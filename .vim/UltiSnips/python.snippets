@@ -1,0 +1,31 @@
+snippet init
+def __init__(self):
+    ${1:pass}$0
+endsnippet
+
+snippet meth
+def ${1:name}(self${2:, args}):
+    ${3:pass}$0
+endsnippet
+
+snippet #! "Simple shebang for python" b
+#!/usr/bin/env python
+$0
+endsnippet
+
+snippet ifmain "ifmain with sys.exit()" b
+#!/usr/bin/env python
+import sys
+
+
+def main():
+    ${1:pass}$0
+
+
+if __name__ == '__main__':
+	sys.exit(main())
+endsnippet
+
+snippet ipdb "add ipdb breakpoint" b
+import ipdb; ipdb.set_trace()
+endsnippet

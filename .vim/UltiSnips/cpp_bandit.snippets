@@ -1,0 +1,33 @@
+snippet desc
+describe("${1:something}", [&](){
+
+  $0
+
+});
+endsnippet
+
+snippet bef
+before_each([&](){
+  $0
+});
+endsnippet
+
+snippet aft
+after_each([&](){
+  $0
+});
+endsnippet
+
+snippet it
+it("${1:does something}", [&](){
+  $0
+});
+endsnippet
+
+snippet gb
+go_bandit([](){
+
+  $0
+
+});
+endsnippet

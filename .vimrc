@@ -48,8 +48,14 @@ NeoBundle 'groenewege/vim-less.git'
 " Misc functions needed by other plugins
 NeoBundle 'xolox/vim-misc.git'
 
+NeoBundle 'mileszs/ack.vim'
+
 " Syntax check for several languages
 NeoBundle 'scrooloose/syntastic.git'
+
+if has('python')
+    NeoBundle 'SirVer/ultisnips'
+endif
 
 " 
 " Make it possible to execute programs within vim (requires compilation)
@@ -73,6 +79,7 @@ execute "NeoBundle 'Shougo/vimproc.vim'," . string({
 " Better indentation for Python
 NeoBundle 'hynek/vim-python-pep8-indent.git'
 
+
 "
 " JavaScript
 "
@@ -86,6 +93,7 @@ filetype plugin indent on
 
 NeoBundleCheck
 
+
 "
 " Set appearance if we're running gvim
 "
@@ -93,7 +101,7 @@ NeoBundleCheck
 if has('gui_running')
   colorscheme harlequin
   set vb t_vb=
-  set guifont=Source_Code_Pro_Medium:h11:cANSI
+  set guifont=Source_Code_Pro_Medium:h10:cANSI
 
   set cursorline
   highlight CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
@@ -141,8 +149,15 @@ set encoding=utf-8
 
 set backspace=indent,eol,start  " make that backspace key work the way it should
 
+"
+" Patterns to ignore for ctrlp etc.
+"
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,*.o
 
+"
+" Automatically load local vimrc files
+"
+let g:localvimrc_ask = 0
 "
 " If compiler error refers to a file already open in a window,
 " use that window instead of opening the file in the last active

@@ -1,0 +1,32 @@
+snippet desc
+describe('${1:something}', function() {
+
+    $0
+
+});
+endsnippet
+
+snippet bef
+beforeEach(function() {
+    $0
+});
+endsnippet
+
+snippet befinj
+beforeEach(inject(function(${1:dependencies}) {
+    $0
+}));
+endsnippet
+
+snippet aft
+afterEach(function() {
+    $0
+});
+endsnippet
+
+snippet it
+it('${1:does something}', function() {
+    $0
+});
+endsnippet
+
