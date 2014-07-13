@@ -100,8 +100,12 @@ NeoBundleCheck
 
 if has('gui_running')
   colorscheme harlequin
-  set vb t_vb=
-  set guifont=Source_Code_Pro_Medium:h10:cANSI
+
+  if has('win32') || has('win64')
+      set guifont=Source_Code_Pro_Medium:h10:cANSI
+  elseif has('macunix')
+      set guifont=Source\ Code\ Pro\ Medium:h16
+  endif
 
   set cursorline
   highlight CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
@@ -143,9 +147,13 @@ set hlsearch            " no highlight searches
 set showmatch           " jump to matches when entering regexp
 set ignorecase          " ignore case when searching
 set smartcase           " no ignorecase if Uppercase char present
-set visualbell t_vb=    " turn off error beep/flash
-set novisualbell        " turn off visual bell
 set encoding=utf-8
+
+"
+" Turn off error beeps and flashing
+"
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 
 set backspace=indent,eol,start  " make that backspace key work the way it should
 
