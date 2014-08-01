@@ -115,10 +115,11 @@ endif
 " KEYBINDINGS
 "
 
-map <leader>p :CtrlPCurWD<cr>
-map <leader>t :CtrlPTag<cr>
-map <leader>n :NERDTreeToggle<cr>
-map <leader>r :NERDTreeFind<cr>
+nnoremap <leader>p :CtrlPCurWD<cr>
+nnoremap <leader>t :CtrlPTag<cr>
+nnoremap <leader>n :NERDTreeToggle<cr>
+nnoremap <leader>r :NERDTreeFind<cr>
+nnoremap <leader><space> :set hlsearch!<cr>
 
 syntax on " Turn on syntax highlighting
 
