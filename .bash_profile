@@ -29,18 +29,27 @@ function actvenv() {
 	cd $start_path  # Reset cwd to where we started.
 }
 
-function prompt {
-    local color_pipe="\\[\e[31m\\]"
-    local color_reset="\\[\e[0m\\]"
-    local arc_down_right=$'\xe2\x95\xad'
-    local arc_up_left=$'\xe2\x95\xb0'
-    local horizontal=$'\xe2\x94\x80'
+# function prompt {
+#     local color_pipe="\\[\e[31m\\]"
+#     local color_reset="\\[\e[0m\\]"
+#     local arc_down_right=$'\xe2\x95\xad'
+#     local arc_up_left=$'\xe2\x95\xb0'
+#     local horizontal=$'\xe2\x94\x80'
+#
+#     local prefix="$color_pipe$arc_down_right$horizontal$horizontal\w$color_reset"
+#     local suffix="\n$color_pipe$arc_up_left$horizontal$color_reset$ "
+#
+#     export GIT_PS1_SHOWDIRTYSTATE=1
+#     export GIT_PS1_SHOWCOLORHINTS="true"
+#     export PROMPT_COMMAND="__git_ps1 '$prefix' '$suffix'"
+# }
+# prompt
 
-    local prefix="$color_pipe$arc_down_right$horizontal$horizontal\w$color_reset"
-    local suffix="\n$color_pipe$arc_up_left$horizontal$color_reset$ "
-
-    export GIT_PS1_SHOWDIRTYSTATE=1
-    export GIT_PS1_SHOWCOLORHINTS="true"
-    export PROMPT_COMMAND="__git_ps1 '$prefix' '$suffix'"
+function _update_ps1 {
+    local error_level=$?
+    local curr_python=`which python`
+    export PYTHONIOENCODING=utf-8
+    export PS1="$(/c/Python33/python.exe ~/bash_prompt.py $error_level $curr_python 2> /dev/null)"
 }
-prompt
+
+export PROMPT_COMMAND="_update_ps1"

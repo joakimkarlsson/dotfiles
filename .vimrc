@@ -160,7 +160,8 @@ set backspace=indent,eol,start  " make that backspace key work the way it should
 "
 " Patterns to ignore for ctrlp etc.
 "
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,*.o
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,*.o,*.pyc
+let NERDTreeIgnore = ['\.pyc$']
 
 "
 " Automatically load local vimrc files
