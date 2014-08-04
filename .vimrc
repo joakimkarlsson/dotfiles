@@ -25,8 +25,6 @@ NeoBundle 'blueyed/vim-airline.git'
 " extended % matching for HTML, LaTeX, and many more languages
 NeoBundle 'vim-scripts/matchit.zip'
 
-" Python matchit support
-NeoBundle 'voithos/vim-python-matchit'
 
 " Dark, high contrast color scheme
 NeoBundle 'nielsmadan/harlequin'
@@ -93,6 +91,9 @@ execute "NeoBundle 'Shougo/vimproc.vim'," . string({
 " Better indentation for Python
 NeoBundle 'hynek/vim-python-pep8-indent.git'
 
+" Python matchit support
+NeoBundle 'voithos/vim-python-matchit'
+
 "
 " JavaScript
 "
@@ -143,6 +144,9 @@ nnoremap <leader>r :NERDTreeFind<cr>
 
 " Clear higlighting of words matching search
 nnoremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
+
+" Shortcut to edit .vimrc
+nnoremap <leader>ev :e $MYVIMRC<cr>
 
 if has('win32') || has('win64')
     let dropbox_path = $HOME . "/Dropbox"
