@@ -79,13 +79,13 @@ execute "NeoBundle 'Shougo/vimproc.vim'," . string({
       \    },
       \ })
 
+
 "
 " Python
 "
 
 " Better indentation for Python
 NeoBundle 'hynek/vim-python-pep8-indent.git'
-
 
 "
 " JavaScript
@@ -107,10 +107,13 @@ NeoBundleCheck
 "
 
 if has('gui_running')
+    set guioptions=-T
+    set guioptions=-M
+
   colorscheme harlequin
 
   if has('win32') || has('win64')
-      set guifont=Source_Code_Pro_Medium:h10:cANSI
+      set guifont=Source_Code_Pro_Medium:h11:cANSI
   elseif has('macunix')
       set guifont=Source\ Code\ Pro\ Medium:h16
   endif
@@ -121,6 +124,7 @@ endif
 
 let mapleader=","
 let maplocalleader="\\"
+highlight colorcolumn ctermbg=235
 
 "
 " KEYBINDINGS
@@ -130,7 +134,9 @@ nnoremap <leader>p :CtrlPCurWD<cr>
 nnoremap <leader>t :CtrlPTag<cr>
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>r :NERDTreeFind<cr>
-nnoremap <leader><space> :set hlsearch!<cr>
+
+" Clear higlighting of words matching search
+nnoremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 
 if has('win32') || has('win64')
 else
@@ -147,15 +153,12 @@ set autoindent
 set expandtab
 set tabstop=4
 set shiftwidth=4
-set guioptions-=T
 set number
 set laststatus=2
 set autowrite
 set number
 set incsearch
 
-let &colorcolumn=80
-highlight colorcolumn ctermbg=235
 
 
 set scrolloff=3         " keep 3 lines when scrolling
@@ -199,9 +202,7 @@ set switchbuf=useopen
 "
 let g:syntastic_python_checkers = ['python', 'flake8', 'pep8', 'pyflakes']
 
-au FileType python set omnifunc=pythoncomplete#Complete
-au FileType python set tabstop=4
-au FileType python set softtabstop=4
-au FileType python set shiftwidth=4
-au FileType python set smarttab
-au FileType python set expandtab
+augroup filetype_python
+    autocmd!
+    autocmd FileType python setlocal colorcolumn=80
+augroup END
