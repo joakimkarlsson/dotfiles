@@ -107,13 +107,13 @@ NeoBundleCheck
 "
 
 if has('gui_running')
-    set guioptions=-T
     set guioptions=-M
 
   colorscheme harlequin
 
   if has('win32') || has('win64')
       set guifont=Source_Code_Pro_Medium:h11:cANSI
+      set guifontwide=Source_Code_Pro_Medium:h11:cANSI
   elseif has('macunix')
       set guifont=Source\ Code\ Pro\ Medium:h16
   endif
@@ -172,6 +172,15 @@ set showmatch           " jump to matches when entering regexp
 set ignorecase          " ignore case when searching
 set smartcase           " no ignorecase if Uppercase char present
 set encoding=utf-8
+
+set list
+set listchars=trail:◆
+
+augroup trailing
+    au!
+    au InsertEnter * :set listchars-=trail:◆
+    au InsertLeave * :set listchars+=trail:◆
+augroup END
 
 "
 " Turn off error beeps and flashing
