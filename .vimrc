@@ -1,18 +1,22 @@
-
+" Setting Vim up on my windows machines ---------------------------------{{{
 " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
 " across (heterogeneous) systems easier.
 if has('win32') || has('win64')
   let $PATH .= ';' . 'c:\Python27;c:\Python27\scripts'
   set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 endif
+" }}}
 
+" Setting up NeoBundle --------------------------------------------------{{{
 if has('vim_starting')
 	set nocompatible
 	set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 call neobundle#begin(expand('~/.vim/bundle/'))
+" }}}
 
+" Plugins ----------------------------------------------------------------{{{
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Better status bar
@@ -57,6 +61,9 @@ if has('python')
     NeoBundle 'SirVer/ultisnips'
 endif
 
+" Personal Wiki for Vim
+NeoBundle 'vimwiki/vimwiki'
+
 " 
 " Make it possible to execute programs within vim (requires compilation)
 "
@@ -92,6 +99,7 @@ call neobundle#end()
 filetype plugin indent on
 
 NeoBundleCheck
+" }}}
 
 
 "
@@ -111,6 +119,9 @@ if has('gui_running')
   highlight CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
 endif
 
+let mapleader=","
+let maplocalleader="\\"
+
 "
 " KEYBINDINGS
 "
@@ -120,6 +131,14 @@ nnoremap <leader>t :CtrlPTag<cr>
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>r :NERDTreeFind<cr>
 nnoremap <leader><space> :set hlsearch!<cr>
+
+if has('win32') || has('win64')
+else
+    let dropbox_path = "~/Dropbox"
+endif
+
+
+let g:vimwiki_list = [{'path': dropbox_path . '/vimwiki/main/src', 'path_html': dropbox_path . '/vimwiki/main/html'}]
 
 syntax on " Turn on syntax highlighting
 
