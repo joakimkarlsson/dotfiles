@@ -139,6 +139,7 @@ nnoremap <leader>r :NERDTreeFind<cr>
 nnoremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 
 if has('win32') || has('win64')
+    let dropbox_path = $HOME . "/Dropbox"
 else
     let dropbox_path = "~/Dropbox"
 endif
