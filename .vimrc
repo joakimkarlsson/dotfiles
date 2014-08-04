@@ -22,6 +22,12 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " Better status bar
 NeoBundle 'blueyed/vim-airline.git'
 
+" extended % matching for HTML, LaTeX, and many more languages
+NeoBundle 'vim-scripts/matchit.zip'
+
+" Python matchit support
+NeoBundle 'voithos/vim-python-matchit'
+
 " Dark, high contrast color scheme
 NeoBundle 'nielsmadan/harlequin'
 
