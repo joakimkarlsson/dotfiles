@@ -29,3 +29,28 @@ endsnippet
 snippet ipdb "add ipdb breakpoint" b
 import ipdb; ipdb.set_trace()
 endsnippet
+
+snippet desc "insert 'describe_it' context"
+@describe
+def ${1:something}():
+    ${0:pass}
+endsnippet
+
+snippet descf "insert 'describe_it' context with fixture"
+@describe
+def ${1:something}():
+    f = Fixture()
+    ${0}
+endsnippet
+
+snippet it "insert 'describe_it' it method"
+@it
+def @{1:does something}():
+    ${0:pass}
+endsnippet
+
+snippet be "insert 'describe_it' before_each method"
+@before_each
+def setup():
+    ${0:pass}
+endsnippet
