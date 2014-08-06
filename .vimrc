@@ -56,6 +56,9 @@ NeoBundle 'groenewege/vim-less.git'
 " Misc functions needed by other plugins
 NeoBundle 'xolox/vim-misc.git'
 
+" Improved integration between Vim and its environment (fullscreen, open URL, background command execution)
+NeoBundle 'xolox/vim-shell'
+
 NeoBundle 'mileszs/ack.vim'
 
 " Syntax check for several languages
