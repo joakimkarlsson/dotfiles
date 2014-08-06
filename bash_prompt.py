@@ -53,9 +53,13 @@ def cwd():
 
 def git_info():
     try:
-        branch_name = sp.check_output(['git', 'symbolic-ref', 'HEAD',
-                                       '--short']).decode('utf-8')
-        branch_name = branch_name.strip()
+        try:
+            branch_name = sp.check_output(
+                ['git', 'symbolic-ref', 'HEAD', '--short', '--quiet']
+            ).decode('utf-8')
+            branch_name = branch_name.strip()
+        except sp.CalledProcessError:
+            branch_name = '<detached>'
 
         uncommited = sp.call(['git', 'diff', '--quiet',
                               '--ignore-submodules', 'HEAD'])
