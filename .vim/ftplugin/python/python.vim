@@ -28,4 +28,4 @@ endfunction
 "
 " Running the mapping again on the 'def ...' line will restore the spaces.
 " This can be useful if I want to go back and change the name of the test.
-nnoremap <buffer> <silent> <LocalLeader>_ :s/\vdef (.*)\(/\= "def " . ToggleUnderscoreAndSpace(submatch(1)) . "("/<cr>:let @/ = ""<cr>
+nnoremap <buffer> <silent> <LocalLeader>_ ^/def /e+1<cr>mq:s/\vdef (.*)\(/\= "def " . ToggleUnderscoreAndSpace(submatch(1)) . "("/<cr>:let @/ = ""<cr>`q
