@@ -1,0 +1,4 @@
+--python-kinds=-iv
+--exclude=build
+--exclude=dist
+--exclude=venv

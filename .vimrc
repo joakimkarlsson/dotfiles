@@ -1,4 +1,6 @@
-" Setting Vim up on my windows machines ---------------------------------{{{
+" vim:foldmethod=marker
+
+" Windows Runtime ---------------------------------{{{
 " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
 " across (heterogeneous) systems easier.
 if has('win32') || has('win64')
@@ -111,10 +113,7 @@ filetype plugin indent on
 NeoBundleCheck
 " }}}
 
-
-"
-" Set appearance if we're running gvim
-"
+" GUI appearances {{{
 
 if has('gui_running')
     set guioptions=-M
@@ -131,15 +130,15 @@ if has('gui_running')
   set cursorline
   highlight CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
 endif
+" }}}
 
+" Leaders {{{
 let mapleader=","
 let maplocalleader="\\"
 highlight colorcolumn ctermbg=235
+" }}}
 
-"
-" KEYBINDINGS
-"
-
+" Key Mappings {{{
 nnoremap <leader>p :CtrlPCurWD<cr>
 nnoremap <leader>t :CtrlPTag<cr>
 nnoremap <leader>n :NERDTreeToggle<cr>
@@ -148,8 +147,14 @@ nnoremap <leader>r :NERDTreeFind<cr>
 " Clear higlighting of words matching search
 nnoremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 
+" Rebuild ctags
+:nnoremap <silent> <F12> :echo "Rebuilding tags..."<cr>:VimProcBang ctags -R .<cr>:echo "Rebuilt tags"<cr>
+
 " Shortcut to edit .vimrc
 nnoremap <leader>ev :e $MYVIMRC<cr>
+" }}}
+
+" VimWiki with dropbox as storage {{{
 
 if has('win32') || has('win64')
     let dropbox_path = $HOME . "/Dropbox"
@@ -159,7 +164,9 @@ endif
 
 
 let g:vimwiki_list = [{'path': dropbox_path . '/vimwiki/main/src', 'path_html': dropbox_path . '/vimwiki/main/html'}]
+" }}}
 
+" Options {{{
 syntax on " Turn on syntax highlighting
 
 set smartindent
@@ -169,25 +176,22 @@ set tabstop=4
 set shiftwidth=4
 set number
 set laststatus=2
-set autowrite
+set autowrite           " Automatically save buffer
 set number
 set incsearch
-
-
-
 set scrolloff=3         " keep 3 lines when scrolling
 set showcmd             " display incomplete commands
 set nobackup            " do not keep a backup file
 set nowritebackup
 set noswapfile
-set hlsearch            " no highlight searches
+set hlsearch            " highlight searches
 set showmatch           " jump to matches when entering regexp
 set ignorecase          " ignore case when searching
 set smartcase           " no ignorecase if Uppercase char present
 set encoding=utf-8
 
-set list
-set listchars=trail:◆
+set list                " Display special characters (e.g. trailing whitespace)
+set listchars=tab:▷◆,trail:◆
 
 augroup trailing
     au!
@@ -213,6 +217,7 @@ let NERDTreeIgnore = ['\.pyc$']
 " Automatically load local vimrc files
 "
 let g:localvimrc_ask = 0
+
 "
 " If compiler error refers to a file already open in a window,
 " use that window instead of opening the file in the last active
@@ -221,11 +226,17 @@ let g:localvimrc_ask = 0
 set switchbuf=useopen
 
 "
-" Python Settings
+" Use unicode characters to make NERDTree look prettier
 "
+let g:NERDTreeDirArrows=1
+
+" }}}
+
+" Python Settings {{{
 let g:syntastic_python_checkers = ['python', 'flake8', 'pep8', 'pyflakes']
 
 augroup filetype_python
     autocmd!
     autocmd FileType python setlocal colorcolumn=80
 augroup END
+" }}}
