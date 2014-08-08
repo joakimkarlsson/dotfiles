@@ -14,16 +14,8 @@ $0
 endsnippet
 
 snippet ifmain "ifmain with sys.exit()" b
-#!/usr/bin/env python
-import sys
-
-
-def main():
-    ${1:pass}$0
-
-
 if __name__ == '__main__':
-	sys.exit(main())
+    sys.exit(main())
 endsnippet
 
 snippet ipdb "add ipdb breakpoint" b
@@ -52,5 +44,11 @@ endsnippet
 snippet be "insert 'describe_it' before_each method"
 @before_each
 def setup():
+    ${0:pass}
+endsnippet
+
+snippet ae "insert 'describe_it' after_each method"
+@after_each
+def teardown():
     ${0:pass}
 endsnippet
