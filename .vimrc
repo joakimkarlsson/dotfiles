@@ -102,7 +102,6 @@ NeoBundle 'voithos/vim-python-matchit'
 "
 " JavaScript
 "
-NeoBundle 'pangloss/vim-javascript'
 NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
 
 
@@ -239,4 +238,8 @@ augroup filetype_python
     autocmd!
     autocmd FileType python setlocal colorcolumn=80
 augroup END
+" }}}
+
+" JavaScript Settings {{{
+au FileType javascript call JavaScriptFold()
 " }}}
