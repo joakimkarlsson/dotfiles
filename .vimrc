@@ -4,8 +4,15 @@
 " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
 " across (heterogeneous) systems easier.
 if has('win32') || has('win64')
-  let $PATH .= ';' . 'c:\Python27;c:\Python27\scripts'
-  set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+    let $PATH .= ';' . 'c:\Python33;c:\Python33\scripts'
+    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+    set renderoptions=type:directx,gamma:1.0,contrast:0.9,level:1.0,geom:1,renmode:5,taamode:1
+
+    "
+    " Make UltiSnips edit snippets file in the correct directory.
+    "
+    let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
+
 endif
 " }}}
 
@@ -22,7 +29,7 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Better status bar
-NeoBundle 'blueyed/vim-airline.git'
+NeoBundle 'itchyny/lightline.vim'
 
 " extended % matching for HTML, LaTeX, and many more languages
 NeoBundle 'vim-scripts/matchit.zip'
@@ -102,8 +109,8 @@ NeoBundle 'voithos/vim-python-matchit'
 "
 " JavaScript
 "
-NeoBundleLazy 'jelera/vim-javascript-syntax', {'autoload':{'filetypes':['javascript']}}
-
+NeoBundleLazy 'pangloss/vim-javascript'
+au FileType javascript NeoBundleSource vim-javascript
 
 call neobundle#end()
 
@@ -114,20 +121,26 @@ NeoBundleCheck
 
 " GUI appearances {{{
 
+
 if has('gui_running')
     set guioptions=-M
 
-  colorscheme harlequin
+    colorscheme harlequin
 
-  if has('win32') || has('win64')
-      set guifont=Source_Code_Pro_Medium:h11:cANSI
-      set guifontwide=Source_Code_Pro_Medium:h11:cANSI
-  elseif has('macunix')
-      set guifont=Source\ Code\ Pro\ Medium:h16
-  endif
+    if has('win32') || has('win64')
+        set guifont=Source_Code_Pro_Medium:h11:cANSI
+    elseif has('macunix')
+        set guifont=Source\ Code\ Pro\ Medium:h16
+    endif
 
-  set cursorline
-  highlight CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
+    set cursorline
+    highlight CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
+else
+    set term=xterm
+    set t_Co=256
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"
+    colorscheme harlequin
 endif
 " }}}
 
@@ -151,6 +164,9 @@ nnoremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 
 " Shortcut to edit .vimrc
 nnoremap <leader>ev :e $MYVIMRC<cr>
+
+" Ack
+nnoremap <leader>a :Ack 
 " }}}
 
 " VimWiki with dropbox as storage {{{
@@ -229,6 +245,7 @@ set switchbuf=useopen
 "
 let g:NERDTreeDirArrows=1
 
+
 " }}}
 
 " Python Settings {{{
@@ -238,8 +255,4 @@ augroup filetype_python
     autocmd!
     autocmd FileType python setlocal colorcolumn=80
 augroup END
-" }}}
-
-" JavaScript Settings {{{
-au FileType javascript call JavaScriptFold()
 " }}}

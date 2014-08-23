@@ -1,8 +1,9 @@
 # Make separately installed vim come first in path
-export PATH=/c/Program\ Files\ \(x86\)/Vim/vim74:$PATH
+export PATH=/c/src/vim/bin:$PATH
 
 # Common bash operation aliases
 alias ll="ls -lp --color=auto"
+alias g="gvim"
 
 #
 # Function for recursively find a venv in parent dirs and activate it
