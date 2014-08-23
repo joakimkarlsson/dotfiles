@@ -135,6 +135,15 @@ if has('gui_running')
 
     set cursorline
     highlight CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
+
+    set list                " Display special characters (e.g. trailing whitespace)
+    set listchars=tab:▷◆,trail:◆
+
+    augroup trailing
+        au!
+        au InsertEnter * :set listchars-=trail:◆
+        au InsertLeave * :set listchars+=trail:◆
+    augroup END
 else
     set term=xterm
     set t_Co=256
@@ -205,14 +214,7 @@ set ignorecase          " ignore case when searching
 set smartcase           " no ignorecase if Uppercase char present
 set encoding=utf-8
 
-set list                " Display special characters (e.g. trailing whitespace)
-set listchars=tab:▷◆,trail:◆
 
-augroup trailing
-    au!
-    au InsertEnter * :set listchars-=trail:◆
-    au InsertLeave * :set listchars+=trail:◆
-augroup END
 
 "
 " Turn off error beeps and flashing
