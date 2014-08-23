@@ -119,40 +119,6 @@ filetype plugin indent on
 NeoBundleCheck
 " }}}
 
-" GUI appearances {{{
-
-
-if has('gui_running')
-    set guioptions=-M
-
-    colorscheme harlequin
-
-    if has('win32') || has('win64')
-        set guifont=Source_Code_Pro_Medium:h11:cANSI
-    elseif has('macunix')
-        set guifont=Source\ Code\ Pro\ Medium:h16
-    endif
-
-    set cursorline
-    highlight CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
-
-    set list                " Display special characters (e.g. trailing whitespace)
-    set listchars=tab:▷◆,trail:◆
-
-    augroup trailing
-        au!
-        au InsertEnter * :set listchars-=trail:◆
-        au InsertLeave * :set listchars+=trail:◆
-    augroup END
-else
-    set term=xterm
-    set t_Co=256
-    let &t_AB="\e[48;5;%dm"
-    let &t_AF="\e[38;5;%dm"
-    colorscheme harlequin
-endif
-" }}}
-
 " Leaders {{{
 let mapleader=","
 let maplocalleader="\\"
@@ -257,4 +223,38 @@ augroup filetype_python
     autocmd!
     autocmd FileType python setlocal colorcolumn=80
 augroup END
+" }}}
+
+" Appearance {{{
+
+if has('gui_running')
+    set guioptions=-M
+
+    colorscheme harlequin
+
+    if has('win32') || has('win64')
+        set guifont=Source_Code_Pro_Medium:h11:cANSI
+    elseif has('macunix')
+        set guifont=Source\ Code\ Pro\ Medium:h16
+    endif
+
+    set cursorline
+    highlight CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
+
+    set list                " Display special characters (e.g. trailing whitespace)
+    set listchars=tab:▷◆,trail:◆
+
+    augroup trailing
+        au!
+        au InsertEnter * :set listchars-=trail:◆
+        au InsertLeave * :set listchars+=trail:◆
+    augroup END
+
+else
+    set term=xterm
+    set t_Co=256
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"
+    colorscheme harlequin
+endif
 " }}}
