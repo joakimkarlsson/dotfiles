@@ -83,12 +83,10 @@ NeoBundle 'vimwiki/vimwiki'
 " 
 " Make it possible to execute programs within vim (requires compilation)
 "
-let vimproc_updcmd = has('win64') ?
-      \ 'tools\\update-dll-mingw 64' : 'tools\\update-dll-mingw 32'
 execute "NeoBundle 'Shougo/vimproc.vim'," . string({
       \ 'directory': 'vimproc',
       \ 'build' : {
-      \     'windows' : vimproc_updcmd,
+      \     'windows' : 'call "%ProgramFiles(x86)%\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" amd64 && nmake -f make_msvc.mak',
       \     'cygwin' : 'make -f make_cygwin.mak',
       \     'mac' : 'make -f make_mac.mak',
       \     'unix' : 'make -f make_unix.mak',
@@ -208,10 +206,6 @@ let g:localvimrc_ask = 0
 "
 set switchbuf=useopen
 
-"
-" Use unicode characters to make NERDTree look prettier
-"
-let g:NERDTreeDirArrows=1
 
 
 " }}}
@@ -233,7 +227,7 @@ if has('gui_running')
     colorscheme harlequin
 
     if has('win32') || has('win64')
-        set guifont=Source_Code_Pro_Medium:h11:cANSI
+        set guifont=Source_Code_Pro_Medium:h10:cANSI
     elseif has('macunix')
         set guifont=Source\ Code\ Pro\ Medium:h16
     endif
@@ -249,6 +243,11 @@ if has('gui_running')
         au InsertEnter * :set listchars-=trail:◆
         au InsertLeave * :set listchars+=trail:◆
     augroup END
+    
+    "
+    " Use unicode characters to make NERDTree look prettier
+    "
+    let g:NERDTreeDirArrows=1
 
 else
     set term=xterm
