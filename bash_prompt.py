@@ -68,7 +68,7 @@ def git_info():
         unmerged = unmerged.decode('utf-8')
 
         green_check = with_color(' \u2713', 'green')
-        red_check = with_color(' \u2718', 'blue')
+        red_check = with_color(' \u2718', 'red')
         unmerged_indicator = with_color(' \u26a1', 'blue')
         return ' ({0}{1}{2})'.format(branch_name,
                                      red_check if uncommited else green_check,
@@ -80,28 +80,27 @@ def git_info():
 def error_level():
     e = sys.argv[1]
 
-    return with_color(' {0} '.format(e), 'blue',
+    return with_color(' {0} '.format(e), 'red',
                       background=True) if e != '0' else ''
 
 
 def venv_info():
     curr_python = sys.argv[2] if len(sys.argv) > 2 else ''
     return (" {0}".format(
-        with_color("\U0001F40D", 'green', bold=True))
-            if curr_python else "")
+        with_color("\U0001F40D", 'yellow', bold=True)) if curr_python else "")
 
 
 def prompt():
     return (
         with_color(chars['arc_down_right'] +
                    chars['horizontal'] +
-                   chars['horizontal'], 'red') +
+                   chars['horizontal'], 'blue') +
         cwd() +
         git_info() +
         venv_info() +
         error_level() +
         '\n' +
-        with_color(chars['arc_up_left'] + chars['horizontal'], 'red') +
+        with_color(chars['arc_up_left'] + chars['horizontal'], 'blue') +
         '$ '
     )
 
