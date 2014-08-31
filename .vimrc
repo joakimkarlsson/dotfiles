@@ -38,6 +38,8 @@ NeoBundle 'vim-scripts/matchit.zip'
 " Dark, high contrast color scheme
 NeoBundle 'nielsmadan/harlequin'
 
+NeoBundle 'sickill/vim-monokai'
+
 " File navigation
 NeoBundle 'kien/ctrlp.vim.git'
 NeoBundle 'Shougo/unite.vim.git'
@@ -124,6 +126,10 @@ highlight colorcolumn ctermbg=235
 " }}}
 
 " Key Mappings {{{
+
+" Quick escape
+inoremap jk <esc>
+
 nnoremap <leader>p :CtrlPCurWD<cr>
 nnoremap <leader>t :CtrlPTag<cr>
 nnoremap <leader>n :NERDTreeToggle<cr>
@@ -140,6 +146,10 @@ nnoremap <leader>ev :e $MYVIMRC<cr>
 
 " Ack
 nnoremap <leader>a :Ack 
+
+
+
+
 " }}}
 
 " VimWiki with dropbox as storage {{{
