@@ -42,8 +42,9 @@ NeoBundle 'sickill/vim-monokai'
 
 " File navigation
 NeoBundle 'kien/ctrlp.vim.git'
-NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'blueyed/nerdtree.git'
+NeoBundle 'Shougo/unite.vim.git'
+NeoBundle 'Shougo/neomru.vim.git'
 
 " Add support for local vimrc files (.lvimrc)
 NeoBundle 'embear/vim-localvimrc.git'
@@ -145,9 +146,27 @@ nnoremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 nnoremap <leader>ev :e $MYVIMRC<cr>
 
 " Ack
-nnoremap <leader>a :Ack 
+nnoremap <leader>a :Ack ""<left>
 
+" JSON Formatting
+nnoremap <leader>js :%!python -m json.tool<cr>
 
+" Kill all buffers
+nnoremap <silent> <leader>kb :bufdo bw<cr>
+
+" Unite
+
+" Use ag for search
+let g:unite_source_grep_command = 'ag'
+let g:unite_source_rec_async_command = 'ag'
+let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
+let g:unite_source_grep_recursive_opt = ''
+
+let g:unite_source_history_yank_enable = 1
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <leader>f :<C-u>Unite -start-insert -no-split -auto-resize file file_mru<CR>
+nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
+nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
 
 
 " }}}
@@ -188,6 +207,11 @@ set ignorecase          " ignore case when searching
 set smartcase           " no ignorecase if Uppercase char present
 set encoding=utf-8
 
+
+"
+" Easiear copy paste to system clipboard
+"
+set clipboard=unnamed
 
 
 "
@@ -234,16 +258,12 @@ augroup END
 if has('gui_running')
     set guioptions=-M
 
-    colorscheme harlequin
-
     if has('win32') || has('win64')
         set guifont=Source_Code_Pro_Medium:h10:cANSI
     elseif has('macunix')
         set guifont=Source\ Code\ Pro\ Medium:h16
     endif
 
-    set cursorline
-    highlight CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
 
     set list                " Display special characters (e.g. trailing whitespace)
     set listchars=tab:▷◆,trail:◆
@@ -264,6 +284,8 @@ else
     set t_Co=256
     let &t_AB="\e[48;5;%dm"
     let &t_AF="\e[38;5;%dm"
-    colorscheme harlequin
 endif
+colorscheme harlequin
+set cursorline
+highlight CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
 " }}}
