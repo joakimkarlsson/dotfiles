@@ -1,5 +1,5 @@
 # Make separately installed vim come first in path
-export PATH=/c/src/vim/bin:$PATH
+export PATH=/c/vim/bin:$PATH
 
 # Common bash operation aliases
 alias ll="ls -lp --color=auto"

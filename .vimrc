@@ -71,14 +71,12 @@ NeoBundle 'xolox/vim-misc.git'
 " Improved integration between Vim and its environment (fullscreen, open URL, background command execution)
 NeoBundle 'xolox/vim-shell'
 
-NeoBundle 'mileszs/ack.vim'
+NeoBundle 'rking/ag.vim'
 
 " Syntax check for several languages
 NeoBundle 'scrooloose/syntastic.git'
 
-if has('python')
-    NeoBundle 'SirVer/ultisnips'
-endif
+NeoBundle 'SirVer/ultisnips'
 
 " Personal Wiki for Vim
 NeoBundle 'vimwiki/vimwiki'
@@ -146,7 +144,8 @@ nnoremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 nnoremap <leader>ev :e $MYVIMRC<cr>
 
 " Ack
-nnoremap <leader>a :Ack ""<left>
+nnoremap <leader>a :Ag ""<left>
+let g:ag_mapping_message=0
 
 " JSON Formatting
 nnoremap <leader>js :%!python -m json.tool<cr>
