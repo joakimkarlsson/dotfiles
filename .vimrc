@@ -29,22 +29,24 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Better status bar
-NeoBundle 'itchyny/lightline.vim'
+NeoBundle 'bling/vim-airline'
 
 " extended % matching for HTML, LaTeX, and many more languages
 NeoBundle 'vim-scripts/matchit.zip'
 
 
-" Dark, high contrast color scheme
+" Colorschemes
 NeoBundle 'nielsmadan/harlequin'
-
+NeoBundle 'morhetz/gruvbox'
 NeoBundle 'sickill/vim-monokai'
 
 " File navigation
 NeoBundle 'kien/ctrlp.vim.git'
-NeoBundle 'blueyed/nerdtree.git'
+" NeoBundle 'blueyed/nerdtree.git'  Let's try netrw instead...
+NeoBundle 'tpope/vim-vinegar'
 NeoBundle 'Shougo/unite.vim.git'
 NeoBundle 'Shougo/neomru.vim.git'
+NeoBundle 'junkblocker/unite-codesearch'
 
 " Add support for local vimrc files (.lvimrc)
 NeoBundle 'embear/vim-localvimrc.git'
@@ -81,6 +83,9 @@ NeoBundle 'SirVer/ultisnips'
 " Personal Wiki for Vim
 NeoBundle 'vimwiki/vimwiki'
 
+" Distraction free writing
+NeoBundle 'junegunn/goyo'
+
 " 
 " Make it possible to execute programs within vim (requires compilation)
 "
@@ -104,6 +109,10 @@ NeoBundle 'hynek/vim-python-pep8-indent.git'
 
 " Python matchit support
 NeoBundle 'voithos/vim-python-matchit'
+
+" Highlighting for restructured text
+NeoBundle 'Rykka/riv.vim'
+
 
 "
 " JavaScript
@@ -153,6 +162,14 @@ nnoremap <leader>js :%!python -m json.tool<cr>
 " Kill all buffers
 nnoremap <silent> <leader>kb :bufdo bw<cr>
 
+nnoremap <leader>ex :Explore<cr>
+
+" Take over Fontzoom's default mappings
+let g:fontzoom_no_default_key_mappings=1
+
+nnoremap <leader>= :Fontzoom +1<cr>
+nnoremap <leader>- :Fontzoom -1<cr>
+
 " Unite
 
 " Use ag for search
@@ -162,10 +179,9 @@ let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
 let g:unite_source_grep_recursive_opt = ''
 
 let g:unite_source_history_yank_enable = 1
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>f :<C-u>Unite -start-insert -no-split -auto-resize file file_mru<CR>
-nnoremap <leader>y :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
-nnoremap <leader>b :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
+" call unite#filters#matcher_default#use(['matcher_fuzzy'])
+nnoremap <leader>f :<C-u>Unite -start-insert -auto-resize file file_mru buffer<CR>
+nnoremap <leader>y :<C-u>Unite -buffer-name=yank    history/yank<cr>
 
 
 " }}}
@@ -258,10 +274,12 @@ if has('gui_running')
     set guioptions=-M
 
     if has('win32') || has('win64')
-        set guifont=Source_Code_Pro_Medium:h10:cANSI
+        set guifont=Source_Code_Pro_Medium:h11:cANSI
     elseif has('macunix')
         set guifont=Source\ Code\ Pro\ Medium:h16
     endif
+
+    let g:airline_powerline_fonts = 1
 
 
     set list                " Display special characters (e.g. trailing whitespace)
@@ -272,19 +290,21 @@ if has('gui_running')
         au InsertEnter * :set listchars-=trail:◆
         au InsertLeave * :set listchars+=trail:◆
     augroup END
-    
-    "
-    " Use unicode characters to make NERDTree look prettier
-    "
-    let g:NERDTreeDirArrows=1
+
+    set background=dark
 
 else
     set term=xterm
     set t_Co=256
     let &t_AB="\e[48;5;%dm"
     let &t_AF="\e[38;5;%dm"
+    let &t_ZH="\e[3m"
 endif
-colorscheme harlequin
+colorscheme gruvbox
 set cursorline
-highlight CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
+if &background == 'light'
+    highlight CursorLine cterm=NONE ctermbg=LightGray ctermfg=NONE
+else
+    highlight CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
+endif
 " }}}
