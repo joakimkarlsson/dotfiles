@@ -38,15 +38,12 @@ NeoBundle 'vim-scripts/matchit.zip'
 " Colorschemes
 NeoBundle 'nielsmadan/harlequin'
 NeoBundle 'morhetz/gruvbox'
-NeoBundle 'sickill/vim-monokai'
+NeoBundle 'vim-scripts/proton'
 
 " File navigation
 NeoBundle 'kien/ctrlp.vim.git'
 " NeoBundle 'blueyed/nerdtree.git'  Let's try netrw instead...
 NeoBundle 'tpope/vim-vinegar'
-NeoBundle 'Shougo/unite.vim.git'
-NeoBundle 'Shougo/neomru.vim.git'
-NeoBundle 'junkblocker/unite-codesearch'
 
 " Add support for local vimrc files (.lvimrc)
 NeoBundle 'embear/vim-localvimrc.git'
@@ -73,6 +70,7 @@ NeoBundle 'xolox/vim-misc.git'
 " Improved integration between Vim and its environment (fullscreen, open URL, background command execution)
 NeoBundle 'xolox/vim-shell'
 
+" Search using ag.
 NeoBundle 'rking/ag.vim'
 
 " Syntax check for several languages
@@ -86,7 +84,7 @@ NeoBundle 'vimwiki/vimwiki'
 " Distraction free writing
 NeoBundle 'junegunn/goyo'
 
-" 
+"
 " Make it possible to execute programs within vim (requires compilation)
 "
 execute "NeoBundle 'Shougo/vimproc.vim'," . string({
@@ -112,7 +110,6 @@ NeoBundle 'voithos/vim-python-matchit'
 
 " Highlighting for restructured text
 NeoBundle 'Rykka/riv.vim'
-
 
 "
 " JavaScript
@@ -140,8 +137,6 @@ inoremap jk <esc>
 
 nnoremap <leader>p :CtrlPCurWD<cr>
 nnoremap <leader>t :CtrlPTag<cr>
-nnoremap <leader>n :NERDTreeToggle<cr>
-nnoremap <leader>r :NERDTreeFind<cr>
 
 " Clear higlighting of words matching search
 nnoremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
@@ -162,16 +157,15 @@ nnoremap <leader>js :%!python -m json.tool<cr>
 " Kill all buffers
 nnoremap <silent> <leader>kb :bufdo bw<cr>
 
+" Browse directory of file in current buffer
 nnoremap <leader>ex :Explore<cr>
 
 " Take over Fontzoom's default mappings
 let g:fontzoom_no_default_key_mappings=1
-
 nnoremap <leader>= :Fontzoom +1<cr>
 nnoremap <leader>- :Fontzoom -1<cr>
 
 " Unite
-
 " Use ag for search
 let g:unite_source_grep_command = 'ag'
 let g:unite_source_rec_async_command = 'ag'
@@ -182,7 +176,6 @@ let g:unite_source_history_yank_enable = 1
 " call unite#filters#matcher_default#use(['matcher_fuzzy'])
 nnoremap <leader>f :<C-u>Unite -start-insert -auto-resize file file_mru buffer<CR>
 nnoremap <leader>y :<C-u>Unite -buffer-name=yank    history/yank<cr>
-
 
 " }}}
 
@@ -241,7 +234,7 @@ set backspace=indent,eol,start  " make that backspace key work the way it should
 " Patterns to ignore for ctrlp etc.
 "
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,*.o,*.pyc
-let NERDTreeIgnore = ['\.pyc$']
+set wildignore+=*/node_modules/*,*/bower_components/*,*/venv/*
 
 "
 " Automatically load local vimrc files
@@ -255,7 +248,7 @@ let g:localvimrc_ask = 0
 "
 set switchbuf=useopen
 
-
+let g:jedi#use_tabs_not_buffers = 0
 
 " }}}
 
@@ -271,10 +264,10 @@ augroup END
 " Appearance {{{
 
 if has('gui_running')
-    set guioptions=-M
+    set guioptions=-Mc
 
     if has('win32') || has('win64')
-        set guifont=Source_Code_Pro_Medium:h11:cANSI
+        set guifont=Source_Code_Pro_Medium:h10:cANSI
     elseif has('macunix')
         set guifont=Source\ Code\ Pro\ Medium:h16
     endif
