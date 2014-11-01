@@ -12,6 +12,7 @@ alias lall="limefu test unit --all && \
     limefu test functional && \
     limefu test flake && \
     limefu test e2e"
+alias grephist="git rev-list --all | xargs git grep"
 
 #
 # Function for recursively find a venv in parent dirs and activate it
