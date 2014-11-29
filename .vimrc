@@ -38,7 +38,9 @@ NeoBundle 'vim-scripts/matchit.zip'
 " Colorschemes
 NeoBundle 'nielsmadan/harlequin'
 NeoBundle 'morhetz/gruvbox'
-NeoBundle 'vim-scripts/proton'
+NeoBundle 'freeo/vim-kalisi'
+NeoBundle 'vim-scripts/twilight256.vim'
+NeoBundle 'vim-scripts/twilight'
 
 " File navigation
 NeoBundle 'kien/ctrlp.vim.git'
@@ -283,9 +285,6 @@ if has('gui_running')
         au InsertEnter * :set listchars-=trail:◆
         au InsertLeave * :set listchars+=trail:◆
     augroup END
-
-    set background=dark
-
 else
     set term=xterm
     set t_Co=256
@@ -293,11 +292,12 @@ else
     let &t_AF="\e[38;5;%dm"
     let &t_ZH="\e[3m"
 endif
-colorscheme gruvbox
+colorscheme harlequin
+set background=dark
 set cursorline
 if &background == 'light'
     highlight CursorLine cterm=NONE ctermbg=LightGray ctermfg=NONE
 else
-    highlight CursorLine cterm=NONE ctermbg=235 ctermfg=NONE
+    highlight CursorLine cterm=NONE ctermbg=4 ctermfg=NONE
 endif
 " }}}
