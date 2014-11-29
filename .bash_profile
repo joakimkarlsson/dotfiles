@@ -13,11 +13,12 @@ alias lall="limefu test unit --all && \
     limefu test flake && \
     limefu test e2e"
 alias grephist="git rev-list --all | xargs git grep"
+alias sup="cmd //c /c/src/limetng/setup"
 
 #
 # Function for recursively find a venv in parent dirs and activate it
 #
-function actvenv() {
+function av() {
 	start_path=`pwd`	# Remember where we started so we can reset
 
 	while [[ "`pwd`" != "/" ]];
