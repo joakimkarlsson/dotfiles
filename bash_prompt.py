@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys
 import subprocess as sp
+from time import strftime
 
 chars = {
     'arc_down_right': '\u256D',
@@ -90,11 +91,16 @@ def venv_info():
         with_color("\U0001F40D", 'yellow', bold=True)) if curr_python else "")
 
 
+def currtime():
+    return ' {} '.format(with_color(strftime('%H:%M:%S'), 'green'))
+
+
 def prompt():
     return (
         with_color(chars['arc_down_right'] +
                    chars['horizontal'] +
                    chars['horizontal'], 'blue') +
+        currtime() +
         cwd() +
         git_info() +
         venv_info() +
