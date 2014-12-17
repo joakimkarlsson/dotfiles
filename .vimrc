@@ -38,12 +38,10 @@ NeoBundle 'vim-scripts/matchit.zip'
 " Colorschemes
 NeoBundle 'nielsmadan/harlequin'
 NeoBundle 'morhetz/gruvbox'
-NeoBundle 'freeo/vim-kalisi'
-NeoBundle 'vim-scripts/twilight256.vim'
-NeoBundle 'vim-scripts/twilight'
+NeoBundle 'ajh17/Spacegray.vim'
 
 " File navigation
-NeoBundle 'kien/ctrlp.vim.git'
+NeoBundle 'ctrlpvim/ctrlp.vim'
 " NeoBundle 'blueyed/nerdtree.git'  Let's try netrw instead...
 NeoBundle 'tpope/vim-vinegar'
 
@@ -129,7 +127,6 @@ NeoBundleCheck
 " Leaders {{{
 let mapleader=","
 let maplocalleader="\\"
-highlight colorcolumn ctermbg=235
 " }}}
 
 " Key Mappings {{{
@@ -265,8 +262,10 @@ augroup END
 
 " Appearance {{{
 
+colorscheme spacegray
 if has('gui_running')
     set guioptions=-Mc
+    set background=light
 
     if has('win32') || has('win64')
         set guifont=Source_Code_Pro_Medium:h10:cANSI
@@ -291,13 +290,14 @@ else
     let &t_AB="\e[48;5;%dm"
     let &t_AF="\e[38;5;%dm"
     let &t_ZH="\e[3m"
+
+    set background=dark
 endif
-colorscheme harlequin
-set background=dark
 set cursorline
 if &background == 'light'
     highlight CursorLine cterm=NONE ctermbg=LightGray ctermfg=NONE
 else
     highlight CursorLine cterm=NONE ctermbg=4 ctermfg=NONE
+    highlight colorcolumn ctermbg=235
 endif
 " }}}
