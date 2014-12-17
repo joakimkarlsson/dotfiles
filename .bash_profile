@@ -18,23 +18,23 @@ alias sup="cmd //c /c/src/limetng/setup"
 #
 # Function for recursively find a venv in parent dirs and activate it
 #
-function av() {
+function ap() {
 	start_path=`pwd`	# Remember where we started so we can reset
 
 	while [[ "`pwd`" != "/" ]];
 	do
-		echo "Searching in `pwd` for a venv..."
-		if [ -f "venv/Scripts/activate" ]; then
-			echo "found a venv. activating..."
-			source venv/Scripts/activate
-			local found_venv=1
+		echo "Searching in `pwd` for a python folder..."
+		if [ -f "Python34/Scripts/activate" ]; then
+			echo "found python, activating..."
+			source Python34/Scripts/activate
+			local found_python=1
 			break
 		fi
 		cd ..
 	done
 
-	if [[ -z "$found_venv" ]]; then
-		echo "Could not find a venv directory!"
+	if [[ -z "$found_python" ]]; then
+		echo "Could not find a python directory!"
 	fi
 
 	cd $start_path  # Reset cwd to where we started.
