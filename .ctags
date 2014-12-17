@@ -1,4 +1,7 @@
 --python-kinds=-iv
 --exclude=build
 --exclude=dist
---exclude=venv
+--exclude=Python34
+--exclude=webclient
+--exclude=node_modules
+--exclude=package
