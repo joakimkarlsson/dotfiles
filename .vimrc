@@ -111,6 +111,9 @@ NeoBundle 'voithos/vim-python-matchit'
 " Highlighting for restructured text
 NeoBundle 'Rykka/riv.vim'
 
+" Python aoutocompletion with JEDI
+" NeoBundle 'davidhalter/jedi-vim'
+
 "
 " JavaScript
 "
@@ -125,7 +128,7 @@ NeoBundleCheck
 " }}}
 
 " Leaders {{{
-let mapleader=","
+let mapleader=" "
 let maplocalleader="\\"
 " }}}
 
@@ -247,6 +250,9 @@ let g:localvimrc_ask = 0
 "
 set switchbuf=useopen
 
+"
+" JEDI autocomplete options.
+"
 let g:jedi#use_tabs_not_buffers = 0
 
 " }}}
@@ -257,15 +263,32 @@ let g:syntastic_python_checkers = ['python', 'flake8', 'pep8', 'pyflakes']
 augroup filetype_python
     autocmd!
     autocmd FileType python setlocal colorcolumn=80
+    " Prevent JEDI from showing docstrings automatically on autocomplete
+    autocmd FileType python setlocal completeopt-=preview
 augroup END
 " }}}
 
 " Appearance {{{
 
-colorscheme spacegray
+colorscheme gruvbox
+set background=dark
+
+set list                " Display special characters (e.g. trailing whitespace)
+set listchars=tab:▷◆,trail:◆
+
+"
+" Only display trailing whitespaces when we're not in insert mode
+"
+augroup trailing
+    au!
+    au InsertEnter * :set listchars-=trail:◆
+    au InsertLeave * :set listchars+=trail:◆
+augroup END
+
+let g:airline_powerline_fonts = 1
+
 if has('gui_running')
     set guioptions=-Mc
-    set background=light
 
     if has('win32') || has('win64')
         set guifont=Source_Code_Pro_Medium:h10:cANSI
@@ -273,26 +296,18 @@ if has('gui_running')
         set guifont=Source\ Code\ Pro\ Medium:h16
     endif
 
-    let g:airline_powerline_fonts = 1
-
-
-    set list                " Display special characters (e.g. trailing whitespace)
-    set listchars=tab:▷◆,trail:◆
-
-    augroup trailing
-        au!
-        au InsertEnter * :set listchars-=trail:◆
-        au InsertLeave * :set listchars+=trail:◆
-    augroup END
 else
+    "
+    " Make vim display colors and fonts properly in terminal windows (conemu)
+    "
+    set termencoding=ut8
     set term=xterm
     set t_Co=256
     let &t_AB="\e[48;5;%dm"
     let &t_AF="\e[38;5;%dm"
     let &t_ZH="\e[3m"
-
-    set background=dark
 endif
+
 set cursorline
 if &background == 'light'
     highlight CursorLine cterm=NONE ctermbg=LightGray ctermfg=NONE
@@ -300,4 +315,5 @@ else
     highlight CursorLine cterm=NONE ctermbg=4 ctermfg=NONE
     highlight colorcolumn ctermbg=235
 endif
+
 " }}}
