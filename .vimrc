@@ -3,17 +3,17 @@
 " Windows Runtime ---------------------------------{{{
 " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
 " across (heterogeneous) systems easier.
-if has('win32') || has('win64')
-    let $PATH .= ';' . 'c:\Python33;c:\Python33\scripts'
-    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-    set renderoptions=type:directx,gamma:1.0,contrast:0.9,level:1.0,geom:1,renmode:5,taamode:1
-
-    "
-    " Make UltiSnips edit snippets file in the correct directory.
-    "
-    let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
-
-endif
+" if has('win32') || has('win64')
+"     let $PATH .= ';' . 'c:\Python33;c:\Python33\scripts'
+"     set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+"     set renderoptions=type:directx,gamma:1.0,contrast:0.9,level:1.0,geom:1,renmode:5,taamode:1
+"
+"     "
+"     " Make UltiSnips edit snippets file in the correct directory.
+"     "
+"     let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
+"
+" endif
 " }}}
 
 " Setting up NeoBundle --------------------------------------------------{{{
@@ -42,11 +42,10 @@ NeoBundle 'ajh17/Spacegray.vim'
 
 " File navigation
 NeoBundle 'ctrlpvim/ctrlp.vim'
-" NeoBundle 'blueyed/nerdtree.git'  Let's try netrw instead...
 NeoBundle 'tpope/vim-vinegar'
 
 " Add support for local vimrc files (.lvimrc)
-NeoBundle 'embear/vim-localvimrc.git'
+" NeoBundle 'embear/vim-localvimrc.git'
 
 " Surround text
 NeoBundle 'tpope/vim-surround.git'
@@ -68,7 +67,7 @@ NeoBundle 'groenewege/vim-less.git'
 NeoBundle 'xolox/vim-misc.git'
 
 " Improved integration between Vim and its environment (fullscreen, open URL, background command execution)
-NeoBundle 'xolox/vim-shell'
+" NeoBundle 'xolox/vim-shell'
 
 " Search using ag.
 NeoBundle 'rking/ag.vim'
@@ -79,10 +78,10 @@ NeoBundle 'scrooloose/syntastic.git'
 NeoBundle 'SirVer/ultisnips'
 
 " Personal Wiki for Vim
-NeoBundle 'vimwiki/vimwiki'
+" NeoBundle 'vimwiki/vimwiki'
 
 " Distraction free writing
-NeoBundle 'junegunn/goyo'
+" NeoBundle 'junegunn/goyo'
 
 "
 " Make it possible to execute programs within vim (requires compilation)
@@ -137,6 +136,12 @@ let maplocalleader="\\"
 " Quick escape
 inoremap jk <esc>
 
+" Moving between windows
+nnoremap fh <C-W>h
+nnoremap fj <C-W>j
+nnoremap fk <C-W>k
+nnoremap fl <C-W>l
+
 nnoremap <leader>p :CtrlPCurWD<cr>
 nnoremap <leader>t :CtrlPTag<cr>
 
@@ -155,9 +160,6 @@ let g:ag_mapping_message=0
 
 " JSON Formatting
 nnoremap <leader>js :%!python -m json.tool<cr>
-
-" Kill all buffers
-nnoremap <silent> <leader>kb :bufdo bw<cr>
 
 " Browse directory of file in current buffer
 nnoremap <leader>ex :Explore<cr>
@@ -300,19 +302,24 @@ else
     "
     " Make vim display colors and fonts properly in terminal windows (conemu)
     "
-    set termencoding=ut8
-    set term=xterm
-    set t_Co=256
-    let &t_AB="\e[48;5;%dm"
-    let &t_AF="\e[38;5;%dm"
-    let &t_ZH="\e[3m"
+    if has("win32unix")
+        set term=xterm-256color
+        set t_ut=
+    else
+        set termencoding=ut8
+        set term=xterm
+        set t_Co=256
+        let &t_AB="\e[48;5;%dm"
+        let &t_AF="\e[38;5;%dm"
+        let &t_ZH="\e[3m"
+    endif
 endif
 
 set cursorline
 if &background == 'light'
     highlight CursorLine cterm=NONE ctermbg=LightGray ctermfg=NONE
 else
-    highlight CursorLine cterm=NONE ctermbg=4 ctermfg=NONE
+    highlight CursorLine cterm=NONE ctermbg=233 ctermfg=NONE
     highlight colorcolumn ctermbg=235
 endif
 

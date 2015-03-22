@@ -81,14 +81,15 @@ def git_info():
 def error_level():
     e = sys.argv[1]
 
-    return with_color(' {0} '.format(e), 'red',
-                      background=True) if e != '0' else ''
+    return ((' ' + with_color(' {0} '.format(e), 'red', background=True) + ' ')
+            if e != '0' else '')
 
 
 def venv_info():
-    curr_python = sys.argv[2] if len(sys.argv) > 2 else ''
+    has_python = int(sys.argv[2]) if len(sys.argv) > 2 else 0
     return (" {0}".format(
-        with_color("\U0001F40D", 'yellow', bold=True)) if curr_python else "")
+        with_color("\U0001F40D", 'yellow', bold=True)) if has_python else "")
+        # with_color("[P]", 'yellow', bold=True)) if has_python else "")
 
 
 def currtime():
