@@ -24,7 +24,8 @@ alias node="console.exe node"
 # Tell tmux to always expect 256 colors
 alias tmux='tmux -2'
 
-alias ll='ls -l'
+alias ll='ls -l --color'
+alias la='ls -lA --color'
 
 alias sup="pushd ~/src/limetng && cmd /c setup.bat; popd"
 
@@ -55,7 +56,7 @@ function _update_ps1 {
     local error_level=$?
     local has_python=0
     [[ -n `__active_python` ]] && has_python=1
-    export PS1="$(PYTHONIOENCODING=utf-8 python3 ~/bash_prompt.py $error_level $has_python 2>1 /dev/null)"
+    export PS1="$(PYTHONIOENCODING=utf-8 python3 ~/bash_prompt.py $error_level $has_python 2> /dev/null)"
 }
 
 export PROMPT_COMMAND="_update_ps1"

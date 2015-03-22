@@ -66,9 +66,6 @@ NeoBundle 'groenewege/vim-less.git'
 " Misc functions needed by other plugins
 NeoBundle 'xolox/vim-misc.git'
 
-" Improved integration between Vim and its environment (fullscreen, open URL, background command execution)
-" NeoBundle 'xolox/vim-shell'
-
 " Search using ag.
 NeoBundle 'rking/ag.vim'
 
@@ -76,12 +73,6 @@ NeoBundle 'rking/ag.vim'
 NeoBundle 'scrooloose/syntastic.git'
 
 NeoBundle 'SirVer/ultisnips'
-
-" Personal Wiki for Vim
-" NeoBundle 'vimwiki/vimwiki'
-
-" Distraction free writing
-" NeoBundle 'junegunn/goyo'
 
 "
 " Make it possible to execute programs within vim (requires compilation)
@@ -142,7 +133,7 @@ nnoremap fj <C-W>j
 nnoremap fk <C-W>k
 nnoremap fl <C-W>l
 
-nnoremap <leader>p :CtrlPCurWD<cr>
+nnoremap <leader>p :CtrlP<cr>
 nnoremap <leader>t :CtrlPTag<cr>
 
 " Clear higlighting of words matching search
@@ -153,6 +144,9 @@ nnoremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 
 " Shortcut to edit .vimrc
 nnoremap <leader>ev :e $MYVIMRC<cr>
+
+" Set current directory to currently open file.
+nnoremap <leader>cd :lcd %:p:h<cr>
 
 " Ack
 nnoremap <leader>a :Ag ""<left>
