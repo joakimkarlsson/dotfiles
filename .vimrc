@@ -128,10 +128,10 @@ let maplocalleader="\\"
 inoremap jk <esc>
 
 " Moving between windows
-nnoremap fh <C-W>h
-nnoremap fj <C-W>j
-nnoremap fk <C-W>k
-nnoremap fl <C-W>l
+" nnoremap <leader>h <C-W>h
+" nnoremap <leader>j <C-W>j
+" nnoremap <leader>k <C-W>k
+" nnoremap <leader>l <C-W>l
 
 nnoremap <leader>p :CtrlP<cr>
 nnoremap <leader>t :CtrlPTag<cr>
