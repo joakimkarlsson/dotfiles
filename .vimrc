@@ -251,6 +251,12 @@ set switchbuf=useopen
 "
 let g:jedi#use_tabs_not_buffers = 0
 
+"
+" Use tree listing by default in netrw
+"
+let g:netrw_liststyle = 3
+
+
 " }}}
 
 " Python Settings {{{
