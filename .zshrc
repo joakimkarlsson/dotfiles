@@ -28,6 +28,7 @@ alias limefu='console.exe limefu'
 alias ipython='console.exe ipython'
 alias ipython3='console.exe ipython3'
 alias node="console.exe node"
+alias nosetests="console.exe nosetests"
 
 # Tell tmux to always expect 256 colors
 alias tmux='tmux -2'
@@ -37,7 +38,6 @@ alias la='ls -lA --color'
 
 alias sup="pushd ~/src/limetng && cmd /c setup.bat; popd"
 alias venv34="console.exe /cygdrive/c/Python34/Scripts/virtualenv venv"
-
 # }}}
 
 # {{{ Behavior
@@ -46,6 +46,8 @@ bindkey '\e[B' history-beginning-search-forward
 # }}}
 
 # {{{ Functions
+
+# {{{ Python Stuff
 #
 # Check if we have an active python.
 #
@@ -127,6 +129,62 @@ function av() {
 
     cd $start_path  # Reset cwd to where we started.
 }
+# }}}
+
+# {{{ Tmux Stuff
+
+#
+# Start, or attach to, a tmux sesssion with a window for
+# the desired project.
+#
+
+function _default_tmux_pane_layout() {
+    local WORKDIR=$1
+    tmux split-window -h -c $WORKDIR vim
+    tmux resize-pane -x 180
+}
+
+function tms() {
+    local SESSIONNAME="LIME"
+    local PROJNAME=$1
+
+    #
+    # See if we already have a seesion. If not, create one that defaults
+    # to the TNG project.
+    #
+    tmux has-session -t $SESSIONNAME &> /dev/null
+    if [ $? != 0 ]; then
+        echo "Session $SESSIONNAME not found. Creating it..."
+        tmux new-session -s $SESSIONNAME -d -n "limetng" -c /home/jkr/src/limetng
+        _default_tmux_pane_layout /home/jkr/src/limetng
+    fi
+
+    #
+    # Attach to the session. If this fails because we're already attached, 
+    # fail silently.
+    #
+    tmux attach-session -t $SESSIONNAME &> /dev/null
+
+    #
+    # If a project name was supplied, try to find the directory for it
+    #
+    if [ -n "$PROJNAME" ]; then
+        # Is this window already available?
+        tmux find-window -N $PROJNAME &> /dev/null
+        if [ $? != 0 ]; then
+            # Find first dir that matches project name
+            local PROJDIR=$(find -L ~/src -maxdepth 4 -type d -iname $PROJNAME -print -quit)
+
+            #
+            # Create the panes I want by default.
+            tmux new-window -n $PROJNAME -c $PROJDIR
+            _default_tmux_pane_layout $PROJDIR
+        fi
+    fi
+}
+
+# }}}
+
 # }}}
 
 # {{{ Customized prompt
