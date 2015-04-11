@@ -254,6 +254,7 @@ let g:jedi#use_tabs_not_buffers = 0
 " }}}
 
 " Python Settings {{{
+let g:syntastic_python_python_exec = '/usr/bin/python3'
 let g:syntastic_python_checkers = ['python', 'flake8', 'pep8', 'pyflakes']
 
 augroup filetype_python
