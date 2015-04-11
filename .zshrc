@@ -144,19 +144,41 @@ function _default_tmux_pane_layout() {
     tmux resize-pane -x 180
 }
 
+function _project_dir() {
+    local PROJNAME=$1
+    echo "$(find -L ~/src -maxdepth 4 -type d -iname $PROJNAME -print -quit)"
+}
+
 function tms() {
     local SESSIONNAME="LIME"
     local PROJNAME=$1
 
     #
-    # See if we already have a seesion. If not, create one that defaults
-    # to the TNG project.
+    # Default to 'limetng' if no project is provided
+    #
+    if [ -z "$PROJNAME" ]; then
+        PROJNAME="limetng"
+    fi
+
+    #
+    # See if we already have a seesion. If not, create one
     #
     tmux has-session -t $SESSIONNAME &> /dev/null
     if [ $? != 0 ]; then
         echo "Session $SESSIONNAME not found. Creating it..."
-        tmux new-session -s $SESSIONNAME -d -n "limetng" -c /home/jkr/src/limetng
+        tmux new-session -s $SESSIONNAME -d -n $PROJNAME -c "$(_project_dir $PROJNAME)"
         _default_tmux_pane_layout /home/jkr/src/limetng
+    else
+        # Check if we already have a window for the project
+        tmux list-windows -t LIME | grep "^[[:digit:]]\+: $PROJNAME" &> /dev/null
+        if [ $? != 0 ]; then
+            # Find first dir that matches project name
+            local PROJDIR=$(_project_dir $PROJNAME)
+            tmux new-window -n $PROJNAME -c $PROJDIR
+            _default_tmux_pane_layout $PROJDIR
+        else
+            tmux select-window -t $PROJNAME
+        fi
     fi
 
     #
@@ -164,23 +186,6 @@ function tms() {
     # fail silently.
     #
     tmux attach-session -t $SESSIONNAME &> /dev/null
-
-    #
-    # If a project name was supplied, try to find the directory for it
-    #
-    if [ -n "$PROJNAME" ]; then
-        # Is this window already available?
-        tmux find-window -N $PROJNAME &> /dev/null
-        if [ $? != 0 ]; then
-            # Find first dir that matches project name
-            local PROJDIR=$(find -L ~/src -maxdepth 4 -type d -iname $PROJNAME -print -quit)
-
-            #
-            # Create the panes I want by default.
-            tmux new-window -n $PROJNAME -c $PROJDIR
-            _default_tmux_pane_layout $PROJDIR
-        fi
-    fi
 }
 
 # }}}
