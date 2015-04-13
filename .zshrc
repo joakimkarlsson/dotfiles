@@ -29,6 +29,7 @@ alias ipython='console.exe ipython'
 alias ipython3='console.exe ipython3'
 alias node="console.exe node"
 alias nosetests="console.exe nosetests"
+alias devpi="console.exe devpi"
 
 # Tell tmux to always expect 256 colors
 alias tmux='tmux -2'
@@ -47,7 +48,33 @@ bindkey '\e[B' history-beginning-search-forward
 
 # {{{ Functions
 
+#
+# Find the directory for a project from its name. Just returns the first path
+# to a directory with the same name as the project.
+#
+function dir_for_project() {
+    local PROJNAME=$1
+    echo "$(find -L ~/src -maxdepth 4 -type d -iname $PROJNAME -print -quit)"
+}
+
+
 # {{{ Python Stuff
+#
+# Source install another python package into the current python environment.
+#
+function srcinst() {
+    local PROJNAME=$1
+    local PROJDIR=$(dir_for_project $PROJNAME)
+    echo "Installing from $PROJDIR..."
+    pip freeze | grep -i "$PROJNAME" &> /dev/null
+    if [ $? = 0 ]; then
+        pip uninstall $PROJNAME
+    fi
+    pushd $PROJDIR
+    python setup.py develop
+    popd
+}
+
 #
 # Check if we have an active python.
 #
@@ -142,14 +169,9 @@ function _default_tmux_pane_layout() {
     local WORKDIR=$1
     tmux split-window -h -c $WORKDIR vim
     tmux resize-pane -x 180
+    tmux select-pane -t 0
 }
 
-function _project_dir() {
-    local PROJNAME=$1
-
-    # Find the first dir that matches the project name.
-    echo "$(find -L ~/src -maxdepth 4 -type d -iname $PROJNAME -print -quit)"
-}
 
 function tms() {
     local SESSIONNAME="LIME"
@@ -162,7 +184,7 @@ function tms() {
         PROJNAME="limetng"
     fi
 
-    local PROJDIR=$(_project_dir $PROJNAME)
+    local PROJDIR=$(dir_for_project $PROJNAME)
 
     #
     # See if we already have a seesion. If not, create one
