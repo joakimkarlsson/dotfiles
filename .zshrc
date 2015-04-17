@@ -259,6 +259,20 @@ function tms() {
 
 # }}}
 
+# {{{ LIME Stuff
+
+function glp() {
+    # gulp replacement for running gulp inside node_modules
+    #
+    if [[ (-d "$PWD/node_modules") && (-d "$PWD/node_modules/gulp") ]]; then
+        console node node_modules/gulp/bin/gulp.js $*
+    else
+        echo "Cannot find a node_modules or a gulp directory!"
+    fi
+}
+
+# }}}
+
 # }}}
 
 # {{{ Customized prompt
