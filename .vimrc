@@ -44,9 +44,6 @@ NeoBundle 'ajh17/Spacegray.vim'
 NeoBundle 'ctrlpvim/ctrlp.vim'
 NeoBundle 'tpope/vim-vinegar'
 
-" Add support for local vimrc files (.lvimrc)
-" NeoBundle 'embear/vim-localvimrc.git'
-
 " Surround text
 NeoBundle 'tpope/vim-surround.git'
 
@@ -250,11 +247,6 @@ set switchbuf=useopen
 " JEDI autocomplete options.
 "
 let g:jedi#use_tabs_not_buffers = 0
-
-"
-" Use tree listing by default in netrw
-"
-let g:netrw_liststyle = 3
 
 "
 " Syntastic options
