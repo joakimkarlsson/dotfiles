@@ -129,21 +129,21 @@ function __reachable_python_activate_script() {
     local probe
 
     # unix style activation available?
-    probe="$curr_dir/venv/bin/activate" 
+    probe="$curr_dir/venv/bin/activate"
     if [[ -f $probe ]]; then
         echo $probe
         return 0
     fi
 
     # windows style activation available?
-    probe="$curr_dir/venv/Scripts/activate" 
+    probe="$curr_dir/venv/Scripts/activate"
     if [[ -f $probe ]]; then
         echo $probe
         return 0
     fi
 
     # LIME embedded style activation available?
-    probe="$curr_dir/Python34/Scripts/activate" 
+    probe="$curr_dir/Python34/Scripts/activate"
     if [[ -f $probe ]]; then
         echo $probe
         return 0
@@ -203,9 +203,12 @@ function av() {
 
 function _default_tmux_pane_layout() {
     local WORKDIR=$1
-    tmux split-window -h -c $WORKDIR vim
-    tmux resize-pane -x 180
-    tmux select-pane -t 0
+    echo "Setting up default layout. Directory: $WORKDIR"
+
+    tmux split-window -h -c $WORKDIR
+    tmux send-keys -t right 'vim' C-m
+    tmux resize-pane -t right -x 180
+    tmux select-pane -t left
 }
 
 
@@ -221,6 +224,10 @@ function tms() {
     fi
 
     local PROJDIR=$(dir_for_project $PROJNAME)
+    if [ -z "$PROJDIR" ]; then
+        echo "Could not find a directory for $PROJNAME"
+        return 1
+    fi
 
     #
     # See if we already have a seesion. If not, create one
@@ -244,7 +251,7 @@ function tms() {
     fi
 
     #
-    # Attach to the session. If this fails because we're already attached, 
+    # Attach to the session. If this fails because we're already attached,
     # fail silently.
     #
     tmux attach-session -t $SESSIONNAME &> /dev/null
