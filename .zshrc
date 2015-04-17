@@ -205,10 +205,10 @@ function _default_tmux_pane_layout() {
     local WORKDIR=$1
     echo "Setting up default layout. Directory: $WORKDIR"
 
-    tmux split-window -h -c $WORKDIR
-    tmux send-keys -t right 'vim' C-m
-    tmux resize-pane -t right -x 180
-    tmux select-pane -t left
+    tmux split-window -c $WORKDIR
+    tmux send-keys -t 0 'vim' C-m
+    tmux resize-pane -t 0 -y 40
+    tmux select-pane -t 1
 }
 
 
