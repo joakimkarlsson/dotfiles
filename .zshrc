@@ -32,24 +32,44 @@ export LC_MESSAGES="en_US.UTF-8"
 
 # {{{ Aliases
 
-# Aliases to make some native windows applications play nice with
+# {{{ Aliases to make some native windows applications play nice with
 # a standard terminal. Uses https://github.com/rprichard/winpty
-
 alias limefu='console.exe limefu'
 alias ipython='console.exe ipython'
 alias ipython3='console.exe ipython3'
 alias node="console.exe node"
 alias nosetests="console.exe nosetests"
 alias devpi="console.exe devpi"
+# }}}
 
+# {{{ LIME specific stuff
+alias lall="console.exe limefu test flake && \
+    console.exe limefu test unit --all&& \
+    console.exe limefu test functional && \
+    console.exe limefu test e2e"
+alias sup="pushd ~/src/limetng && cmd /c setup.bat; popd"
+alias venv34="console.exe /cygdrive/c/Python34/Scripts/virtualenv venv"
+# }}}
+
+# {{{ General shell stuff
 # Tell tmux to always expect 256 colors
 alias tmux='tmux -2'
 
+# attach to an exisiting tmux session
+alias tma='tmux attach'
+
+# Kill a native window process from cygwin terminal
+alias killw='taskkill /F /PID'
+
+# Standard shell shortcuts
 alias ll='ls -l --color'
 alias la='ls -lA --color'
 
-alias sup="pushd ~/src/limetng && cmd /c setup.bat; popd"
-alias venv34="console.exe /cygdrive/c/Python34/Scripts/virtualenv venv"
+# Reload profile after making changes
+alias zshrel='echo "Reloading .zshrc..." && source ~/.zshrc'
+
+# }}}
+
 # }}}
 
 # {{{ Behavior
