@@ -256,6 +256,15 @@ let g:jedi#use_tabs_not_buffers = 0
 "
 let g:netrw_liststyle = 3
 
+"
+" Syntastic options
+"
+let g:syntastic_enable_signs = 1
+let g:syntastic_error_symbol = "☣"
+let g:syntastic_warning_symbol = "☠"
+let g:syntastic_style_error_symbol = "💩"
+let g:syntastic_style_warning_symbol = "✗"
+let g:syntastic_always_populate_loc_list = 1
 
 " }}}
 
