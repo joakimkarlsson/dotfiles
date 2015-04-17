@@ -75,6 +75,11 @@ alias zshrel='echo "Reloading .zshrc..." && source ~/.zshrc'
 # {{{ Behavior
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
+
+# Remember history
+HISTSIZE=1000
+HISTFILE=~/.history
+SAVEHIST=1000
 # }}}
 
 # {{{ Functions
