@@ -273,6 +273,10 @@ augroup filetype_python
     autocmd FileType python setlocal colorcolumn=80
     " Prevent JEDI from showing docstrings automatically on autocomplete
     autocmd FileType python setlocal completeopt-=preview
+
+    " We don't need smartindent in python. Makes comments always go to 
+    " the start of the line.
+    autocmd! FileType python setlocal nosmartindent
 augroup END
 " }}}
 
