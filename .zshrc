@@ -322,7 +322,7 @@ function parse_git_dirty() {
 
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 local curr_time="%{$fg[green]%}%*"
-local curr_dir="%{$reset_color%}%d"
+local curr_dir="%{$reset_color%}%~"
 local git_branch='%{$fg[blue]%}$(git_prompt_info)%{$reset_color%}'
 local venv_info='$(venv_prompt_info)'
 
