@@ -34,11 +34,10 @@ export LC_MESSAGES="en_US.UTF-8"
 
 # {{{ Aliases to make some native windows applications play nice with
 # a standard terminal. Uses https://github.com/rprichard/winpty
-alias limefu='console.exe limefu'
-alias ipython='console.exe ipython'
-alias ipython3='console.exe ipython3'
+alias lf='console.exe limefu'
+alias ipython='EDITOR=$(cygpath -w /usr/bin/vim) console.exe ipython3'
 alias node="console.exe node"
-alias nosetests="console.exe nosetests"
+alias nt="console.exe nosetests"
 alias devpi="console.exe devpi"
 # }}}
 
@@ -197,6 +196,13 @@ function av() {
 # {{{ Tmux Stuff
 
 #
+# Generate the tmux status-right information
+#
+function _tmux_status_right() {
+     date +"%a %Y-%m-%d %R"
+}
+
+#
 # Start, or attach to, a tmux sesssion with a window for
 # the desired project.
 #
@@ -206,6 +212,7 @@ function _default_tmux_pane_layout() {
     echo "Setting up default layout. Directory: $WORKDIR"
 
     tmux split-window -c $WORKDIR
+    tmux send-keys -t 0 'av' C-m    # Activate python
     tmux send-keys -t 0 'vim' C-m
     tmux resize-pane -t 0 -y 40
     tmux select-pane -t 1
