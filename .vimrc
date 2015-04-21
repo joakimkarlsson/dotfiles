@@ -107,6 +107,7 @@ NeoBundle 'Rykka/riv.vim'
 NeoBundleLazy 'pangloss/vim-javascript'
 au FileType javascript NeoBundleSource vim-javascript
 
+
 call neobundle#end()
 
 filetype plugin indent on
@@ -124,13 +125,10 @@ let maplocalleader="\\"
 " Quick escape
 inoremap jk <esc>
 
-" Moving between windows
-" nnoremap <leader>h <C-W>h
-" nnoremap <leader>j <C-W>j
-" nnoremap <leader>k <C-W>k
-" nnoremap <leader>l <C-W>l
+" run make silently and go to first error
+nnoremap <leader>m :silent make\|redraw!\|cc<CR>
 
-nnoremap <leader>p :CtrlP<cr>
+nnoremap <leader>p :CtrlPCurWD<cr>
 nnoremap <leader>t :CtrlPTag<cr>
 
 " Clear higlighting of words matching search
@@ -276,7 +274,12 @@ augroup filetype_python
 
     " We don't need smartindent in python. Makes comments always go to 
     " the start of the line.
-    autocmd! FileType python setlocal nosmartindent
+    autocmd FileType python setlocal nosmartindent
+
+    autocmd FileType python setlocal makeprg=limefu\ test\ unit\ --all
+    autocmd FileType python setlocal errorformat=%C-----%.%#,%CTraceback%.%#,%C\ %.%#,%EFAIL:\ %f:%l%.%#,%EERROR:\ %f:%l%.%#,%Z%m
+    " autocmd FileType python setlocal makeprg=limefu\ test\ unit\ --all\ 2>&1\ \\\|\ sed\ \"s/ERROR\\\|FAIL:\ \\(.*\\)/\\1/\"
+    " autocmd FileType python setlocal errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
 augroup END
 " }}}
 
