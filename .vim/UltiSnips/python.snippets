@@ -22,6 +22,10 @@ snippet ipdb "add ipdb breakpoint" b
 import ipdb; ipdb.set_trace()
 endsnippet
 
+snippet npdb "add nose breakpoint" b
+from nose.tools import set_trace; set_trace()
+endsnippet
+
 snippet desc "insert 'describe_it' context"
 @describe
 def ${1:something}():
