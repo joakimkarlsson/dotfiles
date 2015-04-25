@@ -67,6 +67,9 @@ alias la='ls -lA --color'
 # Reload profile after making changes
 alias zshrel='echo "Reloading .zshrc..." && source ~/.zshrc'
 
+# Quickly cd to root of current .git dir
+alias cdg='cd_git_root'
+
 # }}}
 
 # }}}
@@ -90,6 +93,41 @@ SAVEHIST=1000
 function dir_for_project() {
     local PROJNAME=$1
     echo "$(find -L ~/src -maxdepth 4 -type d -iname $PROJNAME -print -quit)"
+}
+
+#
+# Find dir by traversing upwards
+#
+function reverse_find_dir() {
+    local dir_to_find=$1
+    local start_path=`pwd`    # Remember where we started so we can reset
+
+	while [[ "`pwd`" != "/" ]];
+	do
+		if [ -d ".git" ]; then
+			local found_git=1
+			break
+		fi
+		cd ..
+	done
+
+	if [[ -n "$found_git" ]]; then
+        pwd
+	fi
+
+    cd $start_path  # Reset cwd to where we started.
+}
+
+#
+# cd to root of current git working dir
+#
+function cd_git_root() {
+    local root=`reverse_find_dir .git`
+    if [[ -n "$root" ]]; then
+        cd $root
+    else
+        echo "Could not find a .git dir"
+    fi
 }
 
 
