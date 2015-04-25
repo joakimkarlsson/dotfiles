@@ -276,11 +276,67 @@ augroup filetype_python
     " the start of the line.
     autocmd FileType python setlocal nosmartindent
 
-    autocmd FileType python setlocal makeprg=limefu\ test\ unit\ --all
-    autocmd FileType python setlocal errorformat=%C-----%.%#,%CTraceback%.%#,%C\ %.%#,%EFAIL:\ %f:%l%.%#,%EERROR:\ %f:%l%.%#,%Z%m
-    " autocmd FileType python setlocal makeprg=limefu\ test\ unit\ --all\ 2>&1\ \\\|\ sed\ \"s/ERROR\\\|FAIL:\ \\(.*\\)/\\1/\"
-    " autocmd FileType python setlocal errorformat=%C\ %.%#,%A\ \ File\ \"%f\"\\,\ line\ %l%.%#,%Z%[%^\ ]%\\@=%m
+    " autocmd FileType python setlocal makeprg=limefu\ test\ unit\ --all
+    " autocmd FileType python let &errorformat=
+    "             \'%-G\s%#\,' .
+    "             \'%-G-%\+\,' .
+    "             \'%-GOK\,' .
+    "             \'%-Gnose.plugins%.%#,' .
+    "             \'%-G=%\+\,' .
+    "             \'%-G%[%\.FE]%\+\,' .
+    "             \'%-GRan %.%# tests%.%#\,' .
+    "             \'%EFAIL: %f:%l%.%#\,' .
+    "             \'%CTraceback%.%#\,' .
+    "             \'%C  File %.%#\,' .
+    "             \'%Z%m,'
 augroup END
+
+
+" {{{ Functions for running unit tests in python
+function! RunAllTests()
+    silent ! echo -e "\033[1;36mRunning all unit tests\033[0m"
+    set makeprg=nosetests\ --with-describe-it\ --with-machineout
+    exec "make!"
+endfunction
+
+function! JumpToError()
+    if getqflist() != []
+        for error in getqflist()
+            if error['valid']
+                break
+            endif
+        endfor
+        let error_message = substitute(error['text'], '^ *', '', 'g')
+        silent cc!
+        if error['bufnr'] != 0
+            exec ":sbuffer " . error['bufnr']
+        endif
+        call RedBar()
+        echo error_message
+    else
+        call GreenBar()
+        echo "All tests passed"
+    endif
+endfunction
+
+function! RedBar()
+    hi RedBar ctermfg=white ctermbg=red guibg=red
+    echohl RedBar
+    echon repeat(" ",&columns - 1)
+    echohl None
+endfunction
+
+function! GreenBar()
+    hi GreenBar ctermfg=white ctermbg=green guibg=green
+    echohl GreenBar
+    echon repeat(" ",&columns - 1)
+    echohl None
+endfunction"
+
+nnoremap <leader>a :call RunAllTests()<cr>:redraw<cr>:call JumpToError()<cr>
+
+" }}}
+
 " }}}
 
 " Appearance {{{
