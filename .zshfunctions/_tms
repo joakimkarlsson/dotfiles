@@ -1,0 +1,18 @@
+#compdef tms
+
+_tms() {
+    local pline
+    local -a prjs
+
+    if (( CURRENT == 2 )); then
+        if [[ -f ~/.projecthist ]]; then
+            cat ~/.projecthist | while read -A pline; do
+                prjs=($prjs "$pline")
+            done
+        fi
+    fi
+
+    _describe 'projects' prjs
+}
+
+_tms "$@"

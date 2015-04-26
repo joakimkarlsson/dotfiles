@@ -1,4 +1,10 @@
 # vim:foldmethod=marker
+
+#
+# Add custom directory for my functions to fpath
+#
+fpath=($fpath ~/.zshfunctions)
+
 # {{{ The following lines were added by compinstall
 zstyle :compinstall filename '/home/jkr/.zshrc'
 
@@ -273,6 +279,11 @@ function tms() {
         echo "Could not find a directory for $PROJNAME"
         return 1
     fi
+
+    #
+    # Remember this project so zsh's completion knows about it next time
+    #
+    grep -q -F "$PROJNAME" ~/.projecthist || echo $PROJNAME >> ~/.projecthist
 
     #
     # See if we already have a seesion. If not, create one
