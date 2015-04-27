@@ -150,7 +150,7 @@ function srcinst() {
         pip uninstall $PROJNAME
     fi
     pushd $PROJDIR
-    python setup.py develop
+    pip install -e .
     popd
 }
 
