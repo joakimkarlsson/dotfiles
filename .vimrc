@@ -275,20 +275,6 @@ augroup filetype_python
     " We don't need smartindent in python. Makes comments always go to 
     " the start of the line.
     autocmd FileType python setlocal nosmartindent
-
-    " autocmd FileType python setlocal makeprg=limefu\ test\ unit\ --all
-    " autocmd FileType python let &errorformat=
-    "             \'%-G\s%#\,' .
-    "             \'%-G-%\+\,' .
-    "             \'%-GOK\,' .
-    "             \'%-Gnose.plugins%.%#,' .
-    "             \'%-G=%\+\,' .
-    "             \'%-G%[%\.FE]%\+\,' .
-    "             \'%-GRan %.%# tests%.%#\,' .
-    "             \'%EFAIL: %f:%l%.%#\,' .
-    "             \'%CTraceback%.%#\,' .
-    "             \'%C  File %.%#\,' .
-    "             \'%Z%m,'
 augroup END
 
 
