@@ -1,4 +1,5 @@
 #compdef tms
+compdef srcinst=tms
 
 _tms() {
     local pline
