@@ -291,7 +291,13 @@ augroup END
 " {{{ Functions for running unit tests in python
 function! RunAllTests()
     silent ! echo -e "\033[1;36mRunning all unit tests\033[0m"
-    set makeprg=nosetests\ --with-describe-it\ --with-machineout
+    set makeprg=nosetests\ --with-describe-it\ --with-terseout
+    " set errorformat=%f:%l:\ %m,%C>\ %.%#
+    exec "make!"
+endfunction
+
+function! RunFlake()
+    set makeprg=python\ setup.py\ flake8
     exec "make!"
 endfunction
 
@@ -330,6 +336,7 @@ function! GreenBar()
 endfunction"
 
 nnoremap <leader>a :call RunAllTests()<cr>:redraw<cr>:call JumpToError()<cr>
+nnoremap <leader>f :call RunFlake()<cr>:redraw<cr>:call JumpToError()<cr>
 
 " }}}
 
