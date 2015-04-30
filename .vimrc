@@ -246,9 +246,19 @@ let g:localvimrc_ask = 0
 set switchbuf=useopen
 
 "
-" JEDI autocomplete options.
+" Faster CtrlP. Either use ag or git ls-files
 "
-let g:jedi#use_tabs_not_buffers = 0
+let g:ctrlp_use_caching = 0
+if executable('ag')
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+else
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
+  let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
+    \ }
+endif
 
 "
 " Syntastic options
