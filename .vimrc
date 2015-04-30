@@ -219,12 +219,7 @@ set backspace=indent,eol,start  " make that backspace key work the way it should
 " Patterns to ignore for ctrlp etc.
 "
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*.so,*.o,*.pyc
-set wildignore+=*/node_modules/*,*/bower_components/*,*/venv/*
-
-"
-" Automatically load local vimrc files
-"
-let g:localvimrc_ask = 0
+set wildignore+=*/node_modules/*,*/bower_components/*,*/venv/*,*/Python34/*
 
 "
 " If compiler error refers to a file already open in a window,
