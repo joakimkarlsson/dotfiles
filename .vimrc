@@ -158,18 +158,6 @@ let g:fontzoom_no_default_key_mappings=1
 nnoremap <leader>= :Fontzoom +1<cr>
 nnoremap <leader>- :Fontzoom -1<cr>
 
-" Unite
-" Use ag for search
-let g:unite_source_grep_command = 'ag'
-let g:unite_source_rec_async_command = 'ag'
-let g:unite_source_grep_default_opts = '--nogroup --nocolor --column'
-let g:unite_source_grep_recursive_opt = ''
-
-let g:unite_source_history_yank_enable = 1
-" call unite#filters#matcher_default#use(['matcher_fuzzy'])
-nnoremap <leader>f :<C-u>Unite -start-insert -auto-resize file file_mru buffer<CR>
-nnoremap <leader>y :<C-u>Unite -buffer-name=yank    history/yank<cr>
-
 " }}}
 
 " VimWiki with dropbox as storage {{{
