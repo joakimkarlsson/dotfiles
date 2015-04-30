@@ -8,7 +8,7 @@ _tms() {
     if (( CURRENT == 2 )); then
         if [[ -f ~/.projecthist ]]; then
             cat ~/.projecthist | while read -A pline; do
-                prjs=($prjs "$pline")
+                prjs=($prjs "$(echo $pline | cut -d: -f1)")
             done
         fi
     fi

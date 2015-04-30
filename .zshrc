@@ -98,7 +98,32 @@ SAVEHIST=1000
 #
 function dir_for_project() {
     local PROJNAME=$1
-    echo "$(find -L ~/src -maxdepth 4 -type d -iname $PROJNAME -print -quit)"
+    local PROJDIR
+
+    #
+    # Check if we already have the dir for this project cached.
+    #
+    if [[ -f ~/.projecthist ]]; then
+        PROJDIR=$(grep "^$PROJNAME:" ~/.projecthist | cut -d: -f2)
+    fi
+
+    if [[ -n "$PROJDIR" ]]; then
+        echo "$PROJDIR"
+        return
+    fi
+
+    #
+    # Attempt to find the project directory
+    #
+    PROJDIR=$(find -L ~/src -maxdepth 4 -type d -iname $PROJNAME -print -quit)
+
+    #
+    # Cache the directory if we found it.
+    #
+    if [[ -n $PROJDIR ]]; then
+        echo "$PROJNAME:$PROJDIR" >> ~/.projecthist
+        echo $PROJDIR
+    fi
 }
 
 #
@@ -256,8 +281,7 @@ function _default_tmux_pane_layout() {
     echo "Setting up default layout. Directory: $WORKDIR"
 
     tmux split-window -c $WORKDIR
-    tmux send-keys -t 0 'av' C-m    # Activate python
-    tmux send-keys -t 0 'vim' C-m
+    tmux send-keys -t 0 'av && vim' C-m # vim with activated python
     tmux resize-pane -t 0 -y 40
     tmux select-pane -t 1
 }
@@ -279,11 +303,6 @@ function tms() {
         echo "Could not find a directory for $PROJNAME"
         return 1
     fi
-
-    #
-    # Remember this project so zsh's completion knows about it next time
-    #
-    grep -q -F "$PROJNAME" ~/.projecthist || echo $PROJNAME >> ~/.projecthist
 
     #
     # See if we already have a seesion. If not, create one
