@@ -128,7 +128,7 @@ inoremap jk <esc>
 " run make silently and go to first error
 nnoremap <leader>m :silent make\|redraw!\|cc<CR>
 
-nnoremap <leader>p :CtrlPCurWD<cr>
+nnoremap <leader>p :CtrlP<cr>
 nnoremap <leader>t :CtrlPTag<cr>
 
 " Clear higlighting of words matching search
@@ -229,19 +229,11 @@ set wildignore+=*/node_modules/*,*/bower_components/*,*/venv/*,*/Python34/*
 set switchbuf=useopen
 
 "
-" Faster CtrlP. Either use ag or git ls-files
+" I'm almost always using vim with git anyway...
 "
 let g:ctrlp_use_caching = 0
-if executable('ag')
-    set grepprg=ag\ --nogroup\ --nocolor
-
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-    \ }
-endif
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_working_path_mode = ''
 
 "
 " Syntastic options
