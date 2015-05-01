@@ -169,11 +169,14 @@ function cd_git_root() {
 function srcinst() {
     local PROJNAME=$1
     local PROJDIR=$(dir_for_project $PROJNAME)
-    echo "Installing from $PROJDIR..."
+
+    echo "Uninstalling existing..."
     pip freeze | grep -i "$PROJNAME" &> /dev/null
     if [ $? = 0 ]; then
         pip uninstall $PROJNAME
     fi
+
+    echo "Installing from $PROJDIR..."
     pushd $PROJDIR
     pip install -e .
     popd
