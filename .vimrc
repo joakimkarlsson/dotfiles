@@ -129,7 +129,9 @@ inoremap jk <esc>
 nnoremap <leader>m :silent make\|redraw!\|cc<CR>
 
 nnoremap <leader>p :CtrlP<cr>
-nnoremap <leader>t :CtrlPTag<cr>
+
+" Mapping to save all files
+nnoremap <silent> <leader>w :wa<cr>:echo 'saved...'<cr>
 
 " Clear higlighting of words matching search
 nnoremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
