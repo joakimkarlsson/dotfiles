@@ -1,7 +1,11 @@
---python-kinds=-iv
+--languages=python
+--python-kinds=cfm
+--recurse
 --exclude=build
 --exclude=dist
 --exclude=Python34
+--exclude=venv
 --exclude=webclient
 --exclude=node_modules
 --exclude=package
+--exclude=.eggs
