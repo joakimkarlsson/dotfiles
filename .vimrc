@@ -130,6 +130,7 @@ inoremap jk <esc>
 nnoremap <leader>m :silent make\|redraw!\|cc<CR>
 
 nnoremap <leader>p :CtrlP<cr>
+nnoremap <leader>t :CtrlPTag<cr>
 
 " Mapping to save all files
 nnoremap <silent> <leader>w :wa<cr>:echo 'saved...'<cr>
@@ -138,7 +139,7 @@ nnoremap <silent> <leader>w :wa<cr>:echo 'saved...'<cr>
 nnoremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
 
 " Rebuild ctags
-:nnoremap <silent> <F12> :echo "Rebuilding tags..."<cr>:VimProcBang ctags -R .<cr>:echo "Rebuilt tags"<cr>
+:nnoremap <silent> <F12> :echo "Rebuilding tags..."<cr>:!ctags .<cr>:echo "Rebuilt tags"<cr>
 
 " Shortcut to edit .vimrc
 nnoremap <leader>ev :e $MYVIMRC<cr>
