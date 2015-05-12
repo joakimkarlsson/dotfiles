@@ -280,7 +280,7 @@ function! RunTests(args)
 endfunction
 
 function! RunFlake()
-    set makeprg=python\ setup.py\ flake8
+    set makeprg=flake8
     exec "make!"
 endfunction
 
@@ -318,9 +318,9 @@ function! GreenBar()
     echohl None
 endfunction"
 
-nnoremap <leader>a :call RunTests("")<cr>:redraw<cr>:call JumpToError()<cr>
-nnoremap <leader>t :call RunTests("%")<cr>:redraw<cr>:call JumpToError()<cr>
-nnoremap <leader>f :call RunFlake()<cr>:redraw<cr>:call JumpToError()<cr>
+nnoremap <leader>ra :wa<cr>:call RunTests("")<cr>:redraw<cr>:call JumpToError()<cr>
+nnoremap <leader>rt :wa<cr>:call RunTests(expand("%"))<cr>:redraw<cr>:call JumpToError()<cr>
+nnoremap <leader>rf :wa<cr>:call RunFlake()<cr>:redraw<cr>:call JumpToError()<cr>
 
 " }}}
 
