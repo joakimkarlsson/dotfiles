@@ -58,13 +58,11 @@ NeoBundle 'tpope/vim-fugitive.git'
 NeoBundle 'int3/vim-extradite.git'
 
 " LESS Syntax highlighting, indent, and autocompletion
-NeoBundle 'groenewege/vim-less.git'
+NeoBundleLazy 'groenewege/vim-less.git'
+autocmd FileType less NeoBundleSource vim-less
 
 " Misc functions needed by other plugins
 NeoBundle 'xolox/vim-misc.git'
-
-" Search using ag.
-NeoBundle 'rking/ag.vim'
 
 " Syntax check for several languages
 NeoBundle 'scrooloose/syntastic.git'
@@ -84,19 +82,22 @@ execute "NeoBundle 'Shougo/vimproc.vim'," . string({
       \    },
       \ })
 
-
 "
 " Python
 "
 
 " Better indentation for Python
-NeoBundle 'hynek/vim-python-pep8-indent.git'
+NeoBundleLazy 'hynek/vim-python-pep8-indent'
+autocmd FileType python NeoBundleSource vim-python-pep8-indent
+
 
 " Python matchit support
-NeoBundle 'voithos/vim-python-matchit'
+NeoBundleLazy 'voithos/vim-python-matchit'
+autocmd FileType python NeoBundleSource vim-python-matchit
 
 " Highlighting for restructured text
-NeoBundle 'Rykka/riv.vim'
+NeoBundleLazy 'Rykka/riv.vim'
+autocmd FileType rst NeoBundleSource riv.vim
 
 " Python aoutocompletion with JEDI
 " NeoBundle 'davidhalter/jedi-vim'
