@@ -162,6 +162,11 @@ let g:fontzoom_no_default_key_mappings=1
 nnoremap <leader>= :Fontzoom +1<cr>
 nnoremap <leader>- :Fontzoom -1<cr>
 
+" Smoother window navigation
+nnoremap <silent> <C-h> :wincmd h<cr>
+nnoremap <silent> <C-j> :wincmd j<cr>
+nnoremap <silent> <C-k> :wincmd k<cr>
+nnoremap <silent> <C-l> :wincmd l<cr>
 " }}}
 
 " VimWiki with dropbox as storage {{{
