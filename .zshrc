@@ -52,7 +52,7 @@ alias lall="console.exe limefu test flake && \
     console.exe limefu test unit --all&& \
     console.exe limefu test functional && \
     console.exe limefu test e2e"
-alias sup="pushd ~/src/limetng && cmd /c setup.bat; popd"
+alias sup="pushd ~/src/limetng && console cmd /c setup.bat; popd"
 alias venv34="console.exe /cygdrive/c/Python34/Scripts/virtualenv venv"
 # }}}
 
