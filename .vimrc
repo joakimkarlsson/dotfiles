@@ -69,6 +69,8 @@ NeoBundle 'scrooloose/syntastic.git'
 
 NeoBundle 'SirVer/ultisnips'
 
+NeoBundle 'Konfekt/FastFold'
+
 "
 " Make it possible to execute programs within vim (requires compilation)
 "
