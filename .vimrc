@@ -99,6 +99,8 @@ autocmd FileType python NeoBundleSource vim-python-matchit
 NeoBundleLazy 'Rykka/riv.vim'
 autocmd FileType rst NeoBundleSource riv.vim
 
+NeoBundle 'christoomey/vim-tmux-navigator'
+
 " Python aoutocompletion with JEDI
 " NeoBundle 'davidhalter/jedi-vim'
 
@@ -107,7 +109,6 @@ autocmd FileType rst NeoBundleSource riv.vim
 "
 NeoBundleLazy 'pangloss/vim-javascript'
 au FileType javascript NeoBundleSource vim-javascript
-
 
 call neobundle#end()
 
