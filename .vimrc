@@ -71,6 +71,8 @@ NeoBundle 'SirVer/ultisnips'
 
 NeoBundle 'Konfekt/FastFold'
 
+NeoBundle 'vimwiki/vimwiki'
+
 "
 " Make it possible to execute programs within vim (requires compilation)
 "
@@ -177,7 +179,7 @@ nnoremap <silent> <C-l> :wincmd l<cr>
 if has('win32') || has('win64')
     let dropbox_path = $HOME . "/Dropbox"
 else
-    let dropbox_path = "~/Dropbox"
+    let dropbox_path = "~/dropbox"
 endif
 
 
