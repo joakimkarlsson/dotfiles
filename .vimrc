@@ -70,6 +70,8 @@ let g:syntastic_python_checkers = ['python', 'flake8', 'pep8', 'pyflakes']
 NeoBundle 'SirVer/ultisnips'
 
 NeoBundle 'Konfekt/FastFold'
+let g:fastfold_fold_command_suffixes =
+            \['x','X','a','A','o','O','c','C','r','R','m','M','i','n','N']
 
 NeoBundle 'vimwiki/vimwiki'
 
