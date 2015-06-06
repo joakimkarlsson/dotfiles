@@ -291,7 +291,6 @@ function! GreenBar()
 endfunction"
 
 nnoremap <leader>ra :wa<cr>:call RunTests("")<cr>:redraw<cr>:call JumpToError()<cr>
-nnoremap <leader>rt :wa<cr>:call RunTests(expand("%"))<cr>:redraw<cr>:call JumpToError()<cr>
 nnoremap <leader>rf :wa<cr>:call RunFlake()<cr>:redraw<cr>:call JumpToError()<cr>
 
 " }}}
