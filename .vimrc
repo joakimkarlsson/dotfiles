@@ -1,21 +1,5 @@
 " vim:foldmethod=marker
 
-" Windows Runtime ---------------------------------{{{
-" On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-" across (heterogeneous) systems easier.
-" if has('win32') || has('win64')
-"     let $PATH .= ';' . 'c:\Python33;c:\Python33\scripts'
-"     set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-"     set renderoptions=type:directx,gamma:1.0,contrast:0.9,level:1.0,geom:1,renmode:5,taamode:1
-"
-"     "
-"     " Make UltiSnips edit snippets file in the correct directory.
-"     "
-"     let g:UltiSnipsSnippetsDir="~/.vim/UltiSnips"
-"
-" endif
-" }}}
-
 " Setting up NeoBundle --------------------------------------------------{{{
 if has('vim_starting')
 	set nocompatible
