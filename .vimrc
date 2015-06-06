@@ -20,6 +20,7 @@ NeoBundle 'vim-scripts/matchit.zip'
 
 
 " Colorschemes
+NeoBundle 'tomasr/molokai'
 NeoBundle 'nielsmadan/harlequin'
 NeoBundle 'morhetz/gruvbox'
 NeoBundle 'ajh17/Spacegray.vim'
@@ -317,7 +318,8 @@ nnoremap <leader>rf :wa<cr>:call RunFlake()<cr>:redraw<cr>:call JumpToError()<cr
 
 " Appearance {{{
 
-colorscheme gruvbox
+colorscheme molokai
+" let g:rehash256 = 1
 set background=dark
 
 set list                " Display special characters (e.g. trailing whitespace)
