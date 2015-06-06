@@ -25,8 +25,16 @@ NeoBundle 'nielsmadan/harlequin'
 NeoBundle 'morhetz/gruvbox'
 NeoBundle 'ajh17/Spacegray.vim'
 
-" File navigation
+"{{{ ctrlp: File navigation
 NeoBundle 'ctrlpvim/ctrlp.vim'
+"
+" I'm almost always using vim with git anyway...
+"
+let g:ctrlp_use_caching = 0
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -oc --exclude-standard']
+let g:ctrlp_working_path_mode = ''
+"}}}
+
 NeoBundle 'tpope/vim-vinegar'
 
 " Surround text
@@ -227,13 +235,6 @@ set wildignore+=*/node_modules/*,*/bower_components/*,*/venv/*,*/Python34/*
 "
 set switchbuf=useopen
 
-"
-" I'm almost always using vim with git anyway...
-"
-let g:ctrlp_use_caching = 0
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -oc --exclude-standard']
-" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-let g:ctrlp_working_path_mode = ''
 
 "
 " Syntastic options
