@@ -73,11 +73,25 @@ NeoBundle 'Konfekt/FastFold'
 let g:fastfold_fold_command_suffixes =
             \['x','X','a','A','o','O','c','C','r','R','m','M','i','n','N']
 
+" vimwiki: with dropbox as storage {{{
 NeoBundle 'vimwiki/vimwiki'
 
-"
-" Make it possible to execute programs within vim (requires compilation)
-"
+if has('win32') || has('win64')
+    let dropbox_path = $HOME . "/Dropbox"
+else
+    let dropbox_path = "~/dropbox"
+endif
+
+
+let g:vimwiki_list = [{'path': dropbox_path . '/vimwiki/main/src', 'path_html': dropbox_path . '/vimwiki/main/html'}]
+" }}}
+
+"{{{ ag: the silver searcher
+NeoBundle 'rking/ag.vim'
+nnoremap <leader>a :Ag<Space>
+"}}}
+
+" {{{ vimproc: Make it possible to execute programs within vim (requires compilation)
 execute "NeoBundle 'Shougo/vimproc.vim'," . string({
       \ 'directory': 'vimproc',
       \ 'build' : {
@@ -87,7 +101,7 @@ execute "NeoBundle 'Shougo/vimproc.vim'," . string({
       \     'unix' : 'make -f make_unix.mak',
       \    },
       \ })
-
+"}}}
 "
 " Python
 "
