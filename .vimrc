@@ -321,6 +321,7 @@ nnoremap <leader>rf :wa<cr>:call RunFlake()<cr>:redraw<cr>:call JumpToError()<cr
 colorscheme molokai
 " let g:rehash256 = 1
 set background=dark
+highlight! link MatchParen StatusLine
 
 set list                " Display special characters (e.g. trailing whitespace)
 set listchars=tab:▷◆,trail:◆
