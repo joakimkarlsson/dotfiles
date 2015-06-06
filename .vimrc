@@ -40,9 +40,6 @@ NeoBundle 'tpope/vim-vinegar'
 " Surround text
 NeoBundle 'tpope/vim-surround.git'
 
-" Change font size with +/- keys
-NeoBundle 'thinca/vim-fontzoom.git'
-
 " Commenting/uncommenting code
 NeoBundle 'tomtom/tcomment_vim.git'
 
@@ -124,14 +121,8 @@ let maplocalleader="\\"
 " Quick escape
 inoremap jk <esc>
 
-" run make silently and go to first error
-nnoremap <leader>m :silent make\|redraw!\|cc<CR>
-
 nnoremap <leader>p :CtrlP<cr>
 nnoremap <leader>t :CtrlPTag<cr>
-
-" Mapping to save all files
-nnoremap <silent> <leader>w :w<cr>
 
 " Clear higlighting of words matching search
 nnoremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
@@ -145,39 +136,14 @@ nnoremap <leader>ev :e $MYVIMRC<cr>
 " Set current directory to currently open file.
 nnoremap <leader>cd :lcd %:p:h<cr>
 
-" Ack
-nnoremap <leader>a :Ag ""<left>
-let g:ag_mapping_message=0
-
 " JSON Formatting
 nnoremap <leader>js :%!python -m json.tool<cr>
 
 " Browse directory of file in current buffer
 nnoremap <leader>ex :Explore<cr>
 
-" Take over Fontzoom's default mappings
-let g:fontzoom_no_default_key_mappings=1
-nnoremap <leader>= :Fontzoom +1<cr>
-nnoremap <leader>- :Fontzoom -1<cr>
-
-" Smoother window navigation
-nnoremap <silent> <C-h> :wincmd h<cr>
-nnoremap <silent> <C-j> :wincmd j<cr>
-nnoremap <silent> <C-k> :wincmd k<cr>
-nnoremap <silent> <C-l> :wincmd l<cr>
 " }}}
 
-" VimWiki with dropbox as storage {{{
-
-if has('win32') || has('win64')
-    let dropbox_path = $HOME . "/Dropbox"
-else
-    let dropbox_path = "~/dropbox"
-endif
-
-
-let g:vimwiki_list = [{'path': dropbox_path . '/vimwiki/main/src', 'path_html': dropbox_path . '/vimwiki/main/html'}]
-" }}}
 
 " Options {{{
 syntax on " Turn on syntax highlighting
@@ -236,21 +202,10 @@ set wildignore+=*/node_modules/*,*/bower_components/*,*/venv/*,*/Python34/*
 set switchbuf=useopen
 
 
-"
-" Syntastic options
-"
-let g:syntastic_enable_signs = 1
-let g:syntastic_error_symbol = "☣"
-let g:syntastic_warning_symbol = "☠"
-let g:syntastic_style_error_symbol = "💩"
-let g:syntastic_style_warning_symbol = "✗"
-let g:syntastic_always_populate_loc_list = 1
 
 " }}}
 
 " Python Settings {{{
-let g:syntastic_python_python_exec = '/usr/bin/python3'
-let g:syntastic_python_checkers = ['python', 'flake8', 'pep8', 'pyflakes']
 
 augroup filetype_python
     autocmd!
@@ -335,8 +290,6 @@ augroup trailing
     au InsertEnter * :set listchars-=trail:◆
     au InsertLeave * :set listchars+=trail:◆
 augroup END
-
-" let g:airline_powerline_fonts = 1
 
 if has('gui_running')
     set guioptions=-Mc
