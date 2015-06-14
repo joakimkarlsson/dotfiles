@@ -73,17 +73,24 @@ NeoBundle 'Konfekt/FastFold'
 let g:fastfold_fold_command_suffixes =
             \['x','X','a','A','o','O','c','C','r','R','m','M','i','n','N']
 
-" vimwiki: with dropbox as storage {{{
-NeoBundle 'vimwiki/vimwiki'
+" " vimwiki: with dropbox as storage {{{
+" NeoBundle 'vimwiki/vimwiki'
+"
+" if has('win32') || has('win64')
+"     let dropbox_path = $HOME . "/Dropbox"
+" else
+"     let dropbox_path = "~/dropbox"
+" endif
+"
+"
+" let g:vimwiki_list = [{'path': dropbox_path . '/vimwiki/main/src', 'path_html': dropbox_path . '/vimwiki/main/html'}]
+" let g:vimwiki_folding = 'expr'
+" }}}
 
-if has('win32') || has('win64')
-    let dropbox_path = $HOME . "/Dropbox"
-else
-    let dropbox_path = "~/dropbox"
-endif
-
-
-let g:vimwiki_list = [{'path': dropbox_path . '/vimwiki/main/src', 'path_html': dropbox_path . '/vimwiki/main/html'}]
+" vim notes with dropbox storage {{{
+NeoBundle 'xolox/vim-notes'
+let g:notes_directories = ['~/dropbox/vim-notes']
+let g:notes_list_bullets = ['•', '▶', '▷', '◆']
 " }}}
 
 "{{{ ag: the silver searcher
