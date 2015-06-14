@@ -109,6 +109,9 @@ execute "NeoBundle 'Shougo/vimproc.vim'," . string({
       \    },
       \ })
 "}}}
+
+NeoBundle 'ludovicchabant/vim-gutentags'
+
 "
 " Python
 "
