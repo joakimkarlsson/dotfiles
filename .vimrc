@@ -180,6 +180,9 @@ nnoremap <leader>js :%!python -m json.tool<cr>
 " Browse directory of file in current buffer
 nnoremap <leader>ex :Explore<cr>
 
+" Search with ag
+nnoremap <leader>a :Ag ""<left>
+
 " }}}
 
 
