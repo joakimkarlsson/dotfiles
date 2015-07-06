@@ -222,7 +222,7 @@ function is_python_active() {
     return 1
 }
 
-function __reachable_python_activate_script() {
+function find_python_venv_activate_script() {
     local curr_dir=$1
     [[ -z $1 ]] && curr_dir=.
 
@@ -250,11 +250,19 @@ function __reachable_python_activate_script() {
     fi
 }
 
+function dir_has_python_venv() {
+    if [[ -n $(find_python_venv_activate_script) ]]; then
+        return 0
+    fi
+
+    return 1
+}
+
 function activate_python() {
     local new_dir=$1
     [[ -z $1 ]] && new_dir=.
 
-    local activate_script=`__reachable_python_activate_script $new_dir`
+    local activate_script=`find_python_venv_activate_script $new_dir`
 
     if [ -z $activate_script ]; then
         return 1
@@ -277,7 +285,7 @@ function av() {
 
     while [[ "`pwd`" != "/" ]];
     do
-        local activate_script=`__reachable_python_activate_script`
+        local activate_script=`find_python_venv_activate_script`
         if [ -n "$activate_script" ]; then
             activate_python
             local found_venv=1
@@ -292,6 +300,20 @@ function av() {
 
     cd $start_path  # Reset cwd to where we started.
 }
+
+#
+# Function to cd to a directory and automatically activate any
+# Python virtual environment in the target dir.
+#
+function cd_venv() {
+    cd $1 && activate_python
+}
+
+#
+# Make the cd command automatically activate venv
+#
+alias cd='cd_venv'
+
 # }}}
 
 # {{{ Tmux Stuff
