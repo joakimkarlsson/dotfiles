@@ -36,49 +36,6 @@ export LC_MESSAGES="en_US.UTF-8"
 
 # }}}
 
-# {{{ Aliases
-
-# {{{ Aliases to make some native windows applications play nice with
-# a standard terminal. Uses https://github.com/rprichard/winpty
-alias lf='console.exe limefu'
-alias ipython='EDITOR=$(cygpath -w /usr/bin/vim) console.exe ipython3'
-alias node="console.exe node"
-alias nt="console.exe nosetests"
-alias devpi="console.exe devpi"
-# }}}
-
-# {{{ LIME specific stuff
-alias lall="console.exe limefu test flake && \
-    console.exe limefu test unit --all&& \
-    console.exe limefu test functional && \
-    console.exe limefu test e2e"
-alias sup="pushd ~/src/limetng && console cmd /c setup.bat; popd"
-alias venv34="console.exe /cygdrive/c/Python34/Scripts/virtualenv venv"
-# }}}
-
-# {{{ General shell stuff
-# Tell tmux to always expect 256 colors
-alias tmux='tmux -2'
-
-# attach to an exisiting tmux session
-alias tma='tmux attach'
-
-# Kill a native window process from cygwin terminal
-alias killw='taskkill /F /PID'
-
-# Standard shell shortcuts
-alias ll='ls -l --color'
-alias la='ls -lA --color'
-
-# Reload profile after making changes
-alias zshrel='echo "Reloading .zshrc..." && source ~/.zshrc'
-
-# Quickly cd to root of current .git dir
-alias cdg='cd_git_root'
-
-# }}}
-
-# }}}
 
 # {{{ Behavior
 bindkey '\e[A' history-beginning-search-backward
@@ -309,10 +266,6 @@ function cd_venv() {
     cd $1 && activate_python
 }
 
-#
-# Make the cd command automatically activate venv
-#
-alias cd='cd_venv'
 
 # }}}
 
@@ -396,6 +349,54 @@ function glp() {
         echo "Cannot find a node_modules or a gulp directory!"
     fi
 }
+
+# }}}
+
+# }}}
+
+# {{{ Aliases
+
+# {{{ Aliases to make some native windows applications play nice with
+# a standard terminal. Uses https://github.com/rprichard/winpty
+alias lf='console.exe limefu'
+alias ipython='EDITOR=$(cygpath -w /usr/bin/vim) console.exe ipython3'
+alias node="console.exe node"
+alias nt="console.exe nosetests"
+alias devpi="console.exe devpi"
+# }}}
+
+# {{{ LIME specific stuff
+alias lall="console.exe limefu test flake && \
+    console.exe limefu test unit --all&& \
+    console.exe limefu test functional && \
+    console.exe limefu test e2e"
+alias sup="pushd ~/src/limetng && console cmd /c setup.bat; popd"
+alias venv34="console.exe /cygdrive/c/Python34/Scripts/virtualenv venv"
+alias piptng="cd ~/src/limetng/ && av && pip install -U --find-links installation/wheels -r installation/requirements.txt"
+# }}}
+
+# {{{ General shell stuff
+# Tell tmux to always expect 256 colors
+alias tmux='tmux -2'
+
+# attach to an exisiting tmux session
+alias tma='tmux attach'
+
+# Kill a native window process from cygwin terminal
+alias killw='taskkill /F /PID'
+
+# Standard shell shortcuts
+alias ll='ls -l --color'
+alias la='ls -lA --color'
+
+# Reload profile after making changes
+alias zshrel='echo "Reloading .zshrc..." && source ~/.zshrc'
+
+# Quickly cd to root of current .git dir
+alias cdg='cd_git_root'
+
+# Make the cd command automatically activate venv
+alias cd='cd_venv'
 
 # }}}
 
