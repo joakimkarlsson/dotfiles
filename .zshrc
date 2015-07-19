@@ -263,7 +263,15 @@ function tms() {
     # Default to 'limetng' if no project is provided
     #
     if [ -z "$PROJNAME" ]; then
-        PROJNAME="limetng"
+        echo "Gimme a project name to open!"
+        if [[ -f ~/.projecthist ]]; then
+            echo "The following projects is in your history:"
+            echo
+            echo "=========================================="
+            cat ~/.projecthist
+            echo "=========================================="
+        fi
+        return 1
     fi
 
     local PROJDIR=$(dir_for_project $PROJNAME)
