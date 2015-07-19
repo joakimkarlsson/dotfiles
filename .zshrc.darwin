@@ -1,0 +1,12 @@
+# vim:foldmethod=marker
+
+#
+# Darwin (i.e. mac specific setup). Source from ~/.zshrc
+#
+
+# {{{ Aliases
+
+alias ll='ls -lG'
+alias la='ls -laG'
+
+# }}}

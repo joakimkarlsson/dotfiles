@@ -50,35 +50,6 @@ SAVEHIST=1000
 # {{{ Functions
 
 #
-# Kill all cygwin processes
-#
-function killcyg() {
-   local MY_OLDEST_PARENT=$(oldest_parent_pid $$)
-   oldest_pids | egrep -v $MY_OLDEST_PARENT | xargs -I{} -t kill -9 {}
-   kill -9 $MY_OLDEST_PARENT
-}
-
-function parent_pid() {
-    local MYPID=$1
-    ps | egrep "^.[[:space:]]+$MYPID" | cut -c13-17 | sed 's/[[:space:]]//g'
-}
-
-function oldest_pids() {
-    ps | cut -c5-17 | egrep "[[:space:]]+1$" | cut -c1-5
-}
-
-function oldest_parent_pid() {
-    local MYPID=$1
-    local NEXT_PID=$(parent_pid "$MYPID")
-
-    if [[ "$NEXT_PID" == "1" ]]; then
-        echo $MYPID
-    else
-        oldest_parent_pid $NEXT_PID
-    fi
-}
-
-#
 # Find the directory for a project from its name. Just returns the first path
 # to a directory with the same name as the project.
 #
@@ -331,42 +302,9 @@ function tms() {
 
 # }}}
 
-# {{{ LIME Stuff
-
-function glp() {
-    # gulp replacement for running gulp inside node_modules
-    #
-    if [[ (-d "$PWD/node_modules") && (-d "$PWD/node_modules/gulp") ]]; then
-        console node node_modules/gulp/bin/gulp.js $*
-    else
-        echo "Cannot find a node_modules or a gulp directory!"
-    fi
-}
-
-# }}}
-
 # }}}
 
 # {{{ Aliases
-
-# {{{ Aliases to make some native windows applications play nice with
-# a standard terminal. Uses https://github.com/rprichard/winpty
-alias lf='console.exe limefu'
-alias ipython='EDITOR=$(cygpath -w /usr/bin/vim) console.exe ipython3'
-alias node="console.exe node"
-alias nt="console.exe nosetests"
-alias devpi="console.exe devpi"
-# }}}
-
-# {{{ LIME specific stuff
-alias lall="console.exe limefu test flake && \
-    console.exe limefu test unit --all&& \
-    console.exe limefu test functional && \
-    console.exe limefu test e2e"
-alias sup="pushd ~/src/limetng && console cmd /c setup.bat; popd"
-alias venv34="console.exe /cygdrive/c/Python34/Scripts/virtualenv venv"
-alias piptng="cd ~/src/limetng/ && av && pip install -U --find-links installation/wheels -r installation/requirements.txt"
-# }}}
 
 # {{{ General shell stuff
 # Tell tmux to always expect 256 colors
@@ -374,13 +312,6 @@ alias tmux='tmux -2'
 
 # attach to an exisiting tmux session
 alias tma='tmux attach'
-
-# Kill a native window process from cygwin terminal
-alias killw='taskkill /F /PID'
-
-# Standard shell shortcuts
-alias ll='ls -l --color'
-alias la='ls -lA --color'
 
 # Reload profile after making changes
 alias zshrel='echo "Reloading .zshrc..." && source ~/.zshrc'
@@ -450,4 +381,12 @@ local venv_info='$(venv_prompt_info)'
 export PROMPT="%{$fg[blue]%}╭── ${curr_time} ${curr_dir} ${git_branch} ${venv_info}
 %{$fg[blue]%}╰─%{$reset_color%}$ "
 export RPS1="${return_code}"
+# }}}
+
+# {{{ Load OS specific settings
+if [[ $(uname | egrep -i 'darwin' > /dev/null) -eq 0 ]]; then
+    source ~/.zshrc.darwin
+elif [[ $(uname | egrep -i 'cygwin' > /dev/null) -eq 0 ]]; then
+    source ~/.zshrc.cygwin
+fi
 # }}}
