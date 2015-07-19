@@ -342,9 +342,9 @@ if has('gui_running')
 
 else
     "
-    " Make vim display colors and fonts properly in terminal windows (conemu)
+    " Make vim display colors and fonts properly
     "
-    if has("win32unix")
+    if has("win32unix") || has("macunix")
         set term=xterm-256color
         set t_ut=
     else
