@@ -272,13 +272,6 @@ function cd_venv() {
 # {{{ Tmux Stuff
 
 #
-# Generate the tmux status-right information
-#
-function _tmux_status_right() {
-     date +"%a %Y-%m-%d %R"
-}
-
-#
 # Start, or attach to, a tmux sesssion with a window for
 # the desired project.
 #
@@ -407,7 +400,8 @@ setopt PROMPT_SUBST
 
 function venv_prompt_info() {
     if is_python_active; then
-        echo "%{$fg_bold[yellow]%}🐍%{$reset_color%}"
+        local venv_path=`basename "$VIRTUAL_ENV/.."(:A)`
+        echo "%{$fg_bold[yellow]%}🐍 [$venv_path]%{$reset_color%}"
     fi
 }
 
