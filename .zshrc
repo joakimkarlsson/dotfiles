@@ -392,9 +392,9 @@ export RPS1="${return_code}"
 # }}}
 
 # {{{ Load OS specific settings
-if [[ $(uname | egrep -i 'darwin' > /dev/null) -eq 0 ]]; then
+if [[ -n $(uname | egrep -i 'darwin') ]]; then
     source ~/.zshrc.darwin
-elif [[ $(uname | egrep -i 'cygwin' > /dev/null) -eq 0 ]]; then
+elif [[ -n $(uname | egrep -i 'cygwin') ]]; then
     source ~/.zshrc.cygwin
 fi
 # }}}
