@@ -52,6 +52,7 @@ alias ipython='EDITOR=$(cygpath -w /usr/bin/vim) console.exe ipython3'
 alias node="console.exe node"
 alias nt="console.exe nosetests"
 alias devpi="console.exe devpi"
+alias vagrant="console.exe vagrant"
 # }}}
 
 # {{{ LIME specific stuff
