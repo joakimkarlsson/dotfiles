@@ -286,17 +286,22 @@ function tms() {
     tmux has-session -t $SESSIONNAME &> /dev/null
     if [ $? != 0 ]; then
         echo "Session $SESSIONNAME not found. Creating it..."
+        echo "Project name: $PROJNAME, Working dir: $PROJDIR"
         tmux new-session -s $SESSIONNAME -d -n $PROJNAME -c $PROJDIR
         _default_tmux_pane_layout $PROJDIR
     else
+        echo "Session $SESSIONAME is running. Attaching..."
         #
         # Check if we already have a window for the project
         # If not, create a new window. Otherwise, select the exisiting one.
         tmux list-windows -t LIME | grep "^[[:digit:]]\+: $PROJNAME" &> /dev/null
         if [ $? != 0 ]; then
+            echo "$PROJNAME has no current window. Creating..."
+            echo "Project name: $PROJNAME, Working dir: $PROJDIR"
             tmux new-window -n $PROJNAME -c $PROJDIR
             _default_tmux_pane_layout $PROJDIR
         else
+            echo "$PROJNAME has an open window. Selecting it..."
             tmux select-window -t $PROJNAME
         fi
     fi
