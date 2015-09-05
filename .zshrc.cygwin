@@ -69,6 +69,7 @@ alias piptng="cd ~/src/limetng/ && av && pip install -U --find-links installatio
 #
 # Kill a native window process from cygwin terminal
 alias killw='taskkill /F /PID'
+alias killall='taskkill /F /T /IM'
 
 # Standard shell shortcuts
 alias ll='ls -l --color'
