@@ -69,8 +69,9 @@ let g:syntastic_style_warning_symbol = "✗"
 let g:syntastic_always_populate_loc_list = 1
 
 let g:syntastic_python_python_exec = '/usr/bin/python3'
-let g:syntastic_python_checkers = ['python', 'flake8', 'pep8', 'pyflakes']
+let g:syntastic_python_checkers = ['python', 'flake8', 'pep8']
 "}}}
+
 
 NeoBundle 'SirVer/ultisnips'
 
