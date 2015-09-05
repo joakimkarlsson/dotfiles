@@ -12,6 +12,12 @@ autoload -Uz compinit
 compinit
 # }}}
 
+# {{{ Spped up autocompletion
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+# }}}
+
 # {{{ Setup environment
 #
 # Load $fg & co with color codes
