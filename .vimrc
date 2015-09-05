@@ -13,7 +13,12 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Better status bar
-" NeoBundle 'bling/vim-airline'
+NeoBundle "bling/vim-airline"
+let g:airline_powerline_fonts=1
+
+
+" Mirror vim status bar theme to tmux
+NeoBundle "edkolev/tmuxline.vim"
 
 " extended % matching for HTML, LaTeX, and many more languages
 NeoBundle 'vim-scripts/matchit.zip'
@@ -211,11 +216,6 @@ set smartcase           " no ignorecase if Uppercase char present
 set encoding=utf-8
 
 "
-" Hide texts line '--INSERT--' as we're using powerline
-"
-set noshowmode
-
-"
 " Easiear copy paste to system clipboard
 "
 set clipboard=unnamed
@@ -366,9 +366,3 @@ else
 endif
 
 " }}}
-
-"{{{ Powerline
-python3 from powerline.vim import setup as powerline_setup
-python3 powerline_setup()
-python3 del powerline_setup
-"}}}
