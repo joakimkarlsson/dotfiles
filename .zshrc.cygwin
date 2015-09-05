@@ -3,34 +3,6 @@
 # Cygwin (i.e. work) specific setup. Source from ~/.zshrc
 #
 
-# {{{ Functions for killing all running cygwin processes
-function killcyg() {
-   local MY_OLDEST_PARENT=$(oldest_parent_pid $$)
-   oldest_pids | egrep -v $MY_OLDEST_PARENT | xargs -I{} -t kill -9 {}
-   kill -9 $MY_OLDEST_PARENT
-}
-
-function parent_pid() {
-    local MYPID=$1
-    ps | egrep "^.[[:space:]]+$MYPID" | cut -c13-17 | sed 's/[[:space:]]//g'
-}
-
-function oldest_pids() {
-    ps | cut -c5-17 | egrep "[[:space:]]+1$" | cut -c1-5
-}
-
-function oldest_parent_pid() {
-    local MYPID=$1
-    local NEXT_PID=$(parent_pid "$MYPID")
-
-    if [[ "$NEXT_PID" == "1" ]]; then
-        echo $MYPID
-    else
-        oldest_parent_pid $NEXT_PID
-    fi
-}
-# }}}
-
 # {{{ LIME Stuff
 
 function glp() {
