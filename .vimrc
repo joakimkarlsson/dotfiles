@@ -105,15 +105,16 @@ nnoremap <leader>a :Ag<Space>
 "}}}
 
 " {{{ vimproc: Make it possible to execute programs within vim (requires compilation)
-execute "NeoBundle 'Shougo/vimproc.vim'," . string({
-      \ 'directory': 'vimproc',
-      \ 'build' : {
-      \     'windows' : 'call "%ProgramFiles(x86)%\Microsoft Visual Studio 10.0\VC\vcvarsall.bat" amd64 && nmake -f make_msvc.mak',
-      \     'cygwin' : 'make -f make_cygwin.mak',
-      \     'mac' : 'make -f make_mac.mak',
-      \     'unix' : 'make -f make_unix.mak',
-      \    },
-      \ })
+
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
 "}}}
 
 " NeoBundle 'ludovicchabant/vim-gutentags'
