@@ -1,11 +1,14 @@
-Font=Sauce Code Powerline
+Font=Hack
 Term=xterm-256color
 CursorType=block
 CursorBlinks=yes
 BoldAsFont=yes
 Scrollbar=none
-FontSmoothing=full
+FontSmoothing=none
 Transparency=off
+OpaqueWhenFocused=yes
+FontIsBold=no
+
 ForegroundColour=208,208,208
 BackgroundColour=21,21,21
 CursorColour=253,157,79
@@ -25,4 +28,3 @@ Cyan=117,181,170
 BoldCyan=151,199,190
 White=208,208,208
 BoldWhite=245,245,245
-OpaqueWhenFocused=yes
