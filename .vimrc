@@ -220,7 +220,7 @@ set encoding=utf-8
 "
 " Easiear copy paste to system clipboard
 "
-" set clipboard=unnamed
+set clipboard=unnamed
 
 
 "
