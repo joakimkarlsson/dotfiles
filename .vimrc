@@ -141,7 +141,7 @@ autocmd FileType rst NeoBundleSource riv.vim
 NeoBundle 'christoomey/vim-tmux-navigator'
 
 " Python aoutocompletion with JEDI
-" NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'davidhalter/jedi-vim'
 
 "
 " JavaScript
