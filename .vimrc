@@ -29,6 +29,8 @@ NeoBundle 'tomasr/molokai'
 NeoBundle 'nielsmadan/harlequin'
 NeoBundle 'morhetz/gruvbox'
 NeoBundle 'ajh17/Spacegray.vim'
+NeoBundle 'joshdick/onedark.vim'
+NeoBundle 'NLKNguyen/papercolor-theme'
 
 "{{{ ctrlp: File navigation
 NeoBundle 'ctrlpvim/ctrlp.vim'
@@ -201,7 +203,6 @@ set autoindent
 set expandtab
 set tabstop=4
 set shiftwidth=4
-set number
 set laststatus=2
 set autowrite           " Automatically save buffer
 set number
@@ -316,7 +317,7 @@ nnoremap <leader>rf :wa<cr>:call RunFlake()<cr>:redraw<cr>:call JumpToError()<cr
 
 " Appearance {{{
 
-colorscheme molokai
+colorscheme papercolor
 " let g:rehash256 = 1
 set background=dark
 highlight! link MatchParen StatusLine
