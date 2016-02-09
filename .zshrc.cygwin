@@ -15,6 +15,7 @@ function glp() {
     fi
 }
 
+alias lisa='console.exe /cygdrive/c/src/limeworld/serveradmin/Server/Lundalogik.Lisa.Service.ConsoleHost/bin/Debug/LisaConsole.exe'
 # }}}
 
 # {{{ Aliases to make some native windows applications play nice with
@@ -27,6 +28,16 @@ alias devpi="console.exe devpi"
 alias vagrant="console.exe vagrant"
 alias conpy="console.exe python"
 # }}}
+
+# {{{ Functions
+function startdocker() {
+    pushd "/cygdrive/c/Program Files/Docker Toolbox/"
+    ./startcyg.sh
+    eval "$(docker-machine env default)"
+    popd
+}
+# }}}
+
 
 # {{{ LIME specific stuff
 alias lall="console.exe limefu test flake && \
@@ -47,5 +58,7 @@ alias killall='taskkill /F /T /IM'
 # Standard shell shortcuts
 alias ll='ls -l --color'
 alias la='ls -lA --color'
+
+alias open='cygstart'
 
 # }}}

@@ -3,7 +3,8 @@
 #
 # Add custom directory for my functions to fpath
 #
-fpath=($fpath ~/.zshfunctions)
+# fpath=($fpath ~/.zshfunctions)
+fpath=($fpath ~/.zsh)
 
 # {{{ The following lines were added by compinstall
 zstyle :compinstall filename '/home/jkr/.zshrc'
@@ -16,6 +17,15 @@ compinit
 zstyle ':completion:*' accept-exact '*(N)'
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
+zstyle ':completion:*' hosts off
+zstyle ':completion:*:git:*' tag-order 'common-commands'
+
+#
+# Disable autocompletion from getting git info
+#
+__git_files () {
+    _wanted files expl 'local files' _files
+}
 # }}}
 
 # {{{ Setup environment
@@ -40,10 +50,13 @@ export LC_COLLATE="en_US.UTF-8"
 export LC_MONETARY="en_US.UTF-8"
 export LC_MESSAGES="en_US.UTF-8"
 
+export EDITOR=vim
+
 # }}}
 
 
 # {{{ Behavior
+bindkey -e
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
 
@@ -257,7 +270,7 @@ function _default_tmux_pane_layout() {
     local WORKDIR=$1
     echo "Setting up default layout. Directory: $WORKDIR"
 
-    tmux send-keys -t 0 'av; vim' C-m # vim with activated python
+    # tmux send-keys -t 0 'av; vim' C-m # vim with activated python
 }
 
 
@@ -333,7 +346,7 @@ alias tmux='tmux -2'
 alias tma='tmux attach'
 
 # Reload profile after making changes
-alias zshrel='echo "Reloading .zshrc..." && source ~/.zshrc'
+alias zr!='echo "Reloading .zshrc..." && source ~/.zshrc'
 
 # Quickly cd to root of current .git dir
 alias cdg='cd_git_root'
@@ -351,7 +364,7 @@ setopt PROMPT_SUBST
 function venv_prompt_info() {
     if is_python_active; then
         local venv_path=`basename "$VIRTUAL_ENV/.."(:A)`
-        echo "%{$fg_bold[yellow]%}🐍 [$venv_path]%{$reset_color%}"
+        echo "%{$fg_bold[yellow]%}[$venv_path]%{$reset_color%}"
     fi
 }
 
