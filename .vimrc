@@ -14,11 +14,12 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 
 " Better status bar
 NeoBundle "bling/vim-airline"
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 
 
 " Mirror vim status bar theme to tmux
 NeoBundle "edkolev/tmuxline.vim"
+let g:tmuxline_powerline_separators = 0
 
 " extended % matching for HTML, LaTeX, and many more languages
 NeoBundle 'vim-scripts/matchit.zip'
