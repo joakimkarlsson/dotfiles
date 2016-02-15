@@ -311,7 +311,7 @@ nnoremap <leader>rf :wa<cr>:call RunFlake()<cr>:redraw<cr>:call JumpToError()<cr
 
 " Appearance {{{
 
-colorscheme papercolor
+colorscheme PaperColor
 " let g:rehash256 = 1
 set background=dark
 highlight! link MatchParen StatusLine
