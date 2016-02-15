@@ -45,7 +45,7 @@ alias lall="console.exe limefu test flake && \
     console.exe limefu test functional && \
     console.exe limefu test e2e"
 alias sup="pushd ~/src/limetng && console cmd /c setup.bat; popd"
-alias venv34="console.exe /cygdrive/c/Python34/Scripts/virtualenv venv"
+alias venv34="console.exe /cygdrive/c/Python34/Scripts/virtualenv venv && av"
 alias piptng="cd ~/src/limetng/ && av && pip install -U --find-links installation/wheels -r installation/requirements.txt"
 # }}}
 
