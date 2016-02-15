@@ -29,10 +29,6 @@ NeoBundle 'vim-scripts/matchit.zip'
 
 " Colorschemes
 NeoBundle 'tomasr/molokai'
-NeoBundle 'nielsmadan/harlequin'
-NeoBundle 'morhetz/gruvbox'
-NeoBundle 'ajh17/Spacegray.vim'
-NeoBundle 'joshdick/onedark.vim'
 NeoBundle 'NLKNguyen/papercolor-theme'
 
 "{{{ ctrlp: File navigation
