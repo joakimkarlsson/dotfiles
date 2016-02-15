@@ -15,6 +15,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 " Better status bar
 NeoBundle "bling/vim-airline"
 let g:airline_powerline_fonts=0
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 
 
 " Mirror vim status bar theme to tmux
