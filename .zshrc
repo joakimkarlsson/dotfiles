@@ -364,7 +364,7 @@ setopt PROMPT_SUBST
 function venv_prompt_info() {
     if is_python_active; then
         local venv_path=`basename "$VIRTUAL_ENV/.."(:A)`
-        echo "%{$fg_bold[yellow]%}[$venv_path]%{$reset_color%}"
+        echo "%{$fg_bold[yellow]%}[ $venv_path]%{$reset_color%}"
     fi
 }
 
@@ -410,8 +410,8 @@ local curr_dir="%{$reset_color%}%~"
 local git_branch='%{$fg[blue]%}$(git_prompt_info)%{$reset_color%}'
 local venv_info='$(venv_prompt_info)'
 
-export PROMPT="%{$fg[blue]%}╭── ${curr_time} ${curr_dir} ${git_branch} ${venv_info}
-%{$fg[blue]%}╰─%{$reset_color%}$ "
+export PROMPT="%{$fg[blue]%}┌── ${curr_time} ${curr_dir} ${git_branch} ${venv_info}
+%{$fg[blue]%}└─%{$reset_color%}$ "
 export RPS1="${return_code}"
 # }}}
 
