@@ -50,10 +50,10 @@ Plug 'xolox/vim-misc'
 "{{{ syntastic: Syntax check for several languages
 Plug 'scrooloose/syntastic', { 'for': 'python' }
 let g:syntastic_enable_signs = 1
-let g:syntastic_error_symbol = "☣"
-let g:syntastic_warning_symbol = "☠"
-let g:syntastic_style_error_symbol = "💩"
-let g:syntastic_style_warning_symbol = "✗"
+let g:syntastic_error_symbol = ""
+let g:syntastic_warning_symbol = ""
+let g:syntastic_style_error_symbol = ""
+let g:syntastic_style_warning_symbol = ""
 let g:syntastic_always_populate_loc_list = 1
 
 let g:syntastic_python_python_exec = '/usr/bin/python3'
@@ -276,14 +276,6 @@ nnoremap <leader>rf :wa<cr>:call RunFlake()<cr>:redraw<cr>:call JumpToError()<cr
 
 " Appearance {{{
 
-colorscheme PaperColor
-" let g:rehash256 = 1
-set background=dark
-highlight! link MatchParen StatusLine
-
-set list                " Display special characters (e.g. trailing whitespace)
-set listchars=tab:▷◆,trail:◆
-
 "
 " Only display trailing whitespaces when we're not in insert mode
 "
@@ -326,5 +318,14 @@ else
     highlight CursorLine cterm=NONE ctermbg=233 ctermfg=NONE
     highlight colorcolumn ctermbg=235
 endif
+
+highlight! link MatchParen StatusLine
+
+set list                " Display special characters (e.g. trailing whitespace)
+set listchars=tab:▷◆,trail:◆
+
+" let g:rehash256 = 1
+set background=dark
+colorscheme PaperColor
 
 " }}}
