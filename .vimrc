@@ -1,38 +1,26 @@
 " vim:foldmethod=marker
 
-" Setting up NeoBundle --------------------------------------------------{{{
-if has('vim_starting')
-	set nocompatible
-	set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
 
-call neobundle#begin(expand('~/.vim/bundle/'))
-" }}}
+call plug#begin()
 
-" Plugins ----------------------------------------------------------------{{{
-NeoBundleFetch 'Shougo/neobundle.vim'
+Plug 'NLKNguyen/papercolor-theme'
 
-" Better status bar
-NeoBundle "bling/vim-airline"
-let g:airline_powerline_fonts=0
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-
+Plug 'bling/vim-airline'
+let g:airline_powerline_fonts=1
 
 " Mirror vim status bar theme to tmux
-NeoBundle "edkolev/tmuxline.vim"
-let g:tmuxline_powerline_separators = 0
+Plug 'edkolev/tmuxline.vim'
 
 " extended % matching for HTML, LaTeX, and many more languages
-NeoBundle 'vim-scripts/matchit.zip'
+Plug 'vim-scripts/matchit.zip'
 
 
 " Colorschemes
-NeoBundle 'tomasr/molokai'
-NeoBundle 'NLKNguyen/papercolor-theme'
+Plug 'NLKNguyen/papercolor-theme'
+Plug 'joshdick/onedark.vim'
 
 "{{{ ctrlp: File navigation
-NeoBundle 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 "
 " I'm almost always using vim with git anyway...
 "
@@ -41,27 +29,26 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -oc --exclude-standar
 let g:ctrlp_working_path_mode = ''
 "}}}
 
-NeoBundle 'tpope/vim-vinegar'
+Plug 'tpope/vim-vinegar'
 
 " Surround text
-NeoBundle 'tpope/vim-surround.git'
+Plug 'tpope/vim-surround'
 
 " Commenting/uncommenting code
-NeoBundle 'tomtom/tcomment_vim.git'
+Plug 'tomtom/tcomment_vim'
 
 " Git integration
-NeoBundle 'tpope/vim-fugitive.git'
-NeoBundle 'int3/vim-extradite.git'
+Plug 'tpope/vim-fugitive'
+Plug 'int3/vim-extradite'
 
 " LESS Syntax highlighting, indent, and autocompletion
-NeoBundleLazy 'groenewege/vim-less.git'
-autocmd FileType less NeoBundleSource vim-less
+Plug 'groenewege/vim-less', { 'for': 'less' }
 
 " Misc functions needed by other plugins
-NeoBundle 'xolox/vim-misc.git'
+Plug 'xolox/vim-misc'
 
 "{{{ syntastic: Syntax check for several languages
-NeoBundle 'scrooloose/syntastic.git'
+Plug 'scrooloose/syntastic', { 'for': 'python' }
 let g:syntastic_enable_signs = 1
 let g:syntastic_error_symbol = "☣"
 let g:syntastic_warning_symbol = "☠"
@@ -74,40 +61,26 @@ let g:syntastic_python_checkers = ['python', 'flake8', 'pep8']
 "}}}
 
 
-NeoBundle 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 
-NeoBundle 'Konfekt/FastFold'
+Plug 'Konfekt/FastFold'
 let g:fastfold_fold_command_suffixes =
             \['x','X','a','A','o','O','c','C','r','R','m','M','i','n','N']
 
-" " vimwiki: with dropbox as storage {{{
-" NeoBundle 'vimwiki/vimwiki'
-"
-" if has('win32') || has('win64')
-"     let dropbox_path = $HOME . "/Dropbox"
-" else
-"     let dropbox_path = "~/dropbox"
-" endif
-"
-"
-" let g:vimwiki_list = [{'path': dropbox_path . '/vimwiki/main/src', 'path_html': dropbox_path . '/vimwiki/main/html'}]
-" let g:vimwiki_folding = 'expr'
-" }}}
-
 " vim notes with dropbox storage {{{
-NeoBundle 'xolox/vim-notes'
+Plug 'xolox/vim-notes'
 let g:notes_directories = ['~/dropbox/vim-notes']
 let g:notes_list_bullets = ['•', '▶', '▷', '◆']
 " }}}
 
 "{{{ ag: the silver searcher
-NeoBundle 'rking/ag.vim'
+Plug 'rking/ag.vim'
 nnoremap <leader>a :Ag<Space>
 "}}}
 
 " {{{ vimproc: Make it possible to execute programs within vim (requires compilation)
 
-NeoBundle 'Shougo/vimproc.vim', {
+Plug 'Shougo/vimproc.vim', {
 \ 'build' : {
 \     'windows' : 'tools\\update-dll-mingw',
 \     'cygwin' : 'make -f make_cygwin.mak',
@@ -118,38 +91,30 @@ NeoBundle 'Shougo/vimproc.vim', {
 \ }
 "}}}
 
-" NeoBundle 'ludovicchabant/vim-gutentags'
-
-" NeoBundle 'benmills/vimux'
-
+Plug 'saltstack/salt-vim', { 'for': 'sls' }
 "
 " Python
 "
 
 " Better indentation for Python
-NeoBundleLazy 'hynek/vim-python-pep8-indent'
-autocmd FileType python NeoBundleSource vim-python-pep8-indent
+Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 
 
 " Python matchit support
-NeoBundleLazy 'voithos/vim-python-matchit'
-autocmd FileType python NeoBundleSource vim-python-matchit
+Plug 'voithos/vim-python-matchit', { 'for': 'python' }
 
 " Highlighting for restructured text
-NeoBundleLazy 'Rykka/riv.vim'
-autocmd FileType rst NeoBundleSource riv.vim
+Plug 'Rykka/riv.vim', { 'for': 'rst' }
 
 "
 " JavaScript
 "
-NeoBundleLazy 'pangloss/vim-javascript'
-au FileType javascript NeoBundleSource vim-javascript
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
-call neobundle#end()
+call plug#end()
 
 filetype plugin indent on
 
-NeoBundleCheck
 " }}}
 
 " Leaders {{{
