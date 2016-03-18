@@ -69,6 +69,26 @@ SAVEHIST=1000
 # {{{ Functions
 
 #
+# Add a project to the list of projects to load in tmux
+#
+function _add_curr_dir_to_projects() {
+    local PROJNAME=$1
+
+    #
+    # Check if we already have the dir for this project cached.
+    #
+    if [[ -f ~/.projecthist ]]; then
+        if [[ -n "$(grep "^$PROJNAME:" ~/.projecthist | cut -d: -f2)" ]]; then
+            echo "$PROJNAME is already a project"
+            return 1
+        fi
+    fi
+
+    echo "$PROJNAME:$(pwd)" >> ~/.projecthist
+    return 0
+}
+
+#
 # Find the directory for a project from its name. Just returns the first path
 # to a directory with the same name as the project.
 #
@@ -77,29 +97,13 @@ function dir_for_project() {
     local PROJDIR
 
     #
-    # Check if we already have the dir for this project cached.
+    # Find project in project directory
     #
     if [[ -f ~/.projecthist ]]; then
-        PROJDIR=$(grep "^$PROJNAME:" ~/.projecthist | cut -d: -f2)
+        PROJDIR=$(grep "^$PROJNAME:" ~/.projecthist | head -1 | cut -d: -f2)
     fi
 
-    if [[ -n "$PROJDIR" ]]; then
-        echo "$PROJDIR"
-        return
-    fi
-
-    #
-    # Attempt to find the project directory
-    #
-    PROJDIR=$(find -L ~/src -maxdepth 4 -type d -iname $PROJNAME -print -quit)
-
-    #
-    # Cache the directory if we found it.
-    #
-    if [[ -n $PROJDIR ]]; then
-        echo "$PROJNAME:$PROJDIR" >> ~/.projecthist
-        echo $PROJDIR
-    fi
+    echo "$PROJDIR"
 }
 
 #
@@ -277,25 +281,52 @@ function _default_tmux_pane_layout() {
 function tms() {
     local SESSIONNAME="LIME"
     local PROJNAME=$1
+    local SHOWHELP
+    local opt
 
-    #
-    # Default to 'limetng' if no project is provided
-    #
-    if [ -z "$PROJNAME" ]; then
-        echo "Gimme a project name to open!"
-        if [[ -f ~/.projecthist ]]; then
-            echo "The following projects is in your history:"
-            echo
-            echo "=========================================="
-            cat ~/.projecthist
-            echo "=========================================="
-        fi
+    # Reset getopts
+    OPTIND=1
+
+    SHOWHELP=0
+
+    while getopts ":la:" opt; do
+        case "$opt" in
+            l)
+                cat ~/.projecthist
+                return
+                ;;
+            a)
+                _add_curr_dir_to_projects $OPTARG
+                return
+                ;;
+            \?)
+                echo "Invalid option: -$OPTARG" >&2
+                SHOWHELP=1
+                ;;
+            :)
+                echo "Option -$OPTARG requires an argument." >&2
+                SHOWHELP=1
+                ;;
+        esac
+    done
+
+    if [[ -z "$PROJNAME" ]]; then
+        echo "No project name supplied!"
+        SHOWHELP=1
+    fi
+
+    if [[ $SHOWHELP -eq 1 ]]; then
+        echo "Manage tmux projects:"
+        echo "-l\tList all registered projects"
+        echo "-a <projname>\tAdd the current directory as project <projname>"
+        echo ""
+        echo "tms <projname>\tloads project in tmux"
         return 1
     fi
 
     local PROJDIR=$(dir_for_project $PROJNAME)
     if [ -z "$PROJDIR" ]; then
-        echo "Could not find a directory for $PROJNAME"
+        echo "Could not find project $PROJNAME"
         return 1
     fi
 
@@ -313,7 +344,7 @@ function tms() {
         #
         # Check if we already have a window for the project
         # If not, create a new window. Otherwise, select the exisiting one.
-        tmux list-windows -t LIME | grep "^[[:digit:]]\+: $PROJNAME" &> /dev/null
+        tmux list-windows -t LIME | grep "^[[:digit:]]\+: $PROJNAME.\?[[:space:]]\+.*$" &> /dev/null
         if [ $? != 0 ]; then
             echo "$PROJNAME has no current window. Creating..."
             echo "Project name: $PROJNAME, Working dir: $PROJDIR"
