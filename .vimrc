@@ -106,6 +106,7 @@ Plug 'voithos/vim-python-matchit', { 'for': 'python' }
 " Highlighting for restructured text
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 
+Plug 'hdima/python-syntax', { 'for': 'python' }
 "
 " JavaScript
 "
