@@ -3,10 +3,18 @@
 
 call plug#begin()
 
-Plug 'NLKNguyen/papercolor-theme'
-
-Plug 'bling/vim-airline'
-let g:airline_powerline_fonts=1
+" Plug 'bling/vim-airline'
+" let g:airline_powerline_fonts=1
+" let g:airline_detect_spell=0
+Plug 'itchyny/lightline.vim'
+let g:lightline = {
+    \ 'colorscheme': 'PaperColor',
+    \ 'componene': {
+    \  'readonly': '%{&readonly?"":""}',
+    \ },
+    \ 'separator': { 'left': '', 'right': '' },
+    \ 'subseparator': { 'left': '', 'right': '' }
+    \ }
 
 " Mirror vim status bar theme to tmux
 Plug 'edkolev/tmuxline.vim'
@@ -18,6 +26,10 @@ Plug 'vim-scripts/matchit.zip'
 " Colorschemes
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'joshdick/onedark.vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'jdkanani/vim-material-theme'
+Plug 'morhetz/gruvbox'
+
 
 "{{{ ctrlp: File navigation
 Plug 'ctrlpvim/ctrlp.vim'
@@ -71,6 +83,7 @@ let g:fastfold_fold_command_suffixes =
 Plug 'xolox/vim-notes'
 let g:notes_directories = ['~/dropbox/vim-notes']
 let g:notes_list_bullets = ['•', '▶', '▷', '◆']
+let g:notes_tab_indents = 0
 " }}}
 
 "{{{ ag: the silver searcher
@@ -112,6 +125,10 @@ Plug 'hdima/python-syntax', { 'for': 'python' }
 "
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
+" Vim as a tool for writing
+Plug 'reedes/vim-pencil'
+Plug 'junegunn/goyo.vim'
+
 call plug#end()
 
 filetype plugin indent on
@@ -152,6 +169,9 @@ nnoremap <leader>ex :Explore<cr>
 " Search with ag
 nnoremap <leader>a :Ag ""<left>
 
+" Switch between dark and light background
+nnoremap <leader>bd :set background=dark<cr>
+nnoremap <leader>bl :set background=light<cr>
 " }}}
 
 
@@ -273,6 +293,7 @@ nnoremap <leader>rf :wa<cr>:call RunFlake()<cr>:redraw<cr>:call JumpToError()<cr
 
 " }}}
 
+nnoremap <leader>rd :redraw!<cr>
 " }}}
 
 " Appearance {{{
@@ -326,7 +347,7 @@ set list                " Display special characters (e.g. trailing whitespace)
 set listchars=tab:▷◆,trail:◆
 
 " let g:rehash256 = 1
-set background=dark
+set background=light
 colorscheme PaperColor
 
 " }}}

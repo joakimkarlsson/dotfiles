@@ -142,26 +142,6 @@ function cd_git_root() {
 }
 
 
-# {{{ Python Stuff
-#
-# Source install another python package into the current python environment.
-#
-function srcinst() {
-    local PROJNAME=$1
-    local PROJDIR=$(dir_for_project $PROJNAME)
-
-    echo "Uninstalling existing..."
-    pip freeze | grep -i "$PROJNAME" &> /dev/null
-    if [ $? = 0 ]; then
-        pip uninstall $PROJNAME
-    fi
-
-    echo "Installing from $PROJDIR..."
-    pushd $PROJDIR
-    pip install -e .
-    popd
-}
-
 #
 # Check if we have an active python.
 #
@@ -382,6 +362,9 @@ alias zr!='echo "Reloading .zshrc..." && source ~/.zshrc'
 # Quickly cd to root of current .git dir
 alias cdg='cd_git_root'
 
+# Remove all merged branches in git
+alias gitprune='git branch --merged | grep -v "\*" | grep -v master | xargs -n 1 git branch -d'
+
 # Make the cd command automatically activate venv
 alias cd='cd_venv'
 
@@ -395,7 +378,7 @@ setopt PROMPT_SUBST
 function venv_prompt_info() {
     if is_python_active; then
         local venv_path=`basename "$VIRTUAL_ENV/.."(:A)`
-        echo "%{$fg_bold[yellow]%}[ $venv_path]%{$reset_color%}"
+        echo "%{$fg[yellow]%}[ $venv_path]%{$reset_color%}"
     fi
 }
 

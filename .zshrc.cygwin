@@ -9,24 +9,24 @@ function glp() {
     # gulp replacement for running gulp inside node_modules
     #
     if [[ (-d "$PWD/node_modules") && (-d "$PWD/node_modules/gulp") ]]; then
-        console node node_modules/gulp/bin/gulp.js $*
+        winpty node node_modules/gulp/bin/gulp.js $*
     else
         echo "Cannot find a node_modules or a gulp directory!"
     fi
 }
 
-alias lisa='console.exe /cygdrive/c/src/limeworld/serveradmin/Server/Lundalogik.Lisa.Service.ConsoleHost/bin/Debug/LisaConsole.exe'
+alias lisa='winpty.exe /cygdrive/c/src/limeworld/serveradmin/Server/Lundalogik.Lisa.Service.ConsoleHost/bin/Debug/LisaConsole.exe'
 # }}}
 
 # {{{ Aliases to make some native windows applications play nice with
 # a standard terminal. Uses https://github.com/rprichard/winpty
-alias lf='console.exe limefu'
-alias ipython='EDITOR=$(cygpath -w /usr/bin/vim) console.exe ipython3'
-alias node="console.exe node"
-alias nt="console.exe nosetests"
-alias devpi="console.exe devpi"
-alias vagrant="console.exe vagrant"
-alias conpy="console.exe python"
+alias lf='winpty.exe limefu --no-color'
+alias ipython='EDITOR=$(cygpath -w /usr/bin/vim) winpty.exe ipython3'
+alias node="winpty.exe node"
+alias devpi="winpty.exe devpi"
+alias vagrant="winpty.exe vagrant"
+alias wpy="winpty.exe python"
+alias py.test="winpty.exe py.test.exe"
 # }}}
 
 # {{{ Functions
@@ -40,13 +40,8 @@ function startdocker() {
 
 
 # {{{ LIME specific stuff
-alias lall="console.exe limefu test flake && \
-    console.exe limefu test unit --all && \
-    console.exe limefu test functional && \
-    console.exe limefu test e2e"
-alias sup="pushd ~/src/limetng && console cmd /c setup.bat; popd"
-alias venv34="console.exe /cygdrive/c/Python34/Scripts/virtualenv venv && av"
-alias piptng="cd ~/src/limetng/ && av && pip install -U --find-links installation/wheels -r installation/requirements.txt"
+alias sup="pushd ~/src/limetng && winpty cmd /c setup.bat; popd"
+alias venv34="winpty.exe /cygdrive/c/Python34/Scripts/virtualenv venv && av && python -m pip install -U pip"
 # }}}
 
 # {{{ Aliases
