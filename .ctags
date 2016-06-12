@@ -1,4 +1,4 @@
---languages=python
+--languages=python,c++
 --python-kinds=cfm
 --recurse
 --exclude=build
