@@ -70,10 +70,10 @@ Plug 'xolox/vim-misc'
 "{{{ syntastic: Syntax check for several languages
 Plug 'scrooloose/syntastic', { 'for': 'python' }
 let g:syntastic_enable_signs = 1
-let g:syntastic_error_symbol = ""
-let g:syntastic_warning_symbol = ""
-let g:syntastic_style_error_symbol = ""
-let g:syntastic_style_warning_symbol = ""
+let g:syntastic_error_symbol = ""
+let g:syntastic_warning_symbol = ""
+let g:syntastic_style_error_symbol = ""
+let g:syntastic_style_warning_symbol = ""
 let g:syntastic_always_populate_loc_list = 1
 
 let g:syntastic_python_python_exec = '/usr/bin/python3'
@@ -90,7 +90,7 @@ let g:fastfold_fold_command_suffixes =
 " vim notes with dropbox storage {{{
 Plug 'xolox/vim-notes'
 let g:notes_directories = ['~/dropbox/vim-notes']
-let g:notes_list_bullets = ['•', '▶', '▷', '◆']
+let g:notes_list_bullets = ['•', '•', '•', '•']
 let g:notes_tab_indents = 0
 " }}}
 
