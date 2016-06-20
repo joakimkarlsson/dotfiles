@@ -29,6 +29,7 @@ Plug 'edkolev/tmuxline.vim'
 " extended % matching for HTML, LaTeX, and many more languages
 Plug 'vim-scripts/matchit.zip'
 
+Plug 'easymotion/vim-easymotion'
 
 " Colorschemes
 Plug 'NLKNguyen/papercolor-theme'
@@ -156,7 +157,7 @@ nnoremap <leader>p :CtrlP<cr>
 nnoremap <leader>t :CtrlPTag<cr>
 
 " Clear higlighting of words matching search
-nnoremap <silent> <leader><space> :noh<cr>:call clearmatches()<cr>
+nnoremap <silent> <leader>cl :noh<cr>:call clearmatches()<cr>
 
 " Rebuild ctags
 :nnoremap <silent> <F12> :echo "Rebuilding tags..."<cr>:!ctags .<cr>:echo "Rebuilt tags"<cr>
