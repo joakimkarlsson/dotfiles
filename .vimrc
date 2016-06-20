@@ -9,8 +9,15 @@ call plug#begin()
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
     \ 'colorscheme': 'PaperColor',
-    \ 'componene': {
+    \ 'component': {
     \  'readonly': '%{&readonly?"":""}',
+    \ },
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'readonly', 'relativepath', 'modified' ] ]
+    \ },
+    \ 'inactive': {
+    \    'left': [ [ 'relativepath' ] ]
     \ },
     \ 'separator': { 'left': '', 'right': '' },
     \ 'subseparator': { 'left': '', 'right': '' }
