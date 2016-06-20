@@ -165,9 +165,6 @@ nnoremap <silent> <leader>cl :noh<cr>:call clearmatches()<cr>
 " Shortcut to edit .vimrc
 nnoremap <leader>ev :e $MYVIMRC<cr>
 
-" Set current directory to currently open file.
-nnoremap <leader>cd :lcd %:p:h<cr>
-
 " JSON Formatting
 nnoremap <leader>js :%!python -m json.tool<cr>
 
