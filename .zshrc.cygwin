@@ -21,13 +21,20 @@ alias lisa='winpty.exe /cygdrive/c/src/limeworld/serveradmin/Server/Lundalogik.L
 # {{{ Aliases to make some native windows applications play nice with
 # a standard terminal. Uses https://github.com/rprichard/winpty
 alias lf='winpty.exe limefu --no-color'
-alias ipython='EDITOR=$(cygpath -w /usr/bin/vim) winpty.exe ipython3'
 alias node="winpty.exe node"
 alias devpi="winpty.exe devpi"
 alias vagrant="winpty.exe vagrant"
 alias wpy="winpty.exe python"
 alias py.test="winpty.exe py.test.exe"
 # }}}
+
+function ipy() {
+    VIRTUAL_ENV=$(cygpath -w $VIRTUAL_ENV) EDITOR=$(cygpath -w /usr/bin/vim) winpty.exe ipython3
+}
+
+function manage.py() {
+    VIRTUAL_ENV=$(cygpath -w $VIRTUAL_ENV) winpty.exe python manage.py $*
+}
 
 # {{{ Functions
 function startdocker() {
