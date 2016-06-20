@@ -1,16 +1,5 @@
-snippet init
-def __init__(self):
-    ${1:pass}$0
-endsnippet
-
-snippet meth
-def ${1:name}(self${2:, args}):
-    ${3:pass}$0
-endsnippet
-
 snippet #! "Simple shebang for python" b
 #!/usr/bin/env python
-$0
 endsnippet
 
 snippet ifmain "ifmain with sys.exit()" b
@@ -22,43 +11,8 @@ snippet ipdb "add ipdb breakpoint" b
 import ipdb; ipdb.set_trace()
 endsnippet
 
-snippet npdb "add nose breakpoint" b
-from nose.tools import set_trace; set_trace()
-endsnippet
-
-snippet desc "insert 'describe_it' context"
-@describe
-def ${1:something}():
+snippet ptf "add py.test fixture" b
+@pytest.fixture(scope='${2:function}')
+def ${1:my_fixture}():
     ${0:pass}
-endsnippet
-
-snippet descf "insert 'describe_it' context with fixture"
-@describe
-def ${1:something}():
-    f = Fixture()
-    ${0}
-endsnippet
-
-snippet it "insert 'describe_it' it method"
-@it
-def ${1:does_something}():
-    ${0:pass}
-endsnippet
-
-snippet be "insert 'describe_it' before_each method"
-@before_each
-def setup():
-    ${0:pass}
-endsnippet
-
-snippet ae "insert 'describe_it' after_each method"
-@after_each
-def teardown():
-    ${0:pass}
-endsnippet
-
-snippet impdesc "imports for using describe_it"
-from describe_it import *  # noqa
-from hamcrest import *  # noqa
-${0}
 endsnippet
