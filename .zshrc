@@ -378,6 +378,11 @@ setopt PROMPT_SUBST
 
 function venv_prompt_info() {
     if is_python_active; then
+        if [[ ! ( -d $VIRTUAL_ENV ) ]]; then
+            echo "%{$fg[red]%}[  venv is gone]%{$reset_color%}"
+            return
+        fi
+
         local venv_path=`basename "$VIRTUAL_ENV/.."(:A)`
         echo "%{$fg[yellow]%}[ $venv_path]%{$reset_color%}"
     fi
