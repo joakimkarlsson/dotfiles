@@ -56,10 +56,13 @@ export EDITOR=vim
 
 
 # {{{ Behavior
+
+# {{{ Vim keybindings
 bindkey -v
 bindkey -M vicmd '?' history-incremental-search-backward
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
+# }}}
 
 # Remember history
 HISTSIZE=1000
@@ -68,6 +71,14 @@ SAVEHIST=1000
 # }}}
 
 # {{{ Functions
+
+#
+# Print nerdfont characters
+#
+function nerdfont() {
+    echo -e $(printf "\\\\u%x\n" $(seq $((16#e000)) $((16#f200))))
+}
+
 
 #
 # Add a project to the list of projects to load in tmux
@@ -376,6 +387,7 @@ alias cd='cd_venv'
 # {{{ Customized prompt
 setopt PROMPT_SUBST
 
+# {{{ Venv status
 function venv_prompt_info() {
     if is_python_active; then
         if [[ ! ( -d $VIRTUAL_ENV ) ]]; then
@@ -387,12 +399,13 @@ function venv_prompt_info() {
         echo "%{$fg[yellow]%}[ $venv_path]%{$reset_color%}"
     fi
 }
+# }}}
 
 # {{{ Git status functions
-ZSH_THEME_GIT_PROMPT_PREFIX="(%{$fg[red]%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="[%{$fg[red]%} "
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[yellow]%}✗%{$fg[blue]%})%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
+ZSH_THEME_GIT_PROMPT_DIRTY=" %{$fg[yellow]%}✗%{$fg[blue]%}]%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%}]"
 
 # get the name of the branch we are on
 function git_prompt_info() {
@@ -424,15 +437,65 @@ function parse_git_dirty() {
 }
 # }}}
 
-local return_code="%(?..%{$fg[red]%}%? %{$reset_color%})"
-local curr_time="%{$fg[green]%}%*"
-local curr_dir="%{$reset_color%}%~"
-local git_branch='%{$fg[blue]%}$(git_prompt_info)%{$reset_color%}'
-local venv_info='$(venv_prompt_info)'
+# {{{ Vim mode status
+function zle-keymap-select {
+    case "${KEYMAP}" in
+        main|viins)
+            vim_mode="I"
+            ;;
+        vicmd)
+            vim_mode="N"
+            ;;
+        visual)
+            vim_mode="V"
+            ;;
+        *)
+            vim_mode="?"
+            ;;
+    esac
 
-export PROMPT="%{$fg[blue]%}┌── ${curr_time} ${curr_dir} ${git_branch} ${venv_info}
+    zle reset-prompt
+}
+
+function zle-line-finish {
+    vim_mode="I"
+}
+
+vim_mode="I"
+
+zle -N zle-line-finish
+zle -N zle-keymap-select
+
+# 
+# Handle C-c in CMD mode, which will not trigger a recalculation of vim mode.
+# This would leave the prompt displayed afterward to indicate command mode
+#
+function TRAPINT {
+    vim_mode='I'
+    return $(( 128 + $1))
+}
+
+# }}}
+
+function display_main_prompt {
+    local curr_time="%{$fg[green]%}%*"
+    local curr_dir="%{$reset_color%}%~"
+    local git_branch='%{$fg[blue]%}$(git_prompt_info)%{$reset_color%}'
+    local venv_info='$(venv_prompt_info)'
+    local vim_info='%{$fg[green]%}[ ${vim_mode}]%{$reset_color%}'
+
+    echo "%{$fg[blue]%}┌── ${curr_time} ${curr_dir} ${vim_info} ${git_branch} ${venv_info}
 %{$fg[blue]%}└─%{$reset_color%}$ "
-export RPS1="${return_code}"
+}
+
+function display_right_prompt {
+    local return_code="%(?..%{$fg[red]%}%? %{$reset_color%})"
+
+    echo "${return_code}"
+}
+
+export PROMPT="$(display_main_prompt)"
+export RPS1="$(display_right_prompt)"
 # }}}
 
 # {{{ Load OS specific settings
