@@ -177,6 +177,14 @@ nnoremap <leader>a :Ag ""<left>
 " Switch between dark and light background
 nnoremap <leader>bd :set background=dark<cr>
 nnoremap <leader>bl :set background=light<cr>
+
+" Less awkward windows handling
+nnoremap <leader>ws <C-w><C-s>
+nnoremap <leader>wv <C-w><C-v>
+nnoremap <C-h> <C-w><C-h>
+nnoremap <C-j> <C-w><C-j>
+nnoremap <C-k> <C-w><C-k>
+nnoremap <C-l> <C-w><C-l>
 " }}}
 
 
