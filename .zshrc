@@ -248,8 +248,8 @@ function av() {
 # Function to cd to a directory and automatically activate any
 # Python virtual environment in the target dir.
 #
-function cd_venv() {
-    cd $1 && activate_python
+function cd() {
+    builtin cd $1 && activate_python
 }
 
 
@@ -376,9 +376,6 @@ alias cdg='cd_git_root'
 
 # Remove all merged branches in git
 alias gitprune='git branch --merged | grep -v "\*" | grep -v master | xargs -n 1 git branch -d'
-
-# Make the cd command automatically activate venv
-alias cd='cd_venv'
 
 # }}}
 
