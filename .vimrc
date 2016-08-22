@@ -1,6 +1,7 @@
 " vim:foldmethod=marker
 
 
+" {{{ Plugins
 call plug#begin()
 
 " Plug 'bling/vim-airline'
@@ -128,6 +129,28 @@ Plug 'voithos/vim-python-matchit', { 'for': 'python' }
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 
 Plug 'hdima/python-syntax', { 'for': 'python' }
+
+" {{{ Auto completion
+function! BuildYCM(info)
+    if a:info.status == 'installed' || a:info.force
+        silent !build_dir=$(mktemp -d)
+        silent !pushd $build_dir
+        silent !cmake . ~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp
+        silent !cmake --build . --target ycm_core
+        silent !popd
+    endif
+endfunction
+
+Plug 'joakimkarlsson/YouCompleteMe', { 'for': 'python', 'do': function('BuildYCM') }
+let g:ycm_server_keep_logfiles = 1
+let g:ycm_python_binary_path = 'python'
+let g:ycm_path_to_python_interpreter = '/usr/bin/python'
+" let g:ycm_auto_trigger = 0
+let g:ycm_key_invoke_completion = '<C-\>'
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+" }}}
+
 "
 " JavaScript
 "
@@ -247,8 +270,8 @@ set switchbuf=useopen
 augroup filetype_python
     autocmd!
     autocmd FileType python setlocal colorcolumn=80
-    " Prevent JEDI from showing docstrings automatically on autocomplete
-    autocmd FileType python setlocal completeopt-=preview
+    " " Prevent JEDI from showing docstrings automatically on autocomplete
+    " autocmd FileType python setlocal completeopt-=preview
 
     " We don't need smartindent in python. Makes comments always go to 
     " the start of the line.
