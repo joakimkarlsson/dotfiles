@@ -57,9 +57,10 @@ export EDITOR=vim
 
 # {{{ Behavior
 
+bindkey -e
 # {{{ Vim keybindings
-bindkey -v
-bindkey -M vicmd '?' history-incremental-search-backward
+# bindkey -v
+# bindkey -M vicmd '?' history-incremental-search-backward
 bindkey '\e[A' history-beginning-search-backward
 bindkey '\e[B' history-beginning-search-forward
 # }}}
@@ -481,7 +482,7 @@ function display_main_prompt {
     local venv_info='$(venv_prompt_info)'
     local vim_info='%{$fg[green]%}[ ${vim_mode}]%{$reset_color%}'
 
-    echo "%{$fg[blue]%}┌── ${curr_time} ${curr_dir} ${vim_info} ${git_branch} ${venv_info}
+    echo "%{$fg[blue]%}┌── ${curr_time} ${curr_dir} ${git_branch} ${venv_info}
 %{$fg[blue]%}└─%{$reset_color%}$ "
 }
 
