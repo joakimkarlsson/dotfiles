@@ -160,6 +160,10 @@ Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 Plug 'reedes/vim-pencil'
 Plug 'junegunn/goyo.vim'
 
+" C64 development
+Plug 'gryf/kickass-syntax-vim', { 'for': 'kickass' }
+autocmd BufRead *.asm set filetype=kickass
+
 call plug#end()
 
 filetype plugin indent on
