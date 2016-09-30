@@ -82,8 +82,6 @@ let g:syntastic_python_checkers = ['python', 'flake8']
 "}}}
 
 
-Plug 'SirVer/ultisnips'
-
 Plug 'Konfekt/FastFold'
 let g:fastfold_fold_command_suffixes =
             \['x','X','a','A','o','O','c','C','r','R','m','M','i','n','N']
@@ -130,7 +128,10 @@ Plug 'Rykka/riv.vim', { 'for': 'rst' }
 
 Plug 'hdima/python-syntax', { 'for': 'python' }
 
+Plug 'SirVer/ultisnips'
+
 " {{{ Auto completion
+
 function! BuildYCM(info)
     if a:info.status == 'installed' || a:info.force
         silent !build_dir=$(mktemp -d)
@@ -141,7 +142,7 @@ function! BuildYCM(info)
     endif
 endfunction
 
-Plug 'joakimkarlsson/YouCompleteMe', { 'for': 'python', 'do': function('BuildYCM') }
+" Plug 'joakimkarlsson/YouCompleteMe', { 'for': 'python', 'do': function('BuildYCM') }
 let g:ycm_server_keep_logfiles = 1
 let g:ycm_python_binary_path = 'python'
 let g:ycm_path_to_python_interpreter = '/usr/bin/python'
@@ -149,6 +150,10 @@ let g:ycm_path_to_python_interpreter = '/usr/bin/python'
 let g:ycm_key_invoke_completion = '<C-\>'
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+
+" Have preview window at bottom to prevent too much flickering
+set splitbelow
 " }}}
 
 "
@@ -274,6 +279,8 @@ set switchbuf=useopen
 augroup filetype_python
     autocmd!
     autocmd FileType python setlocal colorcolumn=80
+    autocmd FileType python setlocal omnifunc=python3complete#Complete
+
     " " Prevent JEDI from showing docstrings automatically on autocomplete
     " autocmd FileType python setlocal completeopt-=preview
 
