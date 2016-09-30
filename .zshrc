@@ -273,78 +273,20 @@ function _default_tmux_pane_layout() {
 
 function tms() {
     local SESSIONNAME="LIME"
-    local PROJNAME=$1
-    local SHOWHELP
-    local opt
+    local PROJDIR=$1
+    local PROJNAME=$(basename $1)
 
-    # Reset getopts
-    OPTIND=1
-
-    SHOWHELP=0
-
-    while getopts ":la:" opt; do
-        case "$opt" in
-            l)
-                cat ~/.projecthist
-                return
-                ;;
-            a)
-                _add_curr_dir_to_projects $OPTARG
-                return
-                ;;
-            \?)
-                echo "Invalid option: -$OPTARG" >&2
-                SHOWHELP=1
-                ;;
-            :)
-                echo "Option -$OPTARG requires an argument." >&2
-                SHOWHELP=1
-                ;;
-        esac
-    done
-
-    if [[ -z "$PROJNAME" ]]; then
-        echo "No project name supplied!"
-        SHOWHELP=1
-    fi
-
-    if [[ $SHOWHELP -eq 1 ]]; then
-        echo "Manage tmux projects:"
-        echo "-l\tList all registered projects"
-        echo "-a <projname>\tAdd the current directory as project <projname>"
-        echo ""
-        echo "tms <projname>\tloads project in tmux"
-        return 1
-    fi
-
-    local PROJDIR=$(dir_for_project $PROJNAME)
-    if [ -z "$PROJDIR" ]; then
-        echo "Could not find project $PROJNAME"
-        return 1
-    fi
-
-    #
-    # See if we already have a seesion. If not, create one
-    #
     tmux has-session -t $SESSIONNAME &> /dev/null
     if [ $? != 0 ]; then
-        echo "Session $SESSIONNAME not found. Creating it..."
-        echo "Project name: $PROJNAME, Working dir: $PROJDIR"
-        tmux new-session -s $SESSIONNAME -d -n $PROJNAME -c $PROJDIR
-        _default_tmux_pane_layout $PROJDIR
+        tmux new-session -s $SESSIONNAME -d -n $PROJNAME -c $PROJDIR:A
     else
-        echo "Session $SESSIONAME is running. Attaching..."
         #
         # Check if we already have a window for the project
         # If not, create a new window. Otherwise, select the exisiting one.
         tmux list-windows -t LIME | grep "^[[:digit:]]\+: $PROJNAME.\?[[:space:]]\+.*$" &> /dev/null
         if [ $? != 0 ]; then
-            echo "$PROJNAME has no current window. Creating..."
-            echo "Project name: $PROJNAME, Working dir: $PROJDIR"
-            tmux new-window -n $PROJNAME -c $PROJDIR
-            _default_tmux_pane_layout $PROJDIR
+            tmux new-window -n $PROJNAME -c $PROJDIR:A
         else
-            echo "$PROJNAME has an open window. Selecting it..."
             tmux select-window -t $PROJNAME
         fi
     fi
