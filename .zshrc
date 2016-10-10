@@ -258,44 +258,17 @@ function cd() {
 
 # {{{ Tmux Stuff
 
-#
-# Start, or attach to, a tmux sesssion with a window for
-# the desired project.
-#
-
-function _default_tmux_pane_layout() {
-    local WORKDIR=$1
-    echo "Setting up default layout. Directory: $WORKDIR"
-
-    # tmux send-keys -t 0 'av; vim' C-m # vim with activated python
-}
-
-
 function tms() {
-    local SESSIONNAME="LIME"
-    local PROJDIR=$1
-    local PROJNAME=$(basename $1)
+    local DIR=$1
 
-    tmux has-session -t $SESSIONNAME &> /dev/null
-    if [ $? != 0 ]; then
-        tmux new-session -s $SESSIONNAME -d -n $PROJNAME -c $PROJDIR:A
-    else
-        #
-        # Check if we already have a window for the project
-        # If not, create a new window. Otherwise, select the exisiting one.
-        tmux list-windows -t LIME | grep "^[[:digit:]]\+: $PROJNAME.\?[[:space:]]\+.*$" &> /dev/null
-        if [ $? != 0 ]; then
-            tmux new-window -n $PROJNAME -c $PROJDIR:A
-        else
-            tmux select-window -t $PROJNAME
-        fi
+    if [[ -z $DIR ]]; then
+        echo "Usage: tms <directory>"
+        return 1
     fi
 
-    #
-    # Attach to the session. If this fails because we're already attached,
-    # fail silently.
-    #
-    tmux attach-session -t $SESSIONNAME &> /dev/null
+    local SESSNAME=$(basename $DIR)
+
+    tmux new -A -s $SESSNAME -n 'main' -c $DIR:A
 }
 
 # }}}
