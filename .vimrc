@@ -38,6 +38,7 @@ Plug 'joshdick/onedark.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'jdkanani/vim-material-theme'
 Plug 'morhetz/gruvbox'
+Plug 'chriskempson/base16-vim'
 
 
 "{{{ ctrlp: File navigation
@@ -394,7 +395,8 @@ set list                " Display special characters (e.g. trailing whitespace)
 set listchars=tab:▷◆,trail:◆
 
 " let g:rehash256 = 1
-set background=light
-colorscheme PaperColor
+set background=dark
+let base16colorspace=256
+colorscheme base16-default-dark
 
 " }}}
