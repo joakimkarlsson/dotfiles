@@ -69,6 +69,9 @@ Plug 'groenewege/vim-less', { 'for': 'less' }
 " Misc functions needed by other plugins
 Plug 'xolox/vim-misc'
 
+" Run Async Shell Commands in Vim 8.0 and Output to Quickfix Window
+Plug 'skywind3000/asyncrun.vim'
+
 "{{{ syntastic: Syntax check for several languages
 Plug 'scrooloose/syntastic', { 'for': 'python' }
 let g:syntastic_enable_signs = 1
@@ -193,7 +196,7 @@ nnoremap <leader>t :CtrlPTag<cr>
 nnoremap <silent> <leader>cl :noh<cr>:call clearmatches()<cr>
 
 " Rebuild ctags
-:nnoremap <silent> <F12> :echo "Rebuilding tags..."<cr>:!ctags .<cr>:echo "Rebuilt tags"<cr>
+:nnoremap <silent> <F12> :AsyncRun ctags .<cr>
 
 " Shortcut to edit .vimrc
 nnoremap <leader>ev :e $MYVIMRC<cr>
