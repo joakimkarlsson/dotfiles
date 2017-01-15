@@ -20,7 +20,7 @@ alias lisa='winpty.exe /cygdrive/c/src/limeworld/serveradmin/Server/Lundalogik.L
 
 # {{{ Aliases to make some native windows applications play nice with
 # a standard terminal. Uses https://github.com/rprichard/winpty
-alias lf='winpty.exe limefu --no-color'
+alias lf='winpty.exe limefu'
 alias node="winpty.exe node"
 alias devpi="winpty.exe devpi"
 alias vagrant="winpty.exe vagrant"
@@ -36,19 +36,23 @@ function manage.py() {
     VIRTUAL_ENV=$(cygpath -w $VIRTUAL_ENV) winpty.exe python manage.py $*
 }
 
-# {{{ Functions
 function startdocker() {
     pushd "/cygdrive/c/Program Files/Docker Toolbox/"
     ./startcyg.sh
     eval "$(docker-machine env default)"
     popd
 }
-# }}}
+
+# Set up a new virtual env for Python 3.4
+function venv34() {
+    [[ -d venv ]] && rm -rf venv
+
+    winpty /cygdrive/c/Python34/Scripts/virtualenv venv && av && winpty python -m pip install -U pip
+}
 
 
 # {{{ LIME specific stuff
 alias sup="pushd ~/src/limetng && winpty cmd /c setup.bat; popd"
-alias venv34="winpty.exe /cygdrive/c/Python34/Scripts/virtualenv venv && av && python -m pip install -U pip"
 # }}}
 
 # {{{ Aliases
