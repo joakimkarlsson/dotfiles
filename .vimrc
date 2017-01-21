@@ -39,6 +39,7 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'jdkanani/vim-material-theme'
 Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'
+Plug 'lifepillar/vim-solarized8'
 
 
 "{{{ ctrlp: File navigation
@@ -211,8 +212,10 @@ nnoremap <leader>ex :Explore<cr>
 nnoremap <leader>a :Ag ""<left>
 
 " Switch between dark and light background
-nnoremap <leader>bd :set background=dark<cr>
-nnoremap <leader>bl :set background=light<cr>
+nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
+    \ ? substitute(g:colors_name, 'dark', 'light', '')
+    \ : substitute(g:colors_name, 'light', 'dark', '')
+    \ )<cr>
 
 " Less awkward windows handling
 nnoremap <leader>ws <C-w><C-s>
