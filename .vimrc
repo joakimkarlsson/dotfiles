@@ -369,19 +369,11 @@ if has('gui_running')
 
 else
     "
-    " Make vim display colors and fonts properly
+    " Enable true colors
     "
-    if has("win32unix") || has("macunix")
-        set term=xterm-256color
-        set t_ut=
-    else
-        set termencoding=ut8
-        set term=xterm
-        set t_Co=256
-        let &t_AB="\e[48;5;%dm"
-        let &t_AF="\e[38;5;%dm"
-        let &t_ZH="\e[3m"
-    endif
+    set termguicolors
+    let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+    let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
 set cursorline
