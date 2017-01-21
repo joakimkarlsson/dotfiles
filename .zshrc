@@ -269,7 +269,7 @@ function tms() {
     local SESSNAME=$(basename $DIR)
 
     if [[ -n "$TMUX" ]]; then
-        tmux new -s $SESSNAME -d -c $DIR:A &> /dev/null
+        tmux new -s $SESSNAME -d -n 'main' -c $DIR:A &> /dev/null
         tmux switch-client -t $SESSNAME
     else
         tmux new -A -s $SESSNAME -n 'main' -c $DIR:A
