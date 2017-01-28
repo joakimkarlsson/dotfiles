@@ -371,10 +371,25 @@ if has('gui_running')
     endif
 
 else
-    "
+    set termencoding=ut8
+    set term=xterm
+
+    " Clearing uses the current background color
+    set t_ut=
+
     " Enable true colors
-    "
     set termguicolors
+
+
+    " Italics mode
+    let &t_ZH="\e[3m"
+    let &t_AB="\e[48;5;%dm"
+
+
+    " Set forground color
+    let &t_AF="\e[38;5;%dm"
+
+    " Set foreground/background color RGB
     let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
@@ -392,9 +407,6 @@ highlight! link MatchParen StatusLine
 set list                " Display special characters (e.g. trailing whitespace)
 set listchars=tab:▷◆,trail:◆
 
-" let g:rehash256 = 1
-set background=dark
-let base16colorspace=256
-colorscheme base16-default-dark
+colorscheme base16-harmonic16-dark
 
 " }}}
