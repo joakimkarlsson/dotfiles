@@ -9,7 +9,7 @@ call plug#begin()
 " let g:airline_detect_spell=0
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
-    \ 'colorscheme': 'PaperColor',
+    \ 'colorscheme': 'solarized',
     \ 'component': {
     \  'readonly': '%{&readonly?"":""}',
     \ },
@@ -40,7 +40,7 @@ Plug 'jdkanani/vim-material-theme'
 Plug 'morhetz/gruvbox'
 Plug 'chriskempson/base16-vim'
 Plug 'lifepillar/vim-solarized8'
-
+Plug 'romainl/flattened'
 
 "{{{ ctrlp: File navigation
 Plug 'ctrlpvim/ctrlp.vim'
@@ -75,11 +75,6 @@ Plug 'skywind3000/asyncrun.vim'
 
 "{{{ syntastic: Syntax check for several languages
 Plug 'scrooloose/syntastic', { 'for': 'python' }
-let g:syntastic_enable_signs = 1
-let g:syntastic_error_symbol = ""
-let g:syntastic_warning_symbol = ""
-let g:syntastic_style_error_symbol = ""
-let g:syntastic_style_warning_symbol = ""
 let g:syntastic_always_populate_loc_list = 1
 
 let g:syntastic_python_python_exec = '/usr/bin/python3'
@@ -124,7 +119,6 @@ Plug 'saltstack/salt-vim', { 'for': 'sls' }
 " Better indentation for Python
 Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 
-
 " Python matchit support
 Plug 'voithos/vim-python-matchit', { 'for': 'python' }
 
@@ -134,32 +128,6 @@ Plug 'Rykka/riv.vim', { 'for': 'rst' }
 Plug 'hdima/python-syntax', { 'for': 'python' }
 
 Plug 'SirVer/ultisnips'
-
-" {{{ Auto completion
-
-function! BuildYCM(info)
-    if a:info.status == 'installed' || a:info.force
-        silent !build_dir=$(mktemp -d)
-        silent !pushd $build_dir
-        silent !cmake . ~/.vim/plugged/YouCompleteMe/third_party/ycmd/cpp
-        silent !cmake --build . --target ycm_core
-        silent !popd
-    endif
-endfunction
-
-" Plug 'joakimkarlsson/YouCompleteMe', { 'for': 'python', 'do': function('BuildYCM') }
-let g:ycm_server_keep_logfiles = 1
-let g:ycm_python_binary_path = 'python'
-let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-" let g:ycm_auto_trigger = 0
-let g:ycm_key_invoke_completion = '<C-\>'
-let g:ycm_add_preview_to_completeopt = 1
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-
-" Have preview window at bottom to prevent too much flickering
-set splitbelow
-" }}}
 
 "
 " JavaScript
@@ -395,12 +363,6 @@ else
 endif
 
 set cursorline
-if &background == 'light'
-    highlight CursorLine cterm=NONE ctermbg=LightGray ctermfg=NONE
-else
-    highlight CursorLine cterm=NONE ctermbg=233 ctermfg=NONE
-    highlight colorcolumn ctermbg=235
-endif
 
 highlight! link MatchParen StatusLine
 
