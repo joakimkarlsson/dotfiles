@@ -74,11 +74,22 @@ Plug 'xolox/vim-misc'
 Plug 'skywind3000/asyncrun.vim'
 
 "{{{ syntastic: Syntax check for several languages
-Plug 'scrooloose/syntastic', { 'for': 'python' }
-let g:syntastic_always_populate_loc_list = 1
+" Plug 'scrooloose/syntastic', { 'for': 'python' }
+" let g:syntastic_always_populate_loc_list = 1
+"
+" let g:syntastic_python_python_exec = '/usr/bin/python3'
+" let g:syntastic_python_checkers = ['python', 'flake8']
+"}}}
 
-let g:syntastic_python_python_exec = '/usr/bin/python3'
-let g:syntastic_python_checkers = ['python', 'flake8']
+"{{{ Ale
+Plug 'w0rp/ale'
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_enter = 1
+let g:ale_lint_delay = 200
+let g:ale_open_list = 0
+let g:ale_set_signs = 1
+let g:ale_sign_column_always = 0
 "}}}
 
 
@@ -142,6 +153,10 @@ Plug 'junegunn/goyo.vim'
 Plug 'gryf/kickass-syntax-vim', { 'for': 'kickass' }
 autocmd BufRead *.asm set filetype=kickass
 
+" Breaking the habit of using Vim ineffectively
+Plug 'takac/vim-hardtime'
+let g:hardtime_default_on = 1  " Have hardtime be on by default for all buffers
+
 call plug#end()
 
 filetype plugin indent on
@@ -160,6 +175,7 @@ inoremap jk <esc>
 
 nnoremap <leader>p :CtrlP<cr>
 nnoremap <leader>t :CtrlPTag<cr>
+nnoremap <leader>b :CtrlPBuffer<cr>
 
 " Clear higlighting of words matching search
 nnoremap <silent> <leader>cl :noh<cr>:call clearmatches()<cr>
@@ -192,6 +208,7 @@ nnoremap <C-h> <C-w><C-h>
 nnoremap <C-j> <C-w><C-j>
 nnoremap <C-k> <C-w><C-k>
 nnoremap <C-l> <C-w><C-l>
+
 " }}}
 
 
@@ -205,7 +222,6 @@ set tabstop=4
 set shiftwidth=4
 set laststatus=2
 set autowrite           " Automatically save buffer
-set number
 set incsearch
 set scrolloff=3         " keep 3 lines when scrolling
 set showcmd             " display incomplete commands
@@ -217,6 +233,12 @@ set showmatch           " jump to matches when entering regexp
 set ignorecase          " ignore case when searching
 set smartcase           " no ignorecase if Uppercase char present
 set encoding=utf-8
+
+"
+" Show relative line numbers, except for on the current line
+"
+set relativenumber
+set number
 
 "
 " Easiear copy paste to system clipboard
@@ -369,6 +391,6 @@ highlight! link MatchParen StatusLine
 set list                " Display special characters (e.g. trailing whitespace)
 set listchars=tab:▷◆,trail:◆
 
-colorscheme base16-harmonic16-dark
+colorscheme solarized8_light
 
 " }}}
