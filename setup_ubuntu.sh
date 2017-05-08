@@ -123,10 +123,10 @@ ln -s $DIR/.ctags $HOME
 ln -s $DIR/.tmux.conf $HOME
 ln -s $DIR/.tmuxline.conf $HOME
 ln -s $DIR/.vimrc $HOME
-ln -s $DIR/.zshrc $HOME
+ln -s $DIR/.zshrc* $HOME
 ln -s $DIR/.config/autostart $HOME/.config
-ln -s $DIR/.config/i3 $HOME/i3
-ln -s $DIR/.config/polybar $HOME/polybar
+ln -s $DIR/.config/i3 $HOME/.config/i3
+ln -s $DIR/.config/polybar $HOME/.config/polybar
 
 mkdir -p $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
 ln -s $DIR/.config/xfce4/xfconf/xfce-perchannel-xml/* $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/
