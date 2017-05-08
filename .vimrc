@@ -9,7 +9,7 @@ call plug#begin()
 " let g:airline_detect_spell=0
 Plug 'itchyny/lightline.vim'
 let g:lightline = {
-    \ 'colorscheme': 'solarized',
+    \ 'colorscheme': 'wombat',
     \ 'component': {
     \  'readonly': '%{&readonly?"":""}',
     \ },
@@ -391,6 +391,6 @@ highlight! link MatchParen StatusLine
 set list                " Display special characters (e.g. trailing whitespace)
 set listchars=tab:▷◆,trail:◆
 
-colorscheme solarized8_light
+colorscheme onedark
 
 " }}}
