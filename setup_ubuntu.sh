@@ -110,6 +110,8 @@ sudo apt install zsh vim silversearcher-ag -y
 # Python
 sudo apt install python3-venv python3-dev -y
 
+sudo apt install firefox -y
+
 # Link dotfiles needed
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" 
