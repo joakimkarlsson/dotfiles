@@ -421,6 +421,8 @@ if [[ -n $(uname | egrep -i 'darwin') ]]; then
     source ~/.zshrc.darwin
 elif [[ -n $(uname | egrep -i 'cygwin') ]]; then
     source ~/.zshrc.cygwin
+elif [[ -n $(uname | egrep -i 'linux' ) ]]; then
+    source ~/.zshrc.linux
 fi
 # }}}
 

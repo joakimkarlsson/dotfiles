@@ -1,0 +1,2 @@
+alias ll='ls -lG --color'
+alias la='ls -laG --color'
