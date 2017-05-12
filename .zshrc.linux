@@ -1,2 +1,16 @@
 alias ll='ls -lG --color'
 alias la='ls -laG --color'
+
+function mkvenv() {
+    if [[ -d ./venv ]]; then
+        echo "Removing existing venv"
+        rm -rf ./venv
+    fi
+
+    echo "Creating venv"
+    python3 -m venv venv
+    av
+
+    echo "Updating pip"
+    pip install -U pip
+}

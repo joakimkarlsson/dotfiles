@@ -9,12 +9,23 @@ sudo add-apt-repository ppa:aguignard/ppa -y
 # Needed for Vim8 with good compile flags
 sudo add-apt-repository ppa:pi-rho/dev -y
 
+# Needed for albert launcher
+sudo add-apt-repository ppa:nilarimogard/webupd8 -y
+
+# Needed for docker
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
+
 # Update packges list
 sudo apt update
 
 # Install Xfce4
 sudo apt install xubuntu-desktop gnome-terminal menu --no-install-recommends -y
-sudo apt install gnome-terminal xfwm4-themes xfce4-terminal --no-install-recommends -y
+sudo apt install albert nitrogen gnome-terminal xfwm4-themes xfce4-terminal --no-install-recommends -y
 
 sudo apt install build-essential curl -y
 
@@ -105,6 +116,9 @@ sudo make install
 popd
 
 
+# Install docker
+sudo apt install docker-ce docker-compose -y
+
 sudo apt install zsh vim silversearcher-ag -y
 
 # Python
@@ -127,6 +141,8 @@ ln -s $DIR/.zshrc* $HOME
 ln -s $DIR/.config/autostart $HOME/.config
 ln -s $DIR/.config/i3 $HOME/.config/i3
 ln -s $DIR/.config/polybar $HOME/.config/polybar
+ln -s $DIR/.config/albert.conf $HOME/.config
+ln -s $DIR/.config/nitrogen $HOME/.config
 
 mkdir -p $HOME/.config/xfce4/xfconf/xfce-perchannel-xml
 ln -s $DIR/.config/xfce4/xfconf/xfce-perchannel-xml/* $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/
