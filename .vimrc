@@ -156,6 +156,8 @@ autocmd BufRead *.asm set filetype=kickass
 " Breaking the habit of using Vim ineffectively
 Plug 'takac/vim-hardtime'
 let g:hardtime_default_on = 1  " Have hardtime be on by default for all buffers
+let g:hardtime_maxcount = 5  " Allow 5 repetitions
+let g:hardtime_allow_different_key = 1 " Allow jjjjjkkk
 
 call plug#end()
 
@@ -209,6 +211,9 @@ nnoremap <C-j> <C-w><C-j>
 nnoremap <C-k> <C-w><C-k>
 nnoremap <C-l> <C-w><C-l>
 
+" Poor mans clipboard on terminal linux
+vnoremap <leader>y :w! /tmp/vimclipboardbuf<CR>
+nnoremap <leader>v :r! cat /tmp/vimclipboardbuf<CR>
 " }}}
 
 
