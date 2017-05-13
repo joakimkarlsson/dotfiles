@@ -27,7 +27,7 @@ sudo add-apt-repository \
 sudo apt update
 
 # Install Gnome 3 stuff
-sudo apt install -y gnome-shell gnome-network-admin gnome-terminal gnome-tweak-tool network-manager-gnome
+sudo apt install -y gnome-shell gnome-session gnome-settings-daemon gnome-network-admin gnome-terminal gnome-tweak-tool network-manager-gnome
 
 sudo apt install build-essential curl -y
 
@@ -140,8 +140,10 @@ ln -s $DIR/.tmuxline.conf $HOME
 ln -s $DIR/.vimrc $HOME
 ln -s $DIR/.zshrc* $HOME
 # ln -s $DIR/.config/autostart $HOME/.config
-# ln -s $DIR/.config/base16-shell $HOME/.config
-# ln -s $DIR/.config/i3 $HOME/.config/i3
-# ln -s $DIR/.config/polybar $HOME/.config/polybar
-# ln -s $DIR/.config/albert.conf $HOME/.config
-# ln -s $DIR/.config/nitrogen $HOME/.config
+ln -s $DIR/.config/base16-shell $HOME/.config
+ln -s $DIR/.config/i3 $HOME/.config/i3
+ln -s $DIR/.config/polybar $HOME/.config/polybar
+ln -s $DIR/.config/albert.conf $HOME/.config
+ln -s $DIR/.config/nitrogen $HOME/.config
+ln -s $DIR/gnome3-with-i3/usr/share/xsessions/gnome-i3.desktop /usr/share/xsessions/
+ln -s $DIR/gnome3-with-i3/usr/share/gnome-session/sessions/gnome-i3.session
