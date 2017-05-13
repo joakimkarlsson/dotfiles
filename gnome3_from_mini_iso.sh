@@ -4,7 +4,7 @@
 sudo apt install python-software-properties software-properties-common -y
 
 # Gnome 3 PPA
-sudo add-apt-repository ppa:gnome3-team/gnome3
+sudo add-apt-repository ppa:gnome3-team/gnome3 -y
 
 # Needed for libxcb-xrm-dev, needed by i3wm
 sudo add-apt-repository ppa:aguignard/ppa -y
