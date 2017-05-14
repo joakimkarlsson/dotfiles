@@ -151,4 +151,4 @@ ln -s $DIR/.config/nitrogen $HOME/.config
 sudo ln -s $DIR/gnome3-with-i3/usr/share/xsessions/gnome-i3.desktop /usr/share/xsessions/
 sudo ln -s $DIR/gnome3-with-i3/usr/share/gnome-session/sessions/gnome-i3.session /usr/share/gnome-session/sessions/
 
-sudo cssh -s $(which zsh) $(whoami)
+FOR_WHO=$(whoami) sudo chsh -s $(which zsh) $FOR_WHO
