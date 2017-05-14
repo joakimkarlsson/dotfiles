@@ -148,5 +148,6 @@ ln -s $DIR/.config/i3 $HOME/.config/i3
 ln -s $DIR/.config/polybar $HOME/.config/polybar
 ln -s $DIR/.config/albert.conf $HOME/.config
 ln -s $DIR/.config/nitrogen $HOME/.config
+ln -s $DIR/.config/gtk-3.0 $HOME/.config
 
 FOR_WHO=$(whoami) sudo chsh -s $(which zsh) $FOR_WHO
