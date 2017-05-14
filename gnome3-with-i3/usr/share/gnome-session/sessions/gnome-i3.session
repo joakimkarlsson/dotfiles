@@ -1,3 +1,0 @@
-[GNOME Session]
-Name=gnome-i3
-RequiredComponents=gnome-shell;gnome-settings-daemon;i3;

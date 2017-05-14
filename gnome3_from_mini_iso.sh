@@ -27,9 +27,9 @@ sudo add-apt-repository \
 sudo apt update
 
 # Install Gnome 3 stuff
-sudo apt install -y gnome-shell gnome-session gnome-settings-daemon gnome-network-admin gnome-terminal gnome-tweak-tool network-manager-gnome
-
-sudo apt install build-essential curl -y
+sudo apt install -y gnome-shell gnome-session gnome-settings-daemon gnome-network-admin gnome-terminal gnome-tweak-tool network-manager-gnome \
+    albert \
+    build-essential curl
 
 mkdir -p ~/.builds
 
@@ -148,12 +148,5 @@ ln -s $DIR/.config/i3 $HOME/.config/i3
 ln -s $DIR/.config/polybar $HOME/.config/polybar
 ln -s $DIR/.config/albert.conf $HOME/.config
 ln -s $DIR/.config/nitrogen $HOME/.config
-sudo ln -s $DIR/gnome3-with-i3/usr/share/xsessions/gnome-i3.desktop /usr/share/xsessions/
-sudo ln -s $DIR/gnome3-with-i3/usr/share/gnome-session/sessions/gnome-i3.session /usr/share/gnome-session/sessions/
-
-if [[ -f /usr/share/applications/i3.desktop ]]; then
-    sudo mv /usr/share/applications/i3.desktop /usr/share/applications/i3.desktop.bak
-fi
-sudo ln -s $DIR/gnome-with-i3/usr/share/applications/i3.desktop /usr/share/applications/
 
 FOR_WHO=$(whoami) sudo chsh -s $(which zsh) $FOR_WHO

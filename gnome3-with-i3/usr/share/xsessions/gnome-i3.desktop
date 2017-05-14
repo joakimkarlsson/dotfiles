@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=GNOME with i3
-Comment=GNOME with i3 window manager
-Exec=gnome-session --session=gnome-i3
-TryExec=gnome-session
-Icon=
-Type=Application
-DesktopNames=Foo;
-X-Ubuntu-Gettext-Domain=gnome-session=3.0
