@@ -69,6 +69,10 @@ bindkey '\e[B' history-beginning-search-forward
 HISTSIZE=1000
 HISTFILE=~/.history
 SAVEHIST=1000
+
+# Ignore duplicates in search history. Skips duplicates when searching
+# with, for instance, fzf.
+setopt hist_ignore_alldups 
 # }}}
 
 # {{{ Functions
@@ -253,6 +257,25 @@ function cd() {
     builtin cd $1 && activate_python
 }
 
+function changes_since() {
+    local SINCE=$1
+
+    if [[ -z "$SINCE" ]]; then
+        echo "Usage: changes_since <version>"
+        return 1
+    fi
+
+    local COMMIT=$(git log -S${SINCE} --reverse --pretty=format:%h -- setup.py | head -1)
+
+    if [[ -z "$COMMIT" ]]; then
+        echo "Commit for version ${SINCE} not found!"
+        return 2
+    fi
+
+    echo "Version ${SINCE} was introduced at ${COMMIT}"
+
+    git ls ${COMMIT}^.. 
+}
 
 # }}}
 
@@ -433,4 +456,6 @@ fi
 
 BASE16_SHELL=$HOME/.config/base16-shell
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-base16_onedark
+base16_gruvbox-dark-hard
+
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

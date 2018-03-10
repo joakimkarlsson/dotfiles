@@ -27,6 +27,8 @@ let g:lightline = {
 " Mirror vim status bar theme to tmux
 Plug 'edkolev/tmuxline.vim'
 
+Plug 'christoomey/vim-tmux-navigator'
+
 " extended % matching for HTML, LaTeX, and many more languages
 Plug 'vim-scripts/matchit.zip'
 
@@ -43,13 +45,16 @@ Plug 'lifepillar/vim-solarized8'
 Plug 'romainl/flattened'
 
 "{{{ ctrlp: File navigation
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
+
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --all'}
+Plug 'junegunn/fzf.vim'
 "
 " I'm almost always using vim with git anyway...
 "
-let g:ctrlp_use_caching = 0
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -oc --exclude-standard']
-let g:ctrlp_working_path_mode = ''
+" let g:ctrlp_use_caching = 0
+" let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -oc --exclude-standard']
+" let g:ctrlp_working_path_mode = ''
 "}}}
 
 Plug 'tpope/vim-vinegar'
@@ -73,6 +78,12 @@ Plug 'xolox/vim-misc'
 " Run Async Shell Commands in Vim 8.0 and Output to Quickfix Window
 Plug 'skywind3000/asyncrun.vim'
 
+" Highlight yanked area
+Plug 'machakann/vim-highlightedyank'
+if !exists('##TextYankPost')
+    map y <Plug>(highlightedyank)
+endif
+
 "{{{ syntastic: Syntax check for several languages
 " Plug 'scrooloose/syntastic', { 'for': 'python' }
 " let g:syntastic_always_populate_loc_list = 1
@@ -86,8 +97,9 @@ Plug 'w0rp/ale'
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_enter = 1
+let g:ale_lint_on_insert_leave = 0
 let g:ale_lint_delay = 200
-let g:ale_open_list = 0
+let g:ale_open_list = 1
 let g:ale_set_signs = 1
 let g:ale_sign_column_always = 0
 "}}}
@@ -97,17 +109,12 @@ Plug 'Konfekt/FastFold'
 let g:fastfold_fold_command_suffixes =
             \['x','X','a','A','o','O','c','C','r','R','m','M','i','n','N']
 
-" vim notes with dropbox storage {{{
-Plug 'xolox/vim-notes'
-let g:notes_directories = ['~/dropbox/vim-notes']
-let g:notes_list_bullets = ['•', '•', '•', '•']
-let g:notes_tab_indents = 0
+" vim org mode {{{
+Plug 'jceb/vim-orgmode', { 'for': 'org' }
+Plug 'tpope/vim-speeddating', { 'for': 'org' }
+command Notes execute "e ~/Dropbox/notes"
+command -nargs=1 NewNote execute "e ~/Dropbox/notes/<args>.org"
 " }}}
-
-"{{{ ag: the silver searcher
-Plug 'rking/ag.vim'
-nnoremap <leader>a :Ag<Space>
-"}}}
 
 " {{{ vimproc: Make it possible to execute programs within vim (requires compilation)
 
@@ -133,12 +140,18 @@ Plug 'hynek/vim-python-pep8-indent', { 'for': 'python' }
 " Python matchit support
 Plug 'voithos/vim-python-matchit', { 'for': 'python' }
 
+Plug 'davidhalter/jedi-vim'
+let g:jedi#completions_command = ""
+let g:jedi#popup_on_dot = 0
+
 " Highlighting for restructured text
 Plug 'Rykka/riv.vim', { 'for': 'rst' }
 
 Plug 'hdima/python-syntax', { 'for': 'python' }
 
 Plug 'SirVer/ultisnips'
+
+Plug 'GutenYe/json5.vim'
 
 "
 " JavaScript
@@ -175,9 +188,14 @@ let maplocalleader="\\"
 " Quick escape
 inoremap jk <esc>
 
-nnoremap <leader>p :CtrlP<cr>
-nnoremap <leader>t :CtrlPTag<cr>
-nnoremap <leader>b :CtrlPBuffer<cr>
+" nnoremap <leader>p :CtrlP<cr>
+" nnoremap <leader>t :CtrlPTag<cr>
+" nnoremap <leader>b :CtrlPBuffer<cr>
+
+nnoremap <leader>p :Files<cr>
+nnoremap <leader>t :Tags<cr>
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>a :Ag 
 
 " Clear higlighting of words matching search
 nnoremap <silent> <leader>cl :noh<cr>:call clearmatches()<cr>
@@ -195,7 +213,7 @@ nnoremap <leader>js :%!python -m json.tool<cr>
 nnoremap <leader>ex :Explore<cr>
 
 " Search with ag
-nnoremap <leader>a :Ag ""<left>
+" nnoremap <leader>a :Ag ""<left>
 
 " Switch between dark and light background
 nnoremap  <leader>B :<c-u>exe "colors" (g:colors_name =~# "dark"
@@ -281,14 +299,19 @@ set switchbuf=useopen
 augroup filetype_python
     autocmd!
     autocmd FileType python setlocal colorcolumn=80
-    autocmd FileType python setlocal omnifunc=python3complete#Complete
-
-    " " Prevent JEDI from showing docstrings automatically on autocomplete
-    " autocmd FileType python setlocal completeopt-=preview
+    " autocmd FileType python setlocal omnifunc=python3complete#Complete
 
     " We don't need smartindent in python. Makes comments always go to 
     " the start of the line.
     autocmd FileType python setlocal nosmartindent
+
+    " Show whitespace markers for python files so we detect tabs or
+    " trailing whitespaces
+    autocmd FileType python setlocal list
+    autocmd FileType python setlocal listchars=tab:▷◆,trail:◆
+
+    " Prevent Jedi from showing docstrings
+    autocmd FileType python setlocal completeopt-=preview
 augroup END
 
 
@@ -367,7 +390,10 @@ if has('gui_running')
 
 else
     set termencoding=ut8
-    set term=xterm
+
+    if !has('nvim')
+        set term=xterm
+    endif
 
     " Clearing uses the current background color
     set t_ut=
@@ -393,9 +419,6 @@ set cursorline
 
 highlight! link MatchParen StatusLine
 
-set list                " Display special characters (e.g. trailing whitespace)
-set listchars=tab:▷◆,trail:◆
-
-colorscheme onedark
+colorscheme base16-gruvbox-dark-hard
 
 " }}}

@@ -36,6 +36,9 @@ mkdir -p ~/.builds
 # Dependencies for i3-gaps
 sudo apt install libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev libxcb-util0-dev libxcb-icccm4-dev libyajl-dev libstartup-notification0-dev libxcb-randr0-dev libev-dev libxcb-cursor-dev libxcb-xinerama0-dev libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev autoconf libxcb-xrm-dev libxcb-xrm-dev -y
 
+# i3bar needs to be installed separately
+sudo apt install i3bar -y
+
 # Get i3-gaps
 if [[ ! -d ~/.builds/i3-gaps ]]; then
     git clone https://www.github.com/Airblader/i3 ~/.builds/i3-gaps
@@ -57,25 +60,25 @@ sudo make install
 popd
 
 # polybar
-sudo apt install cmake cmake-data libcairo2-dev libxcb1-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-randr0-dev libxcb-util0-dev libxcb-xkb-dev pkg-config python-xcbgen xcb-proto libxcb-xrm-dev libasound2-dev libmpdclient-dev libiw-dev libcurl4-openssl-dev -y
-
-if [[ ! -d ~/.builds/polybar ]]; then
-    git clone --branch 3.0.5 --recursive https://github.com/jaagr/polybar ~/.builds/polybar
-else
-    pushd ~/.builds/polybar
-    git pull
-    popd
-fi
+# sudo apt install cmake cmake-data libcairo2-dev libxcb1-dev libxcb-ewmh-dev libxcb-icccm4-dev libxcb-image0-dev libxcb-randr0-dev libxcb-util0-dev libxcb-xkb-dev pkg-config python-xcbgen xcb-proto libxcb-xrm-dev libasound2-dev libmpdclient-dev libiw-dev libcurl4-openssl-dev libjsoncpp-dev libjsconcpp -y
+#
+# if [[ ! -d ~/.builds/polybar ]]; then
+#     git clone --branch 3.0.5 --recursive https://github.com/jaagr/polybar ~/.builds/polybar
+# else
+#     pushd ~/.builds/polybar
+#     git pull
+#     popd
+# fi
 
 # if [[ -d ~/polybar/build ]]; then
 #     rm -rf ~/polybar/build
 # fi
 
-mkdir -p ~/.builds/polybar/build
-pushd ~/.builds/polybar/build
-cmake ..
-sudo make install
-popd
+# mkdir -p ~/.builds/polybar/build
+# pushd ~/.builds/polybar/build
+# cmake ..
+# sudo make install
+# popd
 
 # Arc Theme
 sudo apt install libgtk-3-dev gnome-themes-standard gtk2-engines-murrine -y

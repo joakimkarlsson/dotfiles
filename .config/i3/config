@@ -160,10 +160,10 @@ bindsym $mod+r mode "resize"
 
 # Using polybar instead
 #
-# bar {
-#         status_command i3status
-#         tray_output primary
-# }
+bar {
+        status_command i3status
+        tray_output primary
+}
 
 # Set gaps between windows
 gaps inner 8
@@ -176,6 +176,9 @@ exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 exec_always --no-startup-id albert
+
+# network manager applet
+exec --no-startup-id nm-applet
 
 # Explicitly tell gnome that the desktop application is up and running
 # See http://www.klavrekod.se/til/2015/05/gnome-i3wm/

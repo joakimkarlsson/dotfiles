@@ -3,3 +3,5 @@
 
 .emacs.d/*
 .irssi/
+.config/gtk-3.0/
+.config/nitrogen/

@@ -116,20 +116,6 @@ command! Notes execute "e ~/Dropbox/notes"
 command! -nargs=1 NewNote execute "e ~/Dropbox/notes/<args>.org"
 " }}}
 
-" {{{ vimproc: Make it possible to execute programs within vim (requires compilation)
-
-Plug 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
-"}}}
-
-Plug 'saltstack/salt-vim', { 'for': 'sls' }
 "
 " Python
 "

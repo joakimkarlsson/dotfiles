@@ -1,5 +1,6 @@
 alias ll='ls -lG --color'
 alias la='ls -laG --color'
+alias dc='docker-compose'
 
 function mkvenv() {
     if [[ -d ./venv ]]; then
@@ -12,5 +13,14 @@ function mkvenv() {
     av
 
     echo "Updating pip"
-    pip install -U pip
+    pip install -U pip 2> /dev/null
+
+    echo "Installing wheel package"
+    pip install wheel
 }
+
+# Add .local/bin to PATH as this is where, for instance, python user installs
+# puts binaries. See the XDG Base Directory Specification.
+if [ -d "$HOME/.local/bin" ]; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
