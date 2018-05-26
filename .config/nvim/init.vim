@@ -72,6 +72,7 @@ Plug 'int3/vim-extradite'
 " LESS Syntax highlighting, indent, and autocompletion
 Plug 'groenewege/vim-less', { 'for': 'less' }
 
+Plug 'chr4/nginx.vim'
 
 " Highlight yanked area
 Plug 'machakann/vim-highlightedyank'
