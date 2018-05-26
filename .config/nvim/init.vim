@@ -72,11 +72,6 @@ Plug 'int3/vim-extradite'
 " LESS Syntax highlighting, indent, and autocompletion
 Plug 'groenewege/vim-less', { 'for': 'less' }
 
-" Misc functions needed by other plugins
-Plug 'xolox/vim-misc'
-
-" Run Async Shell Commands in Vim 8.0 and Output to Quickfix Window
-Plug 'skywind3000/asyncrun.vim'
 
 " Highlight yanked area
 Plug 'machakann/vim-highlightedyank'
@@ -194,7 +189,7 @@ nnoremap <leader>a :Ag
 nnoremap <silent> <leader>cl :noh<cr>:call clearmatches()<cr>
 
 " Rebuild ctags
-:nnoremap <silent> <F12> :AsyncRun ctags .<cr>
+:nnoremap <silent> <F12> :silent !ctags .<cr>
 
 " Shortcut to edit .vimrc
 nnoremap <leader>ev :e $MYVIMRC<cr>
