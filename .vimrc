@@ -389,7 +389,7 @@ if has('gui_running')
     endif
 
 else
-    set termencoding=ut8
+    set termencoding=utf8
 
     if !has('nvim')
         set term=xterm
