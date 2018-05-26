@@ -293,6 +293,7 @@ set number
 " Easiear copy paste to system clipboard
 "
 set clipboard=unnamed
+set clipboard+=unnamedplus
 
 
 "
