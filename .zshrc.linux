@@ -1,6 +1,7 @@
 alias ll='ls -lG --color'
 alias la='ls -laG --color'
 alias dc='docker-compose'
+alias dcr='docker-compose run --rm'
 
 function mkvenv() {
     if [[ -d ./venv ]]; then
