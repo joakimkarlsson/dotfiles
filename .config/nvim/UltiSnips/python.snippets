@@ -1,0 +1,22 @@
+snippet #! "Simple shebang for python" b
+#!/usr/bin/env python
+endsnippet
+
+snippet ifmain "ifmain with sys.exit()" b
+if __name__ == '__main__':
+    sys.exit(main())
+endsnippet
+
+snippet ipdb "add ipdb breakpoint" b
+import ipdb; ipdb.set_trace()  # NOQA
+endsnippet
+
+snippet ptf "add py.test fixture" b
+@pytest.fixture(scope='${2:function}')
+def ${1:my_fixture}():
+    ${0:pass}
+endsnippet
+
+snippet log "Add logger for this modules" b
+logger = logging.getLogger(__name__)
+endsnippet
