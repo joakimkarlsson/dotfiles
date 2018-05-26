@@ -79,14 +79,6 @@ if !exists('##TextYankPost')
     map y <Plug>(highlightedyank)
 endif
 
-"{{{ syntastic: Syntax check for several languages
-" Plug 'scrooloose/syntastic', { 'for': 'python' }
-" let g:syntastic_always_populate_loc_list = 1
-"
-" let g:syntastic_python_python_exec = '/usr/bin/python3'
-" let g:syntastic_python_checkers = ['python', 'flake8']
-"}}}
-
 "{{{ Ale
 Plug 'w0rp/ale'
 let g:ale_lint_on_save = 1
@@ -127,17 +119,19 @@ function! GetDirectories(path)
     return dircontent
 endfunction
 
-let g:deoplete#sources#jedi#extra_path = GetDirectories('/home/joakim/src')
-let g:deoplete#enable_at_startup = 1
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+let g:deoplete#enable_at_startup = 1
 Plug 'zchee/deoplete-jedi'
-
-" Highlighting for restructured text
-Plug 'Rykka/riv.vim', { 'for': 'rst' }
+let g:deoplete#sources#jedi#extra_path = GetDirectories('/home/joakim/src')
 
 Plug 'hdima/python-syntax', { 'for': 'python' }
 
 Plug 'SirVer/ultisnips'
+let g:UltisnipsExpandTrigger="<tab>"
+let g:UltisnipsJumpForwardTrigger="<tab>"
+let g:UltisnipsJumpBackwardTrigger="<s-tab>"
+
+Plug 'ervandew/supertab'
 
 Plug 'GutenYe/json5.vim'
 
