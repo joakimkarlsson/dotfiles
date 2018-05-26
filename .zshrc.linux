@@ -23,5 +23,11 @@ function mkvenv() {
 # Add .local/bin to PATH as this is where, for instance, python user installs
 # puts binaries. See the XDG Base Directory Specification.
 if [ -d "$HOME/.local/bin" ]; then
-    PATH="$HOME/.local/bin:$PATH"
+    export PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Add the go lang binaries if available
+if [ -d "/usr/local/go/bin" ]; then
+    export GOPATH=$(/usr/local/go/bin/go env GOPATH)
+    export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 fi
