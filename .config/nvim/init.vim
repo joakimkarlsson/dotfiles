@@ -96,11 +96,60 @@ Plug 'Konfekt/FastFold'
 let g:fastfold_fold_command_suffixes =
             \['x','X','a','A','o','O','c','C','r','R','m','M','i','n','N']
 
-" vim org mode {{{
-Plug 'jceb/vim-orgmode', { 'for': 'org' }
-Plug 'tpope/vim-speeddating', { 'for': 'org' }
+" Note taking {{{
 command! Notes execute "e ~/Dropbox/notes"
-command! -nargs=1 NewNote execute "e ~/Dropbox/notes/<args>.org"
+
+function! HasTodoItem(linenumber)
+    let l:line = getline(a:linenumber)
+    if match(l:line, '- \[[ x]\]') != -1
+        return 1
+    endif
+
+    return 0
+endfunction
+
+function! IsTodoItemSet(linenumber)
+    if !HasTodoItem(a:linenumber)
+        echoerr('Line is not a todo item')
+        return -1
+    endif
+
+    let l:line = getline(a:linenumber)
+    if match(l:line, '- \[x\]') != -1
+        return 1
+    endif
+
+    return 0
+endfunction
+
+function! SetTodoItem(linenumber)
+    let l:line = getline(a:linenumber)
+    call setline(a:linenumber, substitute(l:line, '- \[.\]', '- [x]', ''))
+endfunction
+
+function! UnsetTodoItem(linenumber)
+    let l:line = getline(a:linenumber)
+    call setline(a:linenumber, substitute(l:line, '- \[.\]', '- [ ]', ''))
+endfunction
+
+function! ToggleTodoItem()
+    let l:linenumber = line('.')
+
+    let l:isset = IsTodoItemSet(linenumber)
+    if l:isset == -1
+        return -1
+    endif
+
+    if l:isset
+        call UnsetTodoItem(linenumber)
+    else
+        call SetTodoItem(linenumber)
+    endif
+endfunction
+
+augroup notes
+    au BufEnter *.md nmap <buffer> <LocalLeader>td :call ToggleTodoItem()<cr>
+augroup END
 " }}}
 
 "
