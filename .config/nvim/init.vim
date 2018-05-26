@@ -198,6 +198,8 @@ Plug 'junegunn/goyo.vim'
 Plug 'gryf/kickass-syntax-vim', { 'for': 'kickass' }
 autocmd BufRead *.asm set filetype=kickass
 
+" Jenkinsfiles are groovy
+autocmd Bufread Jenkinsfile* set filetype=groovy
 
 call plug#end()
 
